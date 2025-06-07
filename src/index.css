@@ -1,31 +1,27 @@
 @import url("https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap");
-@import "tailwindcss";
-
-:root {
-  --gradient: radial-gradient(circle, #e5e5e5 0%, #ffffff 100%);
-}
-
 html,
 body {
+  margin: 0;
+  padding: 0;
   height: 100%;
   width: 100dvw;
   overflow-x: hidden;
-  background: linear-gradient(0deg, rgb(0, 0, 0) 0%, rgb(21, 0, 28) 83%, rgba(179, 0, 255, 1) 100%);
+  background: linear-gradient(0deg, rgb(51, 51, 51) 0%, rgb(4, 0, 0) 83%);
   color: white;
   background-repeat: no-repeat;
   scroll-behavior: smooth;
   font-family: "Mona Sans", sans-serif;
 }
 
-nav{
-  justify-content: center;
-  font-size: 1.5em;
-  width: 100%;
-  display: flex;
+/*
+ HEADER
+*/
+a{
+  text-decoration: none;
 }
 
-.hero-text{
-  font-size: 3rem;
+.author{
+  float: left;
 }
 
 .icon-text{
@@ -49,23 +45,61 @@ section {
   overflow: hidden;
 }
 
+.img-wrapper {
+  width: 4rem;
+  height: 4rem;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0.25rem;
+}
+
+.img-wrapper img {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: block;
+}
 .wrapper {
   display: flex;
   flex-direction: column;
   animation: wordSlider 21s infinite cubic-bezier(0.9, 0.01, 0.3, 0.99);
 }
 
-nav li {
+.navbar {
+  font-size: 1.5em;
+  margin: 0 40px;
+}
+
+.nav-center{
+  width: 100%;
+  justify-content: center;
+  display: flex;
+}
+
+.nav-left{
+  margin-top: 10px;
+}
+
+.nav-links {
+
+  display: flex;
   list-style: none;
+  margin: 0;
   padding: 0;
-  margin: 5px 10px;
+}
+
+.nav-links li {
+  margin: 0 10px;
 }
 
 .nav-link {
   position: relative;
   display: inline-block;
   color: white;
-  text-decoration: none;
 }
 
 .nav-link .underline {
@@ -80,6 +114,22 @@ nav li {
 
 .nav-link:hover .underline {
   width: 100%;
+}
+
+.hero{
+  padding: 0px 40px;
+  width: 100%;
+  height: 75vh;
+  display: flex;
+  align-items: center;
+}
+
+.hero-text{
+  font-size: 3rem;
+}
+h1{
+  padding: 0;
+  margin: 0;
 }
 
 @keyframes wordSlider {
