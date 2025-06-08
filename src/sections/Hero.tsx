@@ -5,7 +5,7 @@ import {words} from "../constants";
 const Hero = () => {
   useGSAP(() => {
     gsap.fromTo(
-      ".hero-text h1",
+      ".hero-text h1, .hero-text p",
       { y: 50, opacity: 0 },
       { y: 0, opacity: 1, stagger: 0.2, duration: 1, ease: "power2.inOut" }
     );
