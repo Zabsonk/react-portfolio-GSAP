@@ -15,7 +15,7 @@ const Hero = () => {
       <section className="hero">
           <div className="hero-text">
               <h1>
-                  Shaping
+                  Turning
                   <span className="slide">
                     <span className="wrapper">
                       {words.map((word: { text: string; imgPath: string }, index: number) => (
@@ -29,8 +29,11 @@ const Hero = () => {
                     </span>
                   </span>
               </h1>
-              <h1>into Real Projects</h1>
-              <h1>that Deliver Results</h1>
+              <h1>into Interactive Games</h1>
+              <h1>and Applications</h1>
+              <p>
+                  Hi, I'm App developer from Poland.
+              </p>
           </div>
       </section>
   );
