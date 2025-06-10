@@ -154,8 +154,57 @@ h1{
 }
 
 .about{
-  width: 100%;
   margin: 0 40px;
+  width: auto;
+}
+
+.skills{
+  padding: 40px 40px;
+  width: auto;
+  display: flex;
+  gap: 20px;
+}
+
+.skill-frame{
+  background-color: #171717;
+  flex: 1;
+  text-align: center;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.skill-frame img{
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto auto;
+  transition: transform 0.75s ease, opacity 0.75s ease;
+
+}
+
+.skill-frame span {
+  position: absolute;
+  top: 50%;
+  bottom: 0px;
+  left: 50%;
+  transform: translate(-50%, 100%);
+  opacity: 0;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  transition: transform 0.75s ease, opacity 0.75s ease;
+}
+
+.skill-frame:hover img {
+  transform: scale(0);
+  opacity: 0;
+}
+
+.skill-frame:hover span {
+  transform: translate(-50%, 0);
+  opacity: 1;
 }
 
 @media (min-width: 768px) {

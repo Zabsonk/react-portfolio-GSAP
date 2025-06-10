@@ -7,12 +7,12 @@ const words: {text: string, imgPath: string}[] = [
 
 const navLinks: {text: string, link: string}[] = [
   {
-    text: 'Experience',
-    link: '#experience',
-  },
-  {
     text: 'Skills',
     link: '#skills',
+  },
+  {
+    text: 'Experience',
+    link: '#experience',
   },
   {
     text: 'About Me',
@@ -20,7 +20,23 @@ const navLinks: {text: string, link: string}[] = [
   }
 ]
 
+const skills: {text:string,imgPath: string}[] = [
+  {
+    text: 'Dlaczego JS jak ja pisze w tajpskrypcie?',
+    imgPath: "/images/logos/pixi.svg"
+  },
+  {
+    text: 'Chyba ta strona jest w React nie?',
+    imgPath: "/images/logos/react.png"
+  },
+  {
+    text: 'Paczki umiem instalowac i dodawac',
+    imgPath: "/images/logos/node.png"
+  }
+]
+
 export {
     words,
     navLinks,
+    skills
 };

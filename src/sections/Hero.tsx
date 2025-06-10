@@ -32,7 +32,7 @@ const Hero = () => {
               <h1>into Interactive Games</h1>
               <h1>and Applications</h1>
               <p>
-                  Hi, I'm App developer from Poland.
+                  Hi, I'm Frontend/Game developer from Poland.
               </p>
           </div>
       </section>
