@@ -22,7 +22,7 @@ const navLinks: {text: string, link: string}[] = [
 
 const skills: {text:string,imgPath: string}[] = [
   {
-    text: 'Dlaczego JS jak ja pisze w tajpskrypcie?',
+    text: 'Dlaczego JS jak ja pisze w tajpskrypcie? Dlaczego JS jak ja pisze w tajpskrypcie? Dlaczego JS jak ja pisze w tajpskrypcie? Dlaczego JS jak ja pisze w tajpskrypcie?',
     imgPath: "/images/logos/pixi.svg"
   },
   {

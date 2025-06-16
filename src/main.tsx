@@ -2,7 +2,11 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
 import App from './App.tsx';
-import "./index.css";
+import "./styles/index.css";
+import "./styles/navbar.css";
+import "./styles/skills.css";
+import "./styles/about.css";
+import "./styles/hero.css";
 
 
 const rootElement = document.getElementById('root');
