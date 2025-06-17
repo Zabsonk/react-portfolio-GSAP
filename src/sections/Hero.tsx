@@ -1,6 +1,7 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import {words} from "../constants";
+import ParticleScene from '../animation/ParticleScene.tsx';
 
 const Hero = () => {
   useGSAP(() => {
@@ -34,6 +35,12 @@ const Hero = () => {
               <p>
                   Hi, I'm Frontend/Game developer from Poland.
               </p>
+          </div>
+          <div className="particle-container">
+              <ParticleScene />
+          </div>
+          <div className="portrait-wrapper">
+              <img className={'portrait'} src={'/images/portrait.png'} alt={'portrait'}/>
           </div>
       </section>
   );
