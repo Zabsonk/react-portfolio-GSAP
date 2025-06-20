@@ -7,6 +7,7 @@ import "./styles/navbar.css";
 import "./styles/skills.css";
 import "./styles/about.css";
 import "./styles/hero.css";
+import "./styles/particleScene.css";
 
 
 const rootElement = document.getElementById('root');
