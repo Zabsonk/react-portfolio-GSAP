@@ -8,7 +8,7 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   color: white;
-  background: linear-gradient(0deg, rgb(51, 51, 51) 0%, rgb(4, 0, 0) 83%) no-repeat;
+  background: linear-gradient(0deg, rgb(53, 53, 53) 0%, rgb(0, 0, 0) 83%) no-repeat;
   scroll-behavior: smooth;
   font-family: "Mona Sans", sans-serif;
 }
