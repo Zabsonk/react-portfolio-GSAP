@@ -1,14 +1,14 @@
 .particle-wrapper {
-    position: relative;  /* normalne pozycjonowanie */
-    z-index: 0;          /* na wierzchu Pixi */
+    position: absolute;
+    z-index: 0;
 }
 
 .particle-container {
-    position: fixed;  /* fixed żeby było zawsze na ekranie */
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -1;      /* żeby było pod wszystkim */
-    pointer-events: none; /* żeby Pixi nie blokowało interakcji myszką i scroll */
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
 }

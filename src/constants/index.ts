@@ -32,6 +32,10 @@ const skills: {text:string,imgPath: string}[] = [
   {
     text: 'Paczki umiem instalowac i dodawac',
     imgPath: "/images/logos/node.png"
+  },
+  {
+    text: 'Kurwa git, japierdole',
+    imgPath: "/images/logos/git.svg"
   }
 ]
 

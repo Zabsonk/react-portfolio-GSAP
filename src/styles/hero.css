@@ -30,7 +30,7 @@
 .img-wrapper img {
     width: 3rem;
     height: 3rem;
-    border-radius: 50%;
+    border-radius: 4%;
     display: block;
 }
 .wrapper {
@@ -43,7 +43,7 @@
 .hero{
     padding: 0px 40px;
     width: 100%;
-    min-height: calc(75vh - 125px);
+    min-height: calc(90vh);
     display: flex;
 }
 
@@ -62,15 +62,18 @@ h1{
     padding: 0;
     margin: 0;
 }
-.portrait-wrapper{
-    margin: 0 auto auto;
-    display: block;
-    justify-content: center;
+
+.portrait-wrapper {
+    margin-top: auto;
+    margin-bottom: auto;
+
+    display: flex;
     overflow: hidden;
+    position: relative;
 }
 
 .portrait {
-    border-radius: 50%;
+    border-radius: 5%;
     object-fit: contain;
     width: 500px;
     height: 500px;

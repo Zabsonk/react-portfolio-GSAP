@@ -8,9 +8,15 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   color: white;
-  background: linear-gradient(0deg, rgb(53, 53, 53) 0%, rgb(0, 0, 0) 83%) no-repeat;
   scroll-behavior: smooth;
   font-family: "Mona Sans", sans-serif;
+  background: black;
+}
+
+.hero-background {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgb(3, 4, 23) 50%, rgb(12, 12, 12) 100%);
+  min-height: 100vh;
+  width: 100%;
 }
 
 a{

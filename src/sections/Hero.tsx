@@ -1,6 +1,7 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import {words} from "../constants";
+import ParticleWrapper from './ParticleWrapper.tsx';
 
 const Hero = () => {
   useGSAP(() => {
@@ -18,6 +19,7 @@ const Hero = () => {
 
   return (
       <section className="hero">
+          <ParticleWrapper/>
           <div className="hero-text">
               <h1>
                   Turning

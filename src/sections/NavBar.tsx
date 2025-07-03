@@ -15,33 +15,30 @@ const NavBar = (): ReactElement => {
         );
     });
     return (
-
         <nav className="navbar">
-            <div className={'nav-top'}>
-                <div className="nav-left">
-                    <h1 className="author">Kacper Żabiński</h1>
-                </div>
-                <div className={'nav-right'}>
-                    <button className={'contact-button'}>
-                        <h3>Contact Me</h3>
-                    </button>
-                </div>
+            <div className="nav-left">
+                <h1 className="author">Kacper Żabiński</h1>
             </div>
-            <div className={'nav-bottom'}>
-                <div className="nav-center">
-                    <ul className="nav-links">
-                        {navLinks.map(link => (
-                            <li key={link.text}>
-                                <a href={link.link} className="nav-link">
-                                    <span>{link.text}</span>
-                                    <span className="underline"></span>
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+            <div className="nav-center">
+                <ul className="nav-links">
+                    {navLinks.map(link => (
+                        <li key={link.text}>
+                            <a href={link.link} className="nav-link">
+                                <span>{link.text}</span>
+                                <span className="underline"></span>
+                            </a>
+                        </li>
+                    ))}
+                </ul>
             </div>
+            <div className={'nav-right'}>
+                <button className={'contact-button'}>
+                    <h3>Contact Me</h3>
+                </button>
+            </div>
+
+
         </nav>
-)
+    )
 }
 export default NavBar;
