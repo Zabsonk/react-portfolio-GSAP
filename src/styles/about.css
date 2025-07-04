@@ -1,5 +1,18 @@
-
 .about{
-    margin: 0 40px;
+    background-color: rgb(128, 0, 255);
+    margin-top:40px;
     width: auto;
+}
+
+.info {
+    height: 50vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+.info h3{
+    width: 33%;
 }

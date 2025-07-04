@@ -84,8 +84,8 @@ const ParticleScene = () => {
     const initStars = () => {
         if(appRef.current && mountRef.current) {
             const maxStars: number = 1000;
-            const containerWidth = 100;
-            const containerHeight = 100;
+            const containerWidth = 25;
+            const containerHeight = 25;
             for (let i: number = 0; i < maxStars; i++) {
                 const container :Container = new Container();
                 container.hitArea = new Rectangle(0,0, containerWidth,containerWidth);
@@ -101,8 +101,8 @@ const ParticleScene = () => {
                 star.position.set(containerWidth / 2, containerHeight / 2);
                 container.addChild(star)
                 appRef.current.stage.addChild(container)
-                container.position.x = Math.random() * appRef.current.canvas.width;
-                container.position.y = Math.random() * appRef.current.canvas.height;
+                container.position.x = Math.random() *  mountRef.current.clientWidth;
+                container.position.y = Math.random() * mountRef.current.clientHeight;
 
                 const animationTime: number = 0.2;
                 container.on('pointerover', () => {
@@ -112,8 +112,8 @@ const ParticleScene = () => {
                         duration: animationTime,
                     })
                     gsap.to(star.scale, {
-                        x: 5,
-                        y: 5,
+                        x: 6,
+                        y: 6,
                         duration: animationTime,
                         onComplete: () =>{
                             gsap.to(star.scale, {

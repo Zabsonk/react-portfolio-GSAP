@@ -43,8 +43,10 @@
 .hero{
     padding: 0px 40px;
     width: 100%;
+    position: relative;
     min-height: calc(90vh);
     display: flex;
+    justify-content: space-around;
 }
 
 .hero p{
@@ -66,8 +68,7 @@ h1{
 .portrait-wrapper {
     margin-top: auto;
     margin-bottom: auto;
-
-    display: flex;
+    right: 0;
     overflow: hidden;
     position: relative;
 }
