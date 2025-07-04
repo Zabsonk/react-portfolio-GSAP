@@ -5,22 +5,36 @@
     gap: 20px;
 }
 
-.skill-frame{
-    flex: 0 0 33.33%;
-    background-color: #0b0b0b;
-    text-align: center;
-    border-radius: 10px;
-    border: 4px solid #8c8c8c;
-    position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    align-items: center;
+
+.marquee-wrapper {
     display: flex;
+    width: 100%;
+}
+
+.marquee-inner {
+    display: flex;
+    animation: marquee 20s linear infinite;
+}
+
+.skill-frame {
     overflow: hidden;
+    flex: 0 0 auto;
+    width: 600px;
+    margin: 0 10px;
+    padding: 10px;
+    background: rgba(69, 69, 69, 0.5);
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.marquee-inner:hover {
+    animation-play-state: paused;
 }
 
 .skill-frame:hover {
     transform: scale(1.05);
-    box-shadow: 0 5px 30px rgba(255, 255, 255, 0.5);
+    box-shadow: 0 5px 30px rgba(255, 255, 255, 0.9);
 }
 
 .skill-frame img{
@@ -79,8 +93,8 @@
 
 .dot-wrapper {
     position: relative;
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
 }
 
 .dot {
@@ -103,16 +117,25 @@
 
 .animate {
     opacity: 0;
-    animation: popIn 1.5s ease forwards;
+    animation: popIn 1s cubic-bezier(0.175, 0.885, 0.320, 1.6) forwards;
+}
+
+@keyframes marquee {
+    from {
+        transform: translateX(0%);
+    }
+    to {
+        transform: translateX(-50%);
+    }
 }
 
 @keyframes popIn {
     0% {
-        transform: scale(0) translateY(-10px);
+        transform: scale(0);
         opacity: 0;
     }
     100% {
-        transform: scale(1) translateY(0);
+        transform: scale(1) ;
         opacity: 1;
     }
 }

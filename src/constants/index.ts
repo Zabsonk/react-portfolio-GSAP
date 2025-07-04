@@ -22,22 +22,47 @@ const navLinks: {text: string, link: string}[] = [
 
 const skills: {text:string,imgPath: string, level: number, color: string}[] = [
   {
-    text: 'Dlaczego JS jak ja pisze w tajpskrypcie? Dlaczego JS jak ja pisze w tajpskrypcie? Dlaczego JS jak ja pisze w tajpskrypcie? Dlaczego JS jak ja pisze w tajpskrypcie?',
+    text: 'PixiJS is a fast and flexible 2D rendering library for creating rich, interactive graphics and animations in the browser',
     imgPath: "/images/logos/pixi.svg",
     level: 4,
     color: '#ea1e63'
   },
   {
-    text: 'Chyba ta strona jest w React nie?',
+    text: 'This is what I love the most about programing. OOP makes it easier to model real-world problems in a clear and intuitive way.',
+    imgPath: "/images/logos/oop.svg",
+    level: 5,
+    color: '#12dcbe'
+  },
+  {
+    text: 'This site is built with React, a powerful library for building interactive user interfaces',
     imgPath: "/images/logos/react.png",
     level: 2,
     color: '#00d8ff'
   },
   {
-    text: 'Paczki umiem instalowac i dodawac',
+    text: 'Node.js is a powerful runtime environment that allows JavaScript to be executed on the server side.',
     imgPath: "/images/logos/node.png",
     level: 3,
     color: '#78cc65'
+  }
+  ,
+  {
+    text: 'I use Git for version control to keep track of changes and collaborate efficiently.',
+    imgPath: "/images/logos/git.svg",
+    level: 4,
+    color: '#f03c2e'
+  },
+  {
+    text: 'TypeScript helps me write safer, strongly typed code for complex projects.',
+    imgPath: "/images/logos/ts.svg",
+    level: 5,
+    color: '#3178c6'
+  },
+  {
+    text: 'HTML5 is the latest standard for structuring and presenting content on the web. ',
+    imgPath: "/images/logos/html5.svg",
+    level: 4,
+    color: '#e44d26'
   }
 ]
 
