@@ -5,22 +5,27 @@
 }
 
 .marquee-wrapper {
+    padding-top: 40px;
+    overflow: hidden;
     display: flex;
     width: 100%;
 }
 
 .marquee-inner {
+    height: 240px;
+
     display: flex;
     animation: marquee 30s linear infinite;
 }
 
 .skill-frame {
+    height: 200px;
     overflow: hidden;
     flex: 0 0 auto;
     width: 600px;
     margin: 0 10px;
     padding: 10px;
-    background: rgba(69, 69, 69, 0.5);
+    background: rgba(69, 69, 69, 0.3);
     border-radius: 10px;
     text-align: center;
     transition: transform 0.3s;
@@ -30,10 +35,12 @@
     animation-play-state: paused;
 }
 
+
 .skill-frame:hover {
     transform: scale(1.05);
     box-shadow: 0 5px 30px rgba(255, 255, 255, 0.9);
 }
+
 
 .skill-frame img{
     width: 200px;

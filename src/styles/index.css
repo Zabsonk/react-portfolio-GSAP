@@ -4,7 +4,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
-  width: 100vw;
+  width: 200vw;
   overflow-x: hidden;
   overflow-y: auto;
   color: white;
@@ -21,4 +21,25 @@ body {
 
 a{
   text-decoration: none;
+}
+
+.home {
+  width: 100vw;
+}
+
+.slider{
+  width: 200vw;
+  display: flex;
+}
+
+.contact-wrapper {
+  z-index: 100;
+}
+
+.contact-wrapper > * {
+  position: sticky;
+  top: 0;
+  background-color: #200255;
+  height: 100vh;
+  width: 100vw;
 }

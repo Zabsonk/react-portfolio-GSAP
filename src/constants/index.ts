@@ -64,6 +64,13 @@ const skills: {text:string,imgPath: string, level: number, color: string}[] = [
     level: 4,
     color: '#e44d26'
   }
+  ,
+  {
+    text: 'GSAP',
+    imgPath: "/images/logos/gsap.svg",
+    level: 3,
+    color: '#8ac640'
+  }
 ]
 
 export {

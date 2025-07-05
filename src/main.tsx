@@ -8,6 +8,7 @@ import "./styles/skills.css";
 import "./styles/about.css";
 import "./styles/hero.css";
 import "./styles/particleScene.css";
+import "./styles/contact.css";
 
 
 const rootElement = document.getElementById('root');

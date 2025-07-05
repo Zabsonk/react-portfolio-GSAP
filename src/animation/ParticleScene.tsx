@@ -79,7 +79,7 @@ const ParticleScene = () => {
             appRef.current = null;
 
         };
-    });
+    }, []);
 
     const initStars = () => {
         if(appRef.current && mountRef.current) {
