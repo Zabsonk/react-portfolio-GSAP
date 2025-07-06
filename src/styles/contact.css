@@ -9,10 +9,41 @@
     height: 3rem;
 }
 
-form {
-    margin-top: 1rem;
-    background-color: #7e7878;
-    width: 40vw;
-    height: 50vh;
+.contact input::placeholder,
+textarea::placeholder {
+    color: #a8a8a8;
+}
+
+.contact input {
+    box-sizing: border-box;
+    width: 100%;
     border-radius: 10px;
+    border: none;
+    background-color: #6a6a6a;
+    color: white;
+    margin: 0;
+    padding: 0.5rem;
+}
+
+.form-wrapper{
+    padding: 1rem;
+    background-color: #3a3939;
+    border-radius: 10px;
+    width: 40vw;
+}
+
+form {
+    width: 100%;
+    justify-content: space-around;
+    display: flex;
+    flex-direction: column;
+    height: 50vh;
+}
+
+.form-wrapper p {
+    margin: 0;
+}
+
+.form-message {
+    height: 5rem;
 }
