@@ -29,26 +29,33 @@ const About = (): ReactElement => {
                 About Me
             </h1>
             <div className={'info'} id={'education'}>
-                <p>
-                    I'm a Computer Science graduate with an engineering degree, specializing in IT Systems
-                    Infrastructure.
-                </p>
+                <div className={'info-text'}>
+                    <p>
+                        I'm a Computer Science graduate with an engineering degree, specializing in IT Systems
+                        Infrastructure.
+                    </p>
+                </div>
+
                 <img src={'./public/images/logos/git.svg'} alt="skill"/>
             </div>
             <div className={'info'} id={'freetime'}>
                 <img src={'./public/images/logos/git.svg'} alt="skill"/>
-
-                <p>
-                    In my free time, I focus on staying active through sports and maintaining a healthy lifestyle.
-                </p>
+                <div className={'info-text'}>
+                    <p>
+                        In my free time, I focus on staying active through sports and maintaining a healthy lifestyle.
+                    </p>
+                </div>
 
             </div>
             <div className={'info'} id={'education'}>
+                <div className={'info-text'}>
                 <p>
-                    Currently, I work on building interactive applications and browser-based games using
-                    PixiJS. I enjoy working in a team environment and take particular interest in developing engaging
-                    and visually rich casino games.
-                </p>
+                        Currently, I work on building interactive applications and browser-based games using
+                        PixiJS. I enjoy working in a team environment and take particular interest in developing
+                        engaging
+                        and visually rich casino games.
+                    </p>
+                </div>
                 <img src={'./public/images/logos/git.svg'} alt="skill"/>
 
             </div>
