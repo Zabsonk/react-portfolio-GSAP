@@ -1,4 +1,5 @@
 .skills{
+    position: relative;
     width: auto;
     display: flex;
     gap: 20px;
@@ -11,9 +12,30 @@
     width: 100%;
 }
 
+.skills::after, .skills::before {
+    content: "";
+    position: absolute;
+    width: 200px;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+.skills::after {
+    right: 0;
+    background: black;
+
+    mask: linear-gradient(to left, rgb(0, 0, 0), rgba(195, 4, 4, 0));
+    backdrop-filter: blur(12px);
+}
+
+.skills::before {
+    mask: linear-gradient(to right, rgb(0, 0, 0.5), rgba(195, 4, 4, 0));
+    backdrop-filter: blur(12px);
+    background: black;
+}
+
 .marquee-inner {
     height: 240px;
-
     display: flex;
     animation: marquee 30s linear infinite;
 }
