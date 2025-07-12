@@ -1,7 +1,23 @@
 .about{
     position: relative;
     display: flex;
+    justify-content: center;
+    flex-direction: column;
     margin-bottom: 50vh;
+    font-size: 2.5rem;
+}
+
+.about-title {
+    display: flex;
+    height: 25vh;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.about-info{
+    position: relative;
+    display: flex;
 }
 
 .info-wrapper {
@@ -17,18 +33,19 @@
     margin: auto;
     height: 50vh;
     width: 75%;
+     z-index: 0;
+
 }
 
 .info-text {
     margin: auto;
     text-align: justify;
     display: flex;
-    background: #2E2B2B;
+    background-color: #2E2B2B;
     height: 100%;
     border-radius: 10px;
     justify-content: center;
     align-items: center;
-    z-index: 1;
 }
 
 .info-text span {

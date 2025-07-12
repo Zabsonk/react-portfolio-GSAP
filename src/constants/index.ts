@@ -1,4 +1,9 @@
-const words: {text: string, imgPath: string}[] = [
+export type ImgTexts = {
+  text: string,
+  imgPath: string,
+}
+
+const words: ImgTexts[] = [
   { text: "Ideas", imgPath: "/images/ideas.svg" },
   { text: "Concepts", imgPath: "/images/concepts.svg" },
   { text: "Designs", imgPath: "/images/designs.svg" },
@@ -20,7 +25,7 @@ const navLinks: {text: string, link: string}[] = [
   }
 ]
 
-const skills: {text:string,imgPath: string, level: number, color: string}[] = [
+const skills: { text:string , imgPath: string, level: number, color: string}[] = [
   {
     text: 'PixiJS is a fast and flexible 2D rendering library for creating rich, interactive graphics and animations in the browser',
     imgPath: "/images/logos/pixi.svg",
@@ -73,8 +78,17 @@ const skills: {text:string,imgPath: string, level: number, color: string}[] = [
   }
 ]
 
+const myLinks: (ImgTexts & { link: string })[] = [
+  {
+    text:'Linked In',
+    link: 'll',
+    imgPath: 'images/linkedin.png',
+  }
+]
+
 export {
     words,
     navLinks,
-    skills
+    skills,
+    myLinks
 };

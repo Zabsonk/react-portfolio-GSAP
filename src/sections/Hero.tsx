@@ -1,9 +1,10 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import {words} from "../constants";
+import {type ImgTexts, words} from "../constants";
 import ParticleWrapper from './ParticleWrapper.tsx';
+import type {ReactElement} from "react";
 
-const Hero = () => {
+const Hero = (): ReactElement => {
   useGSAP(() => {
     gsap.fromTo(
       ".hero-text h1, .hero-text p",
@@ -25,7 +26,7 @@ const Hero = () => {
                   Turning
                   <span className="slide">
                     <span className="wrapper">
-                      {words.map((word: { text: string; imgPath: string }, index: number) => (
+                      {words.map((word: ImgTexts, index: number) => (
                           <span key={index} className="icon-text">
                           <span className="img-wrapper">
                             <img src={word.imgPath} alt="person"/>
