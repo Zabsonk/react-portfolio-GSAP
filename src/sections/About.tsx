@@ -1,4 +1,4 @@
-import type {ReactElement} from 'react';
+import {type ReactElement, useState} from 'react';
 import gsap from 'gsap';
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import {useGSAP} from "@gsap/react";
@@ -6,8 +6,16 @@ import {useGSAP} from "@gsap/react";
 const About = (): ReactElement => {
 
     gsap.registerPlugin(ScrollTrigger);
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const illustrations = [
+        "/images/abouts/active.png",
+        "/images/abouts/graduate.png",
+        "/images/abouts/game-dev.png",
+    ];
+
     useGSAP(() => {
-        gsap.utils.toArray<HTMLElement>(".info").forEach((el, index) => {
+        gsap.utils.toArray<HTMLElement>(".info-text").forEach((el, index) => {
             gsap.from(el, {
                 x:  (index % 2) ? 100 : -100,
                 opacity: 0,
@@ -15,49 +23,54 @@ const About = (): ReactElement => {
                 ease: "power2.inOut",
                 scrollTrigger: {
                     trigger: el,
-                    toggleActions: "restart none none none",
                 },
             });
         });
-
+        gsap.utils.toArray<HTMLElement>(".info-text").forEach((el, index) => {
+            ScrollTrigger.create({
+                trigger: el,
+                start: "top bottom",
+                onEnter: () => setCurrentIndex(index),
+                onEnterBack: () => setCurrentIndex(index),
+            });
+        });
     });
 
 
     return (
         <section id={'about'} className={'about'}>
-            <h1>
-                About Me
-            </h1>
-            <div className={'info'} id={'education'}>
+            <div className={'info-wrapper'}>
+                <div className={'info-text-wrapper'}>
                 <div className={'info-text'}>
-                    <p>
+                    <span>
                         I'm a Computer Science graduate with an engineering degree, specializing in IT Systems
                         Infrastructure.
-                    </p>
+                    </span>
                 </div>
-
-                <img src={'./public/images/logos/git.svg'} alt="skill"/>
-            </div>
-            <div className={'info'} id={'freetime'}>
-                <img src={'./public/images/logos/git.svg'} alt="skill"/>
+                </div>
+                <div className={'info-text-wrapper'}>
                 <div className={'info-text'}>
-                    <p>
+                    <span>
                         In my free time, I focus on staying active through sports and maintaining a healthy lifestyle.
-                    </p>
+                    </span>
                 </div>
-
-            </div>
-            <div className={'info'} id={'education'}>
+                </div>
+                <div className={'info-text-wrapper'}>
                 <div className={'info-text'}>
-                <p>
+                    <span>
                         Currently, I work on building interactive applications and browser-based games using
                         PixiJS. I enjoy working in a team environment and take particular interest in developing
                         engaging
                         and visually rich casino games.
-                    </p>
+                    </span>
                 </div>
-                <img src={'./public/images/logos/git.svg'} alt="skill"/>
-
+                </div>
+            </div>
+            <div className={'illustration'}>
+                <img
+                    src={illustrations[currentIndex]}
+                    alt="Illustration"
+                />
             </div>
         </section>
     );

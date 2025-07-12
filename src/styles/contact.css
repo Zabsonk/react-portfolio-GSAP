@@ -27,7 +27,7 @@ textarea::placeholder {
 
 .form-wrapper{
     padding: 1rem;
-    background-color: #A90AFF;
+    background: rgb(153, 153, 153);
     border-radius: 10px;
     width: 40vw;
 }
