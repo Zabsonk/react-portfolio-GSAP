@@ -7,6 +7,9 @@ import About from './sections/About.tsx';
 import Skills from "./sections/Skills.tsx";
 import Contact from "./sections/Contact.tsx";
 import Footer from "./sections/Footer.tsx";
+import ParticleWrapper from "./sections/ParticleWrapper.tsx";
+import ParticleScene from "./animation/ParticleScene.tsx";
+import StarsScene from "./sections/StarsScene.tsx";
 
 const App = () => {
     const homeContainerRef = useRef<HTMLDivElement>(null);
@@ -49,6 +52,9 @@ const App = () => {
                     </div>
                 </div>
                 <div ref={contactContainerRef} className="contact-wrapper">
+                    <ParticleWrapper>
+                        <StarsScene />
+                    </ParticleWrapper>
                     <Contact onButtonClick={handleSlideBack}/>
                 </div>
             </div>

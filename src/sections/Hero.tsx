@@ -3,6 +3,7 @@ import gsap from "gsap";
 import {type ImgTexts, words} from "../constants";
 import ParticleWrapper from './ParticleWrapper.tsx';
 import type {ReactElement} from "react";
+import ParticleScene from "../animation/ParticleScene.tsx";
 
 const Hero = (): ReactElement => {
   useGSAP(() => {
@@ -20,7 +21,9 @@ const Hero = (): ReactElement => {
 
   return (
       <section className="hero">
-          <ParticleWrapper/>
+          <ParticleWrapper>
+              <ParticleScene />
+          </ParticleWrapper>
           <div className="hero-text">
               <h1>
                   Turning

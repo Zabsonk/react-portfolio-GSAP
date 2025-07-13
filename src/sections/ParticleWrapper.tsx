@@ -1,11 +1,14 @@
-import type {ReactElement} from 'react';
-import ParticleScene from '../animation/ParticleScene.tsx';
+import type {ReactElement, ReactNode} from 'react';
 
-const ParticleWrapper = (): ReactElement => {
 
+type Props = {
+    children: ReactNode;
+};
+
+const ParticleWrapper = ({ children }: Props): ReactElement => {
     return (
-        <div className={'particle-wrapper'}>
-            <ParticleScene/>
+        <div className="particle-wrapper">
+            {children}
         </div>
     );
 };

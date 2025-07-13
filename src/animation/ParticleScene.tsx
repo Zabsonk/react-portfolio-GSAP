@@ -1,11 +1,15 @@
-import { useEffect, useRef } from "react";
+import {type ReactElement, useEffect, useRef} from "react";
 import {Application, Container, type ContainerChild, Graphics, Rectangle} from 'pixi.js';
 import gsap from "gsap";
 
-const ParticleScene = () => {
+const ParticleScene = (): ReactElement => {
     const mountRef = useRef<HTMLDivElement>(null);
     const appRef = useRef<Application>(null);
     const hasInitialized = useRef(false);
+
+    gsap.ticker.add((time) => {
+        Ticker.shared.update(time * 1000);
+    });
 
     useEffect(() => {
         if (hasInitialized.current) return;
@@ -37,47 +41,34 @@ const ParticleScene = () => {
               //  globalThis.__PIXI_APP__ = appRef.current;
 
                 initStars()
-
-                window.addEventListener('resize', () => {
-                    if(appRef.current && mountRef.current) {
-                        appRef.current.canvas.width = mountRef.current.clientWidth
-                        appRef.current.canvas.height = mountRef.current.clientHeight
-
-                        appRef.current.stage.children.forEach(child => {
-                            if(appRef.current){
-                                const childRemoved: ContainerChild = appRef.current.stage.removeChild(child);
-                                child.removeAllListeners();
-                                child.off('pointerover')
-                                childRemoved.destroy()
-                            }
-                        })
-                        initStars()
-                    }
-                });
-                window.addEventListener('orientationchange', () => {
-                    if(appRef.current && mountRef.current) {
-                        appRef.current.canvas.width = mountRef.current.clientWidth
-                        appRef.current.canvas.height = mountRef.current.clientHeight
-
-                        appRef.current.stage.children.forEach(child => {
-                            if(appRef.current){
-                                const childRemoved: ContainerChild = appRef.current.stage.removeChild(child);
-                                child.removeAllListeners();
-                                child.off('pointerover')
-                                childRemoved.destroy()
-                            }
-                        })
-                        initStars()
-                    }
-                });
             }
 
         });
 
+        const handleResize = () => {
+            if(appRef.current && mountRef.current) {
+                appRef.current.canvas.width = mountRef.current.clientWidth;
+                appRef.current.canvas.height = mountRef.current.clientHeight;
+
+                appRef.current.stage.children.forEach(child => {
+                    const childRemoved: ContainerChild = appRef.current.stage.removeChild(child);
+                    if ('removeAllListeners' in child) {
+                        (child as any).removeAllListeners?.();
+                        child.off?.('pointerover');
+                    }
+                    child.destroy?.();
+                });
+                initStars();
+            }
+        };
+        window.addEventListener('resize', handleResize);
+        window.addEventListener('orientationchange', handleResize);
+
         return () => {
+            window.removeEventListener('resize', handleResize);
+            window.removeEventListener('orientationchange', handleResize);
             appRef.current?.destroy(true, { children: true });
             appRef.current = null;
-
         };
     }, []);
 
