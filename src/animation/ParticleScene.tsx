@@ -34,7 +34,7 @@ const ParticleScene = () => {
                 appRef.current.canvas.style.display = 'block';
                 appRef.current.canvas.style.pointerEvents = 'none';
 
-                globalThis.__PIXI_APP__ = appRef.current;
+              //  globalThis.__PIXI_APP__ = appRef.current;
 
                 initStars()
 

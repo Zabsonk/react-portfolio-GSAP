@@ -1,8 +1,7 @@
-import {type ReactElement, useRef, useState} from "react";
+import {type ReactElement,  useState} from "react";
 import { skills } from "../constants";
 
 const Skills = (): ReactElement =>{
-    const boxRef = useRef(null);
 
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 

@@ -58,6 +58,7 @@ const NavBar = ({onButtonClick}: Props): ReactElement => {
             <div className={`nav-right ${isMobileMenuOpen ? "show-mobile-menu" : ""}`}>
                 <button className={'contact-button'} onClick={onButtonClick}>
                     <h3>Contact Me</h3>
+                    <img src={'images/message.svg'} alt={'contact image'}/>
                 </button>
             </div>
 

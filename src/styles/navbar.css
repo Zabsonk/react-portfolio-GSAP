@@ -53,37 +53,47 @@
 }
 
 button {
+    position: relative;
     background-color: #c6c6c6;
     border-radius: 10px;
     border: none;
     width: 10rem;
     font-family: "Mona Sans", sans-serif;
-    position: relative;
-    overflow: hidden;
     cursor: pointer;
 }
 
-button::before {
-    content: "";
-    background-color: rgba(255, 255, 255, 0.66);
-    width: 0;
-    height: 100%;
+button img {
     position: absolute;
-    top: 0;
-    left: 0;
-    border-radius: 10px;
-    transition: width 0.3s ease;
+    top: 50%;
+    left: -50%;
+    transform: translate(-50%, -50%) ;
+    width: 2.5rem;
+    height: 2.5rem;
+    object-fit: scale-down;
+    pointer-events: none;
+    transition: left 0.3s;
 }
 
-button:hover::before {
-    width: 100%;
+
+button:hover img {
+    left:50%;
 }
+
+button h3 {
+    transition: transform 0.3s ease;
+}
+
+button:hover h3 {
+    transform: translateX(100%);
+}
+
 
 .hamburger {
     display: none;
     cursor: pointer;
     color: white;
 }
+
 
 @media (max-width: 1020px) {
     .hamburger {
