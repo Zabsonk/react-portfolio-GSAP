@@ -1,5 +1,5 @@
 import {type ReactElement, useEffect, useRef} from "react";
-import {Application, Container, type ContainerChild, Graphics, Rectangle} from 'pixi.js';
+import {Application, Container, type ContainerChild, Graphics, Rectangle, Ticker} from 'pixi.js';
 import gsap from "gsap";
 
 const ParticleScene = (): ReactElement => {

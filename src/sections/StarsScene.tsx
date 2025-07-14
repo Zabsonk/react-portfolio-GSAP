@@ -1,6 +1,5 @@
 import {type ReactElement, useEffect, useRef} from "react";
 import {Application, Container, type ContainerChild, Graphics, Rectangle} from 'pixi.js';
-import gsap from "gsap";
 
 const StarsScene = (): ReactElement => {
     const mountRef = useRef<HTMLDivElement>(null);
@@ -84,7 +83,8 @@ const StarsScene = (): ReactElement => {
             const containerWidth = 25;
             const containerHeight = 25;
             for (let i: number = 0; i < maxStars; i++) {
-                const container :Container = new Container();
+                const container: Container = new Container();
+            }
         }
     }
 
