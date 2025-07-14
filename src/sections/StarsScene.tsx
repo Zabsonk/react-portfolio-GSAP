@@ -33,6 +33,9 @@ const StarsScene = (): ReactElement => {
             if(appRef.current) {
                 appRef.current.canvas.style.display = 'block';
                 appRef.current.canvas.style.pointerEvents = 'none';
+                appRef.current.canvas.style.position = 'sticky';
+                appRef.current.canvas.style.top = '0px'; // konieczne, by sticky działało
+
 
                 globalThis.__PIXI_APP__ = appRef.current;
                 initStars();
@@ -80,26 +83,29 @@ const StarsScene = (): ReactElement => {
 
     const initStars = async () => {
         if (appRef.current && mountRef.current) {
+            const container: Container = new Container()
             const texture = await Assets.load('/images/star.png');
             const starsEmitter: CustomEmitter = new CustomEmitter({
-                frequency: 100,
+                frequency: 200,
                 autoUpdate: true,
                 texture: texture,
-                lifeTime: { min: 20, max: 20 },
+                lifeTime: { min: 10, max: 10 },
                 fadeOut: true,
-                spawnShape: { x: 0, y: -400, width: 100, height: 1200 },
+                spawnShape: { x: 0, y:-400, width: 2000, height: 20 },
                 initAlpha: { min: 0.2, max: 0.6 },
-                initScaleX: { min: 0.5, max: 1 },
-                initScaleY: { min: 0.5, max: 1 },
-                moveSpeed: { min: 1, max: 1 },
+                initDirection: {min: 80, max: 110 },
+                initScaleX: { min: 0.1, max: 1 },
+                initScaleY: { min: 0.1, max: 1 },
+                moveSpeed: { min: 2, max: 10},
                 maxParticles: 100
             })
-            appRef.current.stage.addChild(starsEmitter);
+            appRef.current.stage.addChild(container);
+            container.addChild(starsEmitter);
             starsEmitter.emitParticles = true;
         }
     };
 
-    return <div ref={mountRef} className={'stars-container'} style={{width: "100%", height: "100%" }} />;
+    return <div ref={mountRef} className={'stars-container'} style={{width: "100%", height: "100%" , position: 'relative'}} />;
 };
 
 export default StarsScene;

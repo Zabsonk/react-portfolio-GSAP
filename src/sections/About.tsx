@@ -1,4 +1,4 @@
-import {type ReactElement, useState} from 'react';
+import {type ReactElement, useEffect, useRef, useState} from 'react';
 import gsap from 'gsap';
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import {useGSAP} from "@gsap/react";
@@ -37,15 +37,48 @@ const About = (): ReactElement => {
             },
         })
 
+
+
         gsap.utils.toArray<HTMLElement>(".info-text-wrapper").forEach((el, index) => {
             ScrollTrigger.create({
                 trigger: el,
-                start: "top bottom",
-                onEnter: () => setCurrentIndex(index),
-                onEnterBack: () => setCurrentIndex(index),
+                start: "top center",
+                end: "bottom center",
+                onEnter: () => {
+                    el.classList.add("with-effects");
+                    setCurrentIndex(index);
+                },
+                onEnterBack: () => {
+                    el.classList.add("with-effects");
+                    setCurrentIndex(index);
+                },
+                onLeave: () => {
+                    el.classList.remove("with-effects");
+                },
+                onLeaveBack: () => {
+                    el.classList.remove("with-effects");
+                }
             });
         });
     });
+
+    const [src, setSrc] = useState(illustrations[currentIndex]);
+    const imgRef = useRef<HTMLImageElement>(null);
+
+    useEffect(() => {
+        const img = imgRef.current;
+        if (!img) return;
+
+        img.classList.add("fade-out");
+
+        const handleTransitionEnd = () => {
+            setSrc(illustrations[currentIndex]);
+            img.classList.remove("fade-out");
+            img.removeEventListener("transitionend", handleTransitionEnd);
+        };
+
+        img.addEventListener("transitionend", handleTransitionEnd);
+    }, [currentIndex]);
 
 
     return (
@@ -83,7 +116,8 @@ const About = (): ReactElement => {
                 </div>
                 <div className={'illustration'}>
                     <img
-                        src={illustrations[currentIndex]}
+                        ref={imgRef}
+                        src={src}
                         alt="Illustration"
                     />
                 </div>

@@ -1,6 +1,5 @@
-import { useRef } from "react";
+import {useEffect, useRef} from "react";
 import { gsap } from "gsap";
-
 import Hero from "./sections/Hero";
 import NavBar from "./sections/NavBar.tsx";
 import About from './sections/About.tsx';
@@ -8,7 +7,6 @@ import Skills from "./sections/Skills.tsx";
 import Contact from "./sections/Contact.tsx";
 import Footer from "./sections/Footer.tsx";
 import ParticleWrapper from "./sections/ParticleWrapper.tsx";
-import ParticleScene from "./animation/ParticleScene.tsx";
 import StarsScene from "./sections/StarsScene.tsx";
 
 const App = () => {
@@ -22,11 +20,6 @@ const App = () => {
             duration: 1,
             ease: "power3.inOut"
         });
-        // gsap.to(contactContainerRef.current, {
-        //     x: "-100vw",
-        //     duration: 1,
-        //     ease: "power3.inOut"
-        // });
     };
 
     const handleSlideBack = () => {
@@ -36,6 +29,12 @@ const App = () => {
             ease: "power3.inOut"
         });
     };
+
+    useEffect(() => {
+        if (sliderRef.current) {
+            gsap.set(sliderRef.current, { x: "0vw" });
+        }
+    }, []);
 
     return (
         <div className="main">

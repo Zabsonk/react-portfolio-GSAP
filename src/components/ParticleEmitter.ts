@@ -121,9 +121,7 @@ export default class CustomEmitter extends ParticleContainer {
                     const angleRad: number = angleDeg * (Math.PI / 180);
                     const dirX: number = Math.cos(angleRad);
                     const dirY: number = Math.sin(angleRad);
-                    const initRotation: number = this.initRotation
-                        ? CommonUtils.getRandomValueFromSection(this.initRotation.min, this.initRotation.max) * (Math.PI / 180)
-                        : angleRad;
+                    const initRotation: number = angleRad - Math.PI / 2;
 
                     const p: CustomParticle = new CustomParticle(
                         { texture: this.config.texture, scaleX: initScaleX, scaleY: initScaleY, alpha: initAlpha, rotation: initRotation },
