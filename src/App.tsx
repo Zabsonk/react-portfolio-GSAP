@@ -15,6 +15,7 @@ const App = () => {
     const sliderRef = useRef<HTMLDivElement>(null);
 
     const handleSlide = () => {
+        document.body.style.overflowY = 'hidden';
         gsap.to(sliderRef.current, {
             x: "-100vw",
             duration: 1,
@@ -23,6 +24,7 @@ const App = () => {
     };
 
     const handleSlideBack = () => {
+        document.body.style.overflowY = 'auto';
         gsap.to(sliderRef.current, {
             x: "0vw",
             duration: 1,

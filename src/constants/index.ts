@@ -25,6 +25,14 @@ const navLinks: {text: string, link: string}[] = [
   }
 ]
 
+const skillsLevels: Map<number, string> = new Map([
+  [1, "Beginner"],
+  [2, "Intermediate"],
+  [3, "Advanced"],
+  [4, "Expert"],
+  [5, "Master"]
+]);
+
 const skills: { text:string , imgPath: string, level: number, color: string}[] = [
   {
     text: 'PixiJS is a fast and flexible 2D rendering library for creating rich, interactive graphics and animations in the browser',
@@ -35,7 +43,7 @@ const skills: { text:string , imgPath: string, level: number, color: string}[] =
   {
     text: 'This is what I love the most about programing. OOP makes it easier to model real-world problems in a clear and intuitive way.',
     imgPath: "/images/logos/oop.svg",
-    level: 5,
+    level: 4,
     color: '#12dcbe'
   },
   {
@@ -87,6 +95,7 @@ const myLinks: (ImgTexts & { link: string })[] = [
 ]
 
 export {
+    skillsLevels,
     words,
     navLinks,
     skills,
