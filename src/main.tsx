@@ -9,6 +9,7 @@ import "./styles/about.css";
 import "./styles/hero.css";
 import "./styles/particleScene.css";
 import "./styles/contact.css";
+import "./styles/footer.css";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import {SplitText} from "gsap/SplitText";
 
