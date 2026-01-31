@@ -15,7 +15,8 @@ body {
 
 .hero-background {
   background-color: rgb(10, 10, 10);
-  min-height: 100vh;
+  min-height: calc(100vh - 5rem); /* 5rem = navbar height */
+  height: calc(100vh - 5rem);
   width: 100%;
 }
 

@@ -45,7 +45,8 @@
     padding: 0 40px;
     width: 100%;
     position: relative;
-    min-height: calc(90vh);
+    min-height: calc(100vh - 5rem);
+    height: calc(100vh - 5rem);
     display: flex;
     justify-content: space-around;
 }

@@ -90,8 +90,9 @@ export const initRocket = async (appBounds: Bounds): Promise<Rocket> => {
         acceleration: 0.01 ,
         rotationSpeed: 0.01,
         maxSpeed: 1.5
-    },appBounds);  wa
+    },appBounds); 
 
+    console.warn(rocket)
     rocket.anchor.set(0.5);
     rocket.scale.set(2);
     return rocket;

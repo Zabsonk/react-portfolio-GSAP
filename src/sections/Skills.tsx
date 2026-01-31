@@ -15,9 +15,7 @@ const Skills = (): ReactElement =>{
                             key={index}
                             onMouseEnter={() => setHoveredIndex(index)}
                             onMouseLeave={() => setHoveredIndex(null)}>
-                            <img src={s.imgPath} alt="skill"/>
-                            <span>{s.text}</span>
-                            <div className="dots-container">
+                                <div className="dots-container">
                                 {[...Array(5)].map((_, i) => (
                                     <div key={i} className="dot-wrapper">
                                         <div className="dot gray"/>
@@ -33,6 +31,8 @@ const Skills = (): ReactElement =>{
                                     </div>
                                 ))}
                             </div>
+                            <img src={s.imgPath} alt="skill"/>
+                            <span>{s.text}</span>
                         </div>
                     ))}
                 </div>

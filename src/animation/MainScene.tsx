@@ -2,16 +2,16 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { Ticker, Application } from "pixi.js";
-import { createPixiApp } from "./App";
 import { clearStars, initStars } from "./Stars";
 import { initRocket, Rocket } from "./Rocket";
+import { createPixiApp } from "./PixiApp";
 
 
 const MainScene = () => {
     const mountRef = useRef<HTMLDivElement>(null);
     const appRef = useRef<Application | null>(null);
     const initialized = useRef(false);
-    const rocketRef = useRef<Rocket | null>(null); // <-- ref do rakiety
+    const rocketRef = useRef<Rocket | null>(null); 
 
     gsap.ticker.add((time) => {
         Ticker.shared.update(time * 1000);
@@ -47,9 +47,10 @@ const MainScene = () => {
             app.renderer.resize(mountRef.current.clientWidth, mountRef.current.clientHeight);
             clearStars(app);
             initStars(app, mountRef.current.clientWidth, mountRef.current.clientHeight);
-               if (rocketRef.current) {
+               if (rocketRef.current  ) {
                 rocketRef.current.movementBounds = { width: mountRef.current.clientWidth, height: mountRef.current.clientHeight };
             }
+
         };
 
         window.addEventListener("resize", handleResize);

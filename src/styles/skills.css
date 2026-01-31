@@ -3,11 +3,12 @@
     position: relative;
     width: auto;
     display: flex;
-    gap: 20px;
+    gap: 200px;
 }
 
 .marquee-wrapper {
-    padding-top: 40px;
+    padding-top: 60px;
+    padding-bottom: 60px;
     display: flex;
 }
 
@@ -33,9 +34,14 @@
 }
 
 .marquee-inner {
-    height: 240px;
+    height: 220px;
     display: flex;
-    animation: marquee 30s linear infinite;
+    animation-name: marquee;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-duration: 30s;
+
+    transition: animation-duration 0.6s ease;
 }
 
 .skill-frame {
@@ -49,6 +55,7 @@
     border-radius: 10px;
     text-align: center;
     transition: transform 0.3s;
+    position: relative;
 }
 
 .marquee-inner:hover {
@@ -66,10 +73,11 @@
     width: 200px;
     height: 200px;
     object-fit: contain;
-    display: block;
-    margin: 0 auto auto;
     transition: transform 0.75s ease, opacity 0.75s ease;
-
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .skill-frame span {
@@ -85,8 +93,10 @@
     color: white;
     font-size: 20px;
     font-weight: bold;
-    transition: transform 0.75s ease, opacity 0.75s ease;
     pointer-events: none;
+    overflow: hidden;
+    transform: translateY(0);
+    transition: transform 0.5s, opacity 0.5s;
 }
 
 .skill-frame:hover span {
@@ -95,25 +105,25 @@
 }
 
 .skill-frame:hover img {
-    transform: scale(0);
+    transform: translate(-50%, -50%) scale(0);
     opacity: 0;
 }
 
 
 .skill-frame:hover .dots-container {
     opacity: 1;
-    transform: translateY(24px);
+    transform: translateY(40px);
 }
 
 .dots-container {
     display: flex;
     gap: 6px;
-    position: absolute;
-    top: -12px;
-    right: 0;
-    width: 100%;
-    justify-content: center;
-    opacity: 0;
+    top: -40px;
+    position:relative;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: fit-content;
+    opacity: 1;
     transition: transform 0.75s ease, opacity 0.75s ease;
 }
 
@@ -130,6 +140,9 @@
     position: absolute;
     top: 0;
     left: 0;
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.5s, transform 0.5s;
 }
 
 .gray {
