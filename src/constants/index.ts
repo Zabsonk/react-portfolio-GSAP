@@ -10,6 +10,18 @@ const words: ImgTexts[] = [
   { text: "Code", imgPath: "/images/code.svg" },
 ];
 
+const aboutImgs: string[] = [
+        "/images/abouts/graduate.png",
+        "/images/abouts/active.png",
+        "/images/abouts/game-dev.png",
+    ]
+
+const aboutInfo: string[] = [
+  "I'm a Computer Science graduate with an engineering degree, specializing in IT Systems Infrastructure.",
+  "In my free time, I focus on staying active through sports and maintaining a healthy lifestyle.",
+  "Currently, I work on building interactive applications and browser-based games using PixiJS. I enjoy working in a team environment and take particular interest in developing engaging and visually rich casino games."
+]
+
 const navLinks: {text: string, link: string}[] = [
   {
     text: 'Skills',
@@ -99,5 +111,7 @@ export {
     words,
     navLinks,
     skills,
-    myLinks
+    myLinks,
+    aboutImgs,
+    aboutInfo
 };
