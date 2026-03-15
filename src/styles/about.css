@@ -105,8 +105,15 @@
     transition: opacity 0.2s ease;
 }
 
+
 .illustration img.fade-out {
     opacity: 0;
+    /* transition: opacity 0.2s ease; */
+}
+
+.illustration img.fade-in {
+    opacity: 1;
+    transition: opacity 0.2s ease;
 }
 
 @keyframes spin {

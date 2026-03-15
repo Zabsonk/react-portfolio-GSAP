@@ -1,19 +1,15 @@
-import {type ReactElement, useEffect, useRef, useState} from 'react';
+import {type ReactElement, useRef} from 'react';
 import gsap from 'gsap';
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import {useGSAP} from "@gsap/react";
+import { aboutImgs, aboutInfo } from '../constants';
 
 const About = (): ReactElement => {
 
     gsap.registerPlugin(ScrollTrigger);
-    const [currentIndex, setCurrentIndex] = useState(0);
-
-    const illustrations = [
-        "/images/abouts/graduate.png",
-        "/images/abouts/active.png",
-        "/images/abouts/game-dev.png",
-    ];
-
+    const currentIndexRef = useRef(0);
+    const imgRef = useRef<HTMLImageElement>(null);
+    const tlRef = useRef<gsap.core.Timeline | null>(null);
     useGSAP(() => {
         gsap.utils.toArray<HTMLElement>(".info-text-wrapper").forEach((el) => {
             gsap.from(el, {
@@ -44,41 +40,48 @@ const About = (): ReactElement => {
                 trigger: el,
                 start: "top center",
                 end: "bottom center",
-                onEnter: () => {
-                    el.classList.add("with-effects");
-                    setCurrentIndex(index);
-                },
-                onEnterBack: () => {
-                    el.classList.add("with-effects");
-                    setCurrentIndex(index);
-                },
-                onLeave: () => {
-                    el.classList.remove("with-effects");
-                },
-                onLeaveBack: () => {
-                    el.classList.remove("with-effects");
+
+                onToggle: self => {
+                    if (self.isActive) {
+                        el.classList.add("with-effects");
+                        changeImage(index);
+                    } else {
+                        el.classList.remove("with-effects");
+                    }
+
                 }
             });
         });
+        ScrollTrigger.refresh();
+        tlRef.current = gsap.timeline({ paused: true });
     });
 
-    const [src, setSrc] = useState(illustrations[currentIndex]);
-    const imgRef = useRef<HTMLImageElement>(null);
+    const changeImage = (index: number) => {
 
-    useEffect(() => {
-        const img = imgRef.current;
-        if (!img) return;
+    if (!imgRef.current) return;
 
-        img.classList.add("fade-out");
+    if (index === currentIndexRef.current) return;
 
-        const handleTransitionEnd = () => {
-            setSrc(illustrations[currentIndex]);
-            img.classList.remove("fade-out");
-            img.removeEventListener("transitionend", handleTransitionEnd);
-        };
+    const img = imgRef.current;
 
-        img.addEventListener("transitionend", handleTransitionEnd);
-    }, [currentIndex]);
+    gsap.killTweensOf(img);
+
+    gsap.timeline()
+        .to(img, {
+            opacity: 0,
+            duration: 0.2,
+            ease: "power1.out"
+        })
+        .add(() => {
+            currentIndexRef.current = index; 
+            img.src = aboutImgs[index];
+        }, "+=0.15")
+        .to(img, {
+            opacity: 1,
+            duration: 0.2,
+            ease: "power3.in",
+        });
+};
 
 
     return (
@@ -88,36 +91,18 @@ const About = (): ReactElement => {
             </div>
             <div className={'about-info'}>
                 <div className={'info-wrapper'}>
-                    <div className={'info-text-wrapper'}>
-                    <div className={'info-text'}>
-                        <span>
-                            I'm a Computer Science graduate with an engineering degree, specializing in IT Systems
-                            Infrastructure.
-                        </span>
-                    </div>
-                    </div>
-                    <div className={'info-text-wrapper'}>
-                    <div className={'info-text'}>
-                        <span>
-                            In my free time, I focus on staying active through sports and maintaining a healthy lifestyle.
-                        </span>
-                    </div>
-                    </div>
-                    <div className={'info-text-wrapper'}>
-                    <div className={'info-text'}>
-                        <span>
-                            Currently, I work on building interactive applications and browser-based games using
-                            PixiJS. I enjoy working in a team environment and take particular interest in developing
-                            engaging
-                            and visually rich casino games.
-                        </span>
-                    </div>
-                    </div>
+                    {[...aboutInfo].map((info, index) => (
+                        <div key={index} className={'info-text-wrapper'}>
+                            <div className={'info-text'}>
+                                <span>{info}</span>
+                            </div>
+                        </div>
+                    ))}
                 </div>
                 <div className={'illustration'}>
                     <img
                         ref={imgRef}
-                        src={src}
+                        src={aboutImgs[ currentIndexRef.current]}
                         alt="Illustration"
                     />
                 </div>
