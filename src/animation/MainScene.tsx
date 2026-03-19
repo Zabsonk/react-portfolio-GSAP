@@ -7,6 +7,7 @@ import {
 } from "pixi.js";
 
 import { createPixiApp } from "./PixiApp";
+import { initRocket } from "./Rocket";
 
 const vertex = `
 in vec2 aPosition;
@@ -123,8 +124,15 @@ const MainScene = () => {
 
             const app = await createPixiApp(mountRef.current);
             appRef.current = app;
+            const stage = app.stage;
+
+            const rocket = await initRocket({width: app.renderer.width, height: app.renderer.height});
+            app.ticker.add(rocket.movementTick, rocket)
 
             initStars();
+            rocket.position.set(stage.width/2, stage.height/2);
+            stage.addChild(rocket);
+
         };
 
         init();
