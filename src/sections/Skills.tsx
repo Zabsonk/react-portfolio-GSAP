@@ -14,7 +14,11 @@ const Skills = (): ReactElement =>{
                             className="skill-frame"
                             key={index}
                             onMouseEnter={() => setHoveredIndex(index)}
-                            onMouseLeave={() => setHoveredIndex(null)}>
+                            onMouseLeave={() => setHoveredIndex(null)}
+                             style={{
+                                    boxShadow: `0 0 18px 4px ${s.color}80, 0 0 40px 8px ${s.color}33, inset 0 0 20px rgba(255,255,255,0.03)`
+                                }}
+                            >
                                 <div className="dots-container">
                                 {[...Array(5)].map((_, i) => (
                                     <div key={i} className="dot-wrapper">

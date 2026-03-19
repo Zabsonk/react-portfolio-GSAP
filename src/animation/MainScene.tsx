@@ -1,4 +1,3 @@
-// src/components/ParticleScene.tsx
 import { useEffect, useRef } from "react";
 import {
     Application,
@@ -22,7 +21,7 @@ void main() {
 `;
 
 const fragment = `
-precision mediump float;
+precision highp float;
 
 in vec2 vTextureCoord;
 out vec4 finalColor;
@@ -30,76 +29,81 @@ out vec4 finalColor;
 uniform vec3 iResolution;
 uniform float iTime;
 
-#define iterations 17
-#define formuparam 0.53
-
-#define volsteps 20
-#define stepsize 0.1
-
-#define zoom   0.800
-#define tile   0.850
-#define speed  0.010 
-
-#define brightness 0.0015
-#define darkmatter 0.300
-#define distfading 0.730
-#define saturation 0.850
+#define STEPS   22
+#define ITER    16
+#define STEP_SZ 0.14
+#define FOLD    0.48
+#define ZOOM    0.75
+#define SPEED   0.0009
+#define GLOW    0.0012
+#define SCATTER 0.4
+#define FALLOFF 0.72
+#define SAT     0.80
 
 void main() {
     vec2 fragCoord = vTextureCoord * iResolution.xy;
 
     vec2 uv = fragCoord / iResolution.xy - 0.5;
-    uv.y *= iResolution.y / iResolution.x;
+    uv.x *= iResolution.x / iResolution.y;
 
-    vec3 dir = vec3(uv * zoom, 1.0);
-    float time = iTime * speed + 0.25;
+    float t = iTime * SPEED;
 
-    float a1 = 0.5 / iResolution.x * 2.0;
-    float a2 = 0.8  / iResolution.y * 2.0;
+    vec3 dir = normalize(vec3(uv * ZOOM, 1.0));
 
-    mat2 rot1 = mat2(cos(a1), sin(a1), -sin(a1), cos(a1));
-    mat2 rot2 = mat2(cos(a2), sin(a2), -sin(a2), cos(a2));
+    float b1 = t * 1.3;
+    float b2 = t * 0.7;
 
-    dir.xz *= rot1;
-    dir.xy *= rot2;
+    mat2 rx = mat2(cos(b1), -sin(b1),  sin(b1), cos(b1));
+    mat2 ry = mat2(cos(b2), -sin(b2),  sin(b2), cos(b2));
 
-    vec3 from = vec3(1.0, 0.5, 0.5);
-    from += vec3(time * 2.0, time, -2.0);
-    from.xz *= rot1;
-    from.xy *= rot2;
+    dir.xy = rx * dir.xy;
+    dir.yz = ry * dir.yz;
 
-    float s = 0.1;
-    float fade = 1.0;
-    vec3 v = vec3(0.0);
+    vec3 ro = vec3(0.3, 0.1, t * 2.0);
+    ro.xy = rx * ro.xy;
+    ro.yz = ry * ro.yz;
 
-    for (int r = 0; r < volsteps; r++) {
-        vec3 p = from + s * dir * 0.5;
-        p = abs(vec3(tile) - mod(p, vec3(tile * 2.0)));
+    float march = 0.05;
+    float alpha = 1.0;
+    vec3 col = vec3(0.0);
 
-        float pa = 0.0;
-        float a = 0.0;
+    for (int i = 0; i < STEPS; i++) {
+        vec3 p = ro + dir * march;
+        vec3 q = mod(p, 2.0) - 1.0;
 
-        for (int i = 0; i < iterations; i++) {
-            p = abs(p) / dot(p, p) - formuparam;
-            a += abs(length(p) - pa);
-            pa = length(p);
+        float prev = 0.0;
+        float acc  = 0.0;
+
+        for (int j = 0; j < ITER; j++) {
+            q = abs(q) / max(dot(q, q), 0.0001) - FOLD;
+            float l = length(q);
+            acc += abs(l - prev);
+            prev = l;
         }
 
-        float dm = max(0.0, darkmatter - a * a * 0.001);
-        a *= a * a;
+        float cloud = max(0.0, SCATTER - acc * acc * 0.0008);
+        acc = acc * acc * acc;
 
-        if (r > 6) fade *= 1.0 - dm;
+        vec3 hue = vec3(
+            0.5 + 0.5 * sin(march * 1.1 + 2.0),
+            0.3 + 0.5 * sin(march * 0.7 + 3.5),
+            0.8 + 0.5 * sin(march * 0.4 + 0.0)
+        );
 
-        v += fade;
-        v += vec3(s, s * s, s * s * s * s) * a * brightness * fade;
+        if (i > 5) alpha *= 1.0 - cloud;
 
-        fade *= distfading;
-        s += stepsize;
+        col += alpha * hue * acc * GLOW * vec3(march, march * march, march * march * march * march);
+        col += alpha * vec3(0.01);
+
+        alpha *= FALLOFF;
+        march += STEP_SZ;
     }
 
-    v = mix(vec3(length(v)), v, saturation);
+    col = mix(vec3(length(col)), col, SAT);
+    col = col * 0.012;
+    col = pow(max(col, vec3(0.0)), vec3(0.85));
 
-    finalColor = vec4(v * 0.01, 1.0);
+    finalColor = vec4(col, 1.0);
 }
 `;
 
@@ -125,38 +129,7 @@ const MainScene = () => {
 
         init();
 
-        const handleResize = () => {
-            if (!mountRef.current || !appRef.current) return;
-
-            const app = appRef.current;
-
-            app.renderer.resize(
-                mountRef.current.clientWidth,
-                mountRef.current.clientHeight
-            );
-
-            if (quadRef.current) {
-                quadRef.current.width = app.screen.width;
-                quadRef.current.height = app.screen.height;
-                quadRef.current.x = app.screen.width / 2;
-                quadRef.current.y = app.screen.height / 2;
-            }
-
-            if (shaderRef.current) {
-                shaderRef.current.resources.shaderToyUniforms.uniforms.iResolution = [
-                    app.screen.width,
-                    app.screen.height,
-                    1
-                ];
-            }
-        };
-
-        window.addEventListener("resize", handleResize);
-        window.addEventListener("orientationchange", handleResize);
-
         return () => {
-            window.removeEventListener("resize", handleResize);
-            window.removeEventListener("orientationchange", handleResize);
 
             appRef.current?.destroy(true);
             appRef.current = null;
@@ -177,13 +150,13 @@ const MainScene = () => {
                     -1,  1
                 ],
                 aUV: [
-                    0,0,
-                    1,0,
-                    1,1,
-                    0,1
+                    0, 0,
+                    1, 0,
+                    1, 1,
+                    0, 1
                 ]
             },
-            indexBuffer: [0,1,2,0,2,3]
+            indexBuffer: [0, 1, 2, 0, 2, 3]
         });
 
         const shader = Shader.from({
@@ -215,11 +188,6 @@ const MainScene = () => {
             geometry,
             shader
         });
-
-        quad.width = app.screen.width;
-        quad.height = app.screen.height;
-        quad.x = app.screen.width / 2;
-        quad.y = app.screen.height / 2;
 
         quadRef.current = quad;
 

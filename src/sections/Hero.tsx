@@ -1,9 +1,7 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import {type ImgTexts, words} from "../constants";
-import ParticleWrapper from './ParticleWrapper.tsx';
 import type {ReactElement} from "react";
-import MainScene from "../animation/MainScene.tsx";
 
 const Hero = (): ReactElement => {
   useGSAP(() => {
@@ -21,9 +19,6 @@ const Hero = (): ReactElement => {
 
   return (
       <section className="hero">
-          <ParticleWrapper>
-              <MainScene />
-          </ParticleWrapper>
           <div className="hero-text">
               <h1>
                   Turning

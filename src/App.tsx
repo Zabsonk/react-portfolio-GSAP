@@ -8,6 +8,7 @@ import Contact from "./sections/Contact.tsx";
 import Footer from "./sections/Footer.tsx";
 import ParticleWrapper from "./sections/ParticleWrapper.tsx";
 import StarsScene from "./sections/StarsScene.tsx";
+import MainScene from "./animation/MainScene.tsx";
 
 const App = () => {
     const homeContainerRef = useRef<HTMLDivElement>(null);
@@ -38,11 +39,16 @@ const App = () => {
         }
     }, []);
 
+
+
     return (
         <div className="main">
             <div className={'slider'} ref={sliderRef}>
                 <div ref={homeContainerRef} className="home">
                     <div className="w-screen h-full overflow-y-auto">
+                        <ParticleWrapper>
+                            <MainScene />
+                        </ParticleWrapper>
                         <NavBar onButtonClick={handleSlide}/>
                         <div className="hero-background">
                             <Hero/>

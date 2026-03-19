@@ -48,15 +48,19 @@
     height: 200px;
     overflow: hidden;
     flex: 0 0 auto;
-    width: 600px;
+    width: 400px;
     margin: 0 10px;
     padding: 10px;
-    background: #2E2B2B;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 10px;
     text-align: center;
     transition: transform 0.3s;
     position: relative;
 }
+
+
 
 .marquee-inner:hover {
     animation-play-state: paused;
@@ -179,3 +183,68 @@
     }
 }
 
+
+
+@media (max-width: 1024px) {
+    .skill-frame {
+        width: 160px;
+        height: 160px;
+    }
+
+    .skill-frame img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .skill-frame span {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .skill-frame {
+        width: 120px;
+        height: 120px;
+    }
+
+    .skill-frame img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .skill-frame span {
+        font-size: 10px;
+    }
+
+    .dot-wrapper {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .skill-frame {
+        width: 90px;
+        height: 90px;
+        border-radius: 8px;
+    }
+
+    .skill-frame img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .skill-frame span {
+        font-size: 10px;
+    }
+
+    .dot-wrapper {
+        width: 5px;
+        height: 5px;
+    }
+
+    .marquee-wrapper {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+}

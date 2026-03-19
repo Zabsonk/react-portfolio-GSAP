@@ -91,7 +91,7 @@ const skills: { text:string , imgPath: string, level: number, color: string}[] =
   }
   ,
   {
-    text: 'GSAP',
+    text: 'GSAP is a powerful JavaScript library for creating high-performance animations simply tweening any numeric property of any object.',
     imgPath: "/images/logos/gsap.svg",
     level: 3,
     color: '#8ac640'

@@ -7,6 +7,7 @@ export const createPixiApp = async (mount: HTMLDivElement): Promise<Application>
         width: mount.clientWidth,
         height: mount.clientHeight,
         backgroundAlpha: 0,
+        resizeTo: mount
     });
 
     mount.prepend(app.canvas);

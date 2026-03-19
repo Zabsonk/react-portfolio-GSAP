@@ -41,8 +41,7 @@
     margin: auto;
     text-align: justify;
     display: flex;
-    background-color: #2E2B2B;
-    height: 100%;
+  background: rgba(255, 255, 255, 0.03);    height: 100%;
     border-radius: 10px;
     justify-content: center;
     align-items: center;
@@ -93,8 +92,7 @@
     width: 50vh;
     height: 50vh;
     border-radius: 10px;
-    background-color: #2E2B2B;
-}
+  background: rgba(255, 255, 255, 0.03);}
 
 .illustration img {
     width: 100%;
