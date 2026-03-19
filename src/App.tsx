@@ -1,4 +1,4 @@
-import {useEffect, useRef} from "react";
+import {useEffect, useRef, useState} from "react";
 import { gsap } from "gsap";
 import Hero from "./sections/Hero";
 import NavBar from "./sections/NavBar.tsx";
@@ -9,11 +9,14 @@ import Footer from "./sections/Footer.tsx";
 import ParticleWrapper from "./sections/ParticleWrapper.tsx";
 import StarsScene from "./sections/StarsScene.tsx";
 import MainScene from "./animation/MainScene.tsx";
+import LoadingScreen from "./sections/LoadingScreen.tsx";
 
 const App = () => {
     const homeContainerRef = useRef<HTMLDivElement>(null);
     const contactContainerRef = useRef<HTMLDivElement>(null);
     const sliderRef = useRef<HTMLDivElement>(null);
+
+    const [loading, setLoading] = useState(true);
 
     const handleSlide = () => {
         document.body.style.overflowY = 'hidden';
@@ -43,11 +46,12 @@ const App = () => {
 
     return (
         <div className="main">
+            <LoadingScreen visible={loading} />
             <div className={'slider'} ref={sliderRef}>
                 <div ref={homeContainerRef} className="home">
                     <div className="w-screen h-full overflow-y-auto">
                         <ParticleWrapper>
-                            <MainScene />
+                            <MainScene onReady={() => setLoading(false)} />
                         </ParticleWrapper>
                         <NavBar onButtonClick={handleSlide}/>
                         <div className="hero-background">

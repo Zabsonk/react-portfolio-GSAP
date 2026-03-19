@@ -108,7 +108,11 @@ void main() {
 }
 `;
 
-const MainScene = () => {
+interface Props {
+    onReady?: () => void;
+}
+
+const MainScene = ({ onReady }: Props) => {
     const mountRef = useRef<HTMLDivElement>(null);
     const appRef = useRef<Application | null>(null);
     const quadRef = useRef<Mesh<Geometry, Shader> | null>(null);
@@ -132,7 +136,7 @@ const MainScene = () => {
             initStars();
             rocket.position.set(stage.width/2, stage.height/2);
             stage.addChild(rocket);
-
+            onReady?.(); 
         };
 
         init();
