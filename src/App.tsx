@@ -8,14 +8,16 @@ import Contact from "./sections/Contact.tsx";
 import Footer from "./sections/Footer.tsx";
 import ParticleWrapper from "./sections/ParticleWrapper.tsx";
 import MainScene from "./animation/MainScene.tsx";
+import LoadingScreen from "./sections/LoadingScreen.tsx";
 
 const App = () => {
     const homeContainerRef = useRef<HTMLDivElement>(null);
     const contactContainerRef = useRef<HTMLDivElement>(null);
     const sliderRef = useRef<HTMLDivElement>(null);
-    const [shaderVisible, setShaderVisible] = useState(true);
 
     const [loading, setLoading] = useState(true);
+    const [shaderVisible, setShaderVisible] = useState(true);
+
 
         const handleSlide = () => {
             document.body.style.overflowY = 'hidden';
@@ -48,6 +50,7 @@ const App = () => {
 
     return (
         <div className="main">
+            <LoadingScreen visible={loading} />
             <div className={'slider'} ref={sliderRef}>
                 <div ref={homeContainerRef} className="home">
                     <div className="w-screen h-full overflow-y-auto">

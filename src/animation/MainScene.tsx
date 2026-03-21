@@ -129,14 +129,6 @@ const MainScene = ({ onReady, isVisible }: Props) => {
         }
     }, [isVisible]);
 
-        useEffect(() => {
-        if (!appRef.current) return;
-        if (isVisible) {
-            appRef.current.ticker.start();
-        } else {
-            appRef.current.ticker.stop();
-        }
-    }, [isVisible]);
 
     useEffect(() => {
         if (initialized.current) return;
@@ -155,7 +147,7 @@ const MainScene = ({ onReady, isVisible }: Props) => {
             initStars();
             rocket.position.set(stage.width/2, stage.height/2);
             stage.addChild(rocket);
-
+            onReady?.(); 
         };
 
         init();
