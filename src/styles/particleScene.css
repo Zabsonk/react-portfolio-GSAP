@@ -1,9 +1,9 @@
 .particle-wrapper {
     z-index: 0;
-    position: sticky;  /* ← zamiast absolute */
+    position: sticky; 
     width: 100vw;
     height: 100vh;
     top: 0; 
-    margin-bottom: -100vh; /* ← żeby nie pchał treści w dół */
+    margin-bottom: -100vh;
 }
 

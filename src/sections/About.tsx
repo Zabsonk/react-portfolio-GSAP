@@ -38,7 +38,7 @@ const About = (): ReactElement => {
         gsap.utils.toArray<HTMLElement>(".info-text-wrapper").forEach((el, index) => {
             ScrollTrigger.create({
                 trigger: el,
-                start: "top center",
+                start: "center center",
                 end: "bottom center",
 
                 onToggle: self => {
