@@ -15,6 +15,9 @@ export type Bounds = {
 
 export class Rocket extends Sprite
 {
+    private onFirstMove?: () => void;
+    private hasMoved = false;
+
     public movementBounds: Bounds;
 
     private keys: {
@@ -25,11 +28,12 @@ export class Rocket extends Sprite
 
     private physics :IRocketPhysics;
 
-    constructor(texture: Texture, movementConfig: IRocketPhysics, movementBounds: Bounds){
+    constructor(texture: Texture, movementConfig: IRocketPhysics, movementBounds: Bounds, onFirstMove?: () => void) {
         super(texture);
 
         this.physics = movementConfig;
         this.movementBounds = movementBounds;
+        this.onFirstMove = onFirstMove;
 
         window.addEventListener("keydown", (e) => {
             if (e.key === "w" || e.key === "W") this.keys.w = true;
@@ -45,6 +49,11 @@ export class Rocket extends Sprite
     }
 
     public movementTick(){
+        if ((this.keys.w || this.keys.a || this.keys.d) && !this.hasMoved) {
+            this.hasMoved = true;
+            this.onFirstMove?.();
+        }
+
         if (this.keys.a) this.rotation -= this.physics.rotationSpeed;
         if (this.keys.d) this.rotation += this.physics.rotationSpeed;
 
@@ -82,7 +91,7 @@ export class Rocket extends Sprite
 
 
 
-export const initRocket = async (appBounds: Bounds): Promise<Rocket> => {
+export const initRocket = async (appBounds: Bounds, onFirstMove?: () => void): Promise<Rocket> => {
     const texture = await Assets.load("/assets/rocket.png");
     const rocket = new Rocket(texture,{
         vx: 0,
@@ -90,9 +99,8 @@ export const initRocket = async (appBounds: Bounds): Promise<Rocket> => {
         acceleration: 0.01 ,
         rotationSpeed: 0.01,
         maxSpeed: 1.5
-    },appBounds); 
+    },appBounds, onFirstMove); 
 
-    console.warn(rocket)
     rocket.anchor.set(0.5);
     rocket.scale.set(2);
     return rocket;

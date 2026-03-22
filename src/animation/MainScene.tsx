@@ -19,7 +19,7 @@ const MainScene = ({ onReady, isVisible }: Props) => {
     const mountRef = useRef<HTMLDivElement>(null);
     const appRef = useRef<Application | null>(null);
     const quadRef = useRef<Mesh<Geometry, Shader> | null>(null);
-    const hintRef = useRef<HTMLDivElement | null>(null);
+    const hintRef = useRef<HTMLDivElement>(null);
     const shaderRef = useRef<Shader | null>(null);
     const initialized = useRef(false);
 
@@ -44,7 +44,7 @@ const MainScene = ({ onReady, isVisible }: Props) => {
             appRef.current = app;
             const stage = app.stage;
 
-            const rocket = await initRocket({width: app.renderer.width, height: app.renderer.height});
+            const rocket = await initRocket({width: app.renderer.width, height: app.renderer.height}, alphaOutHint);
             app.ticker.add(rocket.movementTick, rocket)
 
             initStars();
@@ -63,6 +63,13 @@ const MainScene = ({ onReady, isVisible }: Props) => {
             appRef.current = null;
         };
     }, []);
+
+    const alphaOutHint = () => {
+        if (hintRef.current) {
+            hintRef.current.style.transition = 'opacity 0.5s ease';
+            hintRef.current.style.opacity = '0';
+        }
+    }
 
     const initStars = () => {
         if (!appRef.current) return;
@@ -127,16 +134,18 @@ const MainScene = ({ onReady, isVisible }: Props) => {
         });
     };
 
-    const initRocketHint = async () => {
-
-    }
-
     return (
-        <div
-            ref={mountRef}
-            className="particle-container"
-            style={{ width: "100%", height: "100%" }}
-        />
+       
+            <div
+                ref={mountRef}
+                className="particle-container"
+                style={{ width: "100%", height: "100%" }}
+            >
+                <div ref={hintRef} className={"rocket-hint"}>
+                    Use <span className="hint-key">W</span> <span className="hint-key">A</span> <span className="hint-key">D</span> to move the rocket
+                </div>
+            </div>
+      
     );
 };
 
