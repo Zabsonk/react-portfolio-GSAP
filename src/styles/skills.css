@@ -15,22 +15,27 @@
 .skills::after, .skills::before {
     content: "";
     position: absolute;
-    width: 200px;
+    width: 150px;
     height: 100%;
     z-index: 1;
     pointer-events: none;
 }
+
 .skills::after {
     right: 0;
-    background: black;
-    mask: linear-gradient(to left, rgb(0, 0, 0), rgba(195, 4, 4, 0));
+    mask: 
+        linear-gradient(to left, rgb(0,0,0), rgba(0,0,0,0)),
+        linear-gradient(to bottom, rgba(0,0,0,0), rgb(0,0,0) 20%, rgb(0,0,0) 80%, rgba(0,0,0,0));
+    mask-composite: intersect;
     backdrop-filter: blur(12px);
 }
 
 .skills::before {
-    mask: linear-gradient(to right, rgb(0, 0, 0.5), rgba(195, 4, 4, 0));
+    mask: 
+        linear-gradient(to right, rgb(0,0,0), rgba(0,0,0,0)),
+        linear-gradient(to bottom, rgba(0,0,0,0), rgb(0,0,0) 20%, rgb(0,0,0) 80%, rgba(0,0,0,0));
+    mask-composite: intersect;
     backdrop-filter: blur(12px);
-    background: black;
 }
 
 .marquee-inner {

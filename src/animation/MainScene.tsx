@@ -12,15 +12,26 @@ import { vertex, fragment } from "./shaders";
 
 interface Props {
     onReady?: () => void;
+    isVisible: boolean;
 }
 
-const MainScene = ({ onReady }: Props) => {
+const MainScene = ({ onReady, isVisible }: Props) => {
     const mountRef = useRef<HTMLDivElement>(null);
     const appRef = useRef<Application | null>(null);
     const quadRef = useRef<Mesh<Geometry, Shader> | null>(null);
     const hintRef = useRef<HTMLDivElement | null>(null);
     const shaderRef = useRef<Shader | null>(null);
     const initialized = useRef(false);
+
+        useEffect(() => {
+        if (!appRef.current) return;
+        if (isVisible) {
+            appRef.current.ticker.start();
+        } else {
+            appRef.current.ticker.stop();
+        }
+    }, [isVisible]);
+
 
     useEffect(() => {
         if (initialized.current) return;

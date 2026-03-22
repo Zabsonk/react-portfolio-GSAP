@@ -37,7 +37,10 @@ const Contact = ({onButtonClick}: Props) => {
     return(
         <section className="contact">
 
-            <button className="return-button" onClick={onButtonClick}>Return Home</button>
+            <button className="return-button" onClick={onButtonClick}>
+                <img src="images/message.svg" alt="Return"/>
+                <h3>Return Home</h3>
+            </button>
             <h1>
                 Get In Touch With Me!
             </h1>
@@ -62,7 +65,7 @@ const Contact = ({onButtonClick}: Props) => {
                         </p>
                         <input type="text" className={'form-message'} name="message" id="name" placeholder="Write your message here..."/>
                     </div>
-                    <button type="submit">Send</button>
+                    <button className={"send-button"} type="submit">Send</button>
                 </form>
             </div>
         </section>
