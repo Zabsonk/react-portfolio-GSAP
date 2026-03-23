@@ -1,5 +1,5 @@
 import gsap from "gsap";
-import { AnimatedSprite, Assets, Sprite, Spritesheet, Texture } from "pixi.js";
+import { AnimatedSprite, Assets, Sprite, Spritesheet, Texture} from "pixi.js";
 
 interface IRocketPhysics {
     vx: number; 
@@ -94,6 +94,7 @@ export class Rocket extends Sprite
 
     private turnOffFlame(){
         if(this.isFlameOn === false) return;
+     this.isFlameOn = false;  // ← od razu
 
         gsap.to(this.flame.scale, { 
             x: 0, 
@@ -109,12 +110,12 @@ export class Rocket extends Sprite
                     if(!this.isFlameOn){
                         this.flame.stop();
                     }
-                    this.isFlameOn = false;
                 }});
     }
 
     private turnOnFlame() {
         if(this.isFlameOn) return;
+        this.isFlameOn = true;
         this.flame.play();
 
         gsap.to(this.flame.scale, { 
@@ -124,9 +125,7 @@ export class Rocket extends Sprite
         gsap.to(this.flame, { 
             alpha: 1, 
             duration: 0.5, 
-            onComplete: () => {
-                this.isFlameOn = true;
-        }});
+           });
     }   
 
     private keepInsideScreen(): void{
