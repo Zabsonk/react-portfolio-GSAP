@@ -92,6 +92,13 @@ export class Rocket extends Sprite
         this.keepInsideScreen();
     }
 
+    public updateMovementBounds(bounds: Bounds): void {
+        this.movementBounds = bounds;
+
+        this.x = bounds.width / 2;
+        this.y = bounds.height / 2;
+    }
+
     private turnOffFlame(){
         if(this.isFlameOn === false) return;
      this.isFlameOn = false;  // ← od razu

@@ -1,14 +1,14 @@
 import { useEffect, useRef } from "react";
 import {
-    Application,
     Geometry,
     Mesh,
     Shader
 } from "pixi.js";
 
-import { createPixiApp } from "./PixiApp";
-import { initRocket } from "./Rocket";
+import { createPixiApp } from "../app/PixiApp";
+import { initRocket, Rocket } from "./Rocket";
 import { vertex, fragment } from "./shaders";
+import type BrowserApplication from "../app/BrowserApplication";
 
 interface Props {
     onReady?: () => void;
@@ -17,18 +17,21 @@ interface Props {
 
 const MainScene = ({ onReady, isVisible }: Props) => {
     const mountRef = useRef<HTMLDivElement>(null);
-    const appRef = useRef<Application | null>(null);
+    const appRef = useRef<BrowserApplication | null>(null);
     const quadRef = useRef<Mesh<Geometry, Shader> | null>(null);
     const hintRef = useRef<HTMLDivElement>(null);
     const shaderRef = useRef<Shader | null>(null);
+    const rocketRef = useRef<Rocket | null>(null);
+
     const initialized = useRef(false);
+    
 
         useEffect(() => {
         if (!appRef.current) return;
         if (isVisible) {
-            appRef.current.ticker.start();
+           appRef.current.resume();
         } else {
-            appRef.current.ticker.stop();
+            appRef.current.stop();
         }
     }, [isVisible]);
 
@@ -40,17 +43,19 @@ const MainScene = ({ onReady, isVisible }: Props) => {
         const init = async () => {
             if (!mountRef.current) return;
 
-            const app = await createPixiApp(mountRef.current);
+            const { app } = await createPixiApp(mountRef.current);
             appRef.current = app;
-            const stage = app.stage;
 
-            const rocket = await initRocket({width: app.renderer.width, height: app.renderer.height}, alphaOutHint);
-            app.ticker.add(rocket.movementTick, rocket)
+            app.on("onResize", handlePixiSceneResize, this);
 
+            const rocket = await initRocket({width: app.width, height: app.height}, alphaOutHint);
+            rocketRef.current = rocket;
+
+            app.addToTicker(rocket.movementTick, rocket);
             initStars();
-            stage.addChild(rocket);
+            app.addChild(rocket);
             requestAnimationFrame(() => {
-                rocket.position.set(app.screen.width / 2, app.screen.height /4);
+                rocket.position.set(app.width / 2, app.height / 4);
             });
             onReady?.(); 
         };
@@ -58,8 +63,6 @@ const MainScene = ({ onReady, isVisible }: Props) => {
         init();
 
         return () => {
-
-            appRef.current?.destroy(true);
             appRef.current = null;
         };
     }, []);
@@ -102,7 +105,7 @@ const MainScene = ({ onReady, isVisible }: Props) => {
             resources: {
                 shaderToyUniforms: {
                     iResolution: {
-                        value: [app.screen.width, app.screen.height, 1],
+                        value: [app.width, app.height, 1],
                         type: "vec3<f32>"
                     },
                     iTime: {
@@ -126,13 +129,19 @@ const MainScene = ({ onReady, isVisible }: Props) => {
 
         quadRef.current = quad;
 
-        app.stage.addChild(quad);
+        app.addChild(quad);
 
-        app.ticker.add((ticker) => {
+        app.addToTicker((ticker) => {
             const uniforms = shader.resources.shaderToyUniforms.uniforms;
             uniforms.iTime += ticker.deltaMS / 1000;
         });
     };
+
+    const handlePixiSceneResize = (width: number, height: number) => {
+        if(rocketRef.current){
+            rocketRef.current.updateMovementBounds({width, height});
+        }
+    }
 
     return (
        
@@ -150,3 +159,4 @@ const MainScene = ({ onReady, isVisible }: Props) => {
 };
 
 export default MainScene;
+
