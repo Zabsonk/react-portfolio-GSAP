@@ -15,23 +15,11 @@
     overflow: hidden;
 }
 
-.img-wrapper {
-    width: 4rem;
-    height: 4rem;
-    background-color: white;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-    padding: 0.25rem;
-}
 
-.img-wrapper img {
+.hero-icon {
     width: 3rem;
     height: 3rem;
     border-radius: 4%;
-    display: block;
 }
 
 .wrapper {

@@ -27,7 +27,7 @@ const Hero = (): ReactElement => {
                       {words.map((word: ImgTexts, index: number) => (
                           <span key={index} className="icon-text">
                           <span className="img-wrapper">
-                            <img src={word.imgPath} alt="person"/>
+                            {word.icon && <word.icon  className="hero-icon"/>}
                           </span>
                           <span>{word.text}</span>
                         </span>

@@ -1,10 +1,12 @@
 import type { IconType } from 'react-icons';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
+import { MdOutlineDraw } from 'react-icons/md';
+import { TbBulbFilled, TbCode, TbPalette } from 'react-icons/tb';
 
 
 export interface ImgTexts  {
   text: string,
-  imgPath: string,
+  icon: IconType,
 }
 
 export interface ExperienceStat {
@@ -12,17 +14,17 @@ export interface ExperienceStat {
   desc: string,
 }
 
-export interface IconLink{
+export interface IconLink {
   link: string,
   text: string,
   icon: IconType,
 }
 
 const words: ImgTexts[] = [
-  { text: "Ideas", imgPath: "/images/ideas.svg" },
-  { text: "Concepts", imgPath: "/images/concepts.svg" },
-  { text: "Designs", imgPath: "/images/designs.svg" },
-  { text: "Code", imgPath: "/images/code.svg" },
+  { text: "Ideas", icon: TbBulbFilled },
+  { text: "Concepts", icon: MdOutlineDraw },
+  { text: "Designs", icon: TbPalette },
+  { text: "Code", icon: TbCode }
 ];
 
 const aboutImgs: string[] = [
