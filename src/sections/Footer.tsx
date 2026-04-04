@@ -1,5 +1,7 @@
 import type {ReactElement} from "react";
 import {myLinks, type IconLink} from "../constants";
+import { LuFileUser } from "react-icons/lu";
+import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 
 const Footer = (): ReactElement => {
 
@@ -17,9 +19,9 @@ const Footer = (): ReactElement => {
 
                 <div className={'resume-button'}>
                     <a href="/files/resume.pdf" target="_blank" rel="noopener noreferrer" className="resume">
-                        <img src={'images/new-window.svg'} alt={'new-window'} className={'img-new-window'}/>
+                        <FaArrowUpRightFromSquare className={'img-new-window'}/>
                         <div className={'resume-title'}>
-                            <img src={'images/resume.svg'} alt={'resume'}/>
+                            {<LuFileUser className="resume-icon"/>}
                             <h3>Open Resume</h3>
                         </div>
 

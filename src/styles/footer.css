@@ -29,24 +29,21 @@ footer{
 }
 
 
-.resume img{
-    width: 2rem;
-    height: 2rem;
-}
 
 .resume {
     overflow: hidden;
     position: relative;
-    color: #121010;
+    color: white;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #c6c6c6;
+    background-color: #000000;
     border-radius: 10px;
     border: none;
     font-family: "Mona Sans", sans-serif;
     cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.25);
     gap: 0.3rem;
     padding-left: 10px;
     padding-right: 10px;
@@ -62,14 +59,18 @@ footer{
     object-fit: scale-down;
     pointer-events: none;
     transition: top 0.3s;
+    color: white;
+
 }
 
 .my-links {
     color: white;
-    font-size: 2rem; 
+    font-size: 1.5rem; 
     display: flex;
-    align-items: center;
-    transition: color 0.2s ease;
+    flex-direction: column;
+    gap: 8px;
+    align-self: center; 
+
 }
 
 .my-links:hover {
@@ -84,5 +85,9 @@ footer{
     transform: translateY(200%);
 }
 
+.resume-icon {
+    color: white;
+    font-size: 40px;
+}
 
 
