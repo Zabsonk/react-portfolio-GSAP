@@ -51,26 +51,30 @@ const Contact = ({onButtonClick}: Props) => {
                         <p>
                             Name
                         </p>
-                        <input type="text" name="name" id="name" placeholder="Your name"/>
+                        <input type="text" name="name" id="name" placeholder="Your name" maxLength={50}/>
                     </div>
 
                     <div className={'form-part'}>
                         <p>
                         Email
                         </p>
-                        <input type="email" name="email" id="email" placeholder="your@email.com"/>
+                        <input type="email" name="email" id="email" placeholder="your@email.com" maxLength={50}/>
                     </div>
                     <div className={'form-part'}>
                         <p>
                             Subject
                         </p>
-                        <input type="text" name="title" id="title" placeholder="Message Subject"/>
+                        <input type="text" name="title" id="title" placeholder="Message Subject" maxLength={50}/>
                     </div>
                     <div className={'form-part'}>
-                        <p>
-                            Message
-                        </p>
-                        <input type="text" className={'form-message'} name="message" id="message" placeholder="Write your message here..."/>
+                           <p>Message</p>
+                        <textarea 
+                            className={'form-message'} 
+                            name="message" 
+                            id="message" 
+                            placeholder="Write your message here..."
+                            maxLength={255}
+                        />
                     </div>
                     <button className={"send-button"} type="submit">Send</button>
                 </form>

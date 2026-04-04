@@ -12,7 +12,7 @@ textarea::placeholder {
     color: #a8a8a8;
 }
 
-.contact input {
+.contact input, .contact textarea {
     box-sizing: border-box;
     width: 100%;
     border-radius: 10px;
@@ -47,6 +47,11 @@ form {
 .form-message {
     height: 5rem;
     padding: 0.5rem;
+    resize: none;         /* ← zablokuj ręczny resize */
+    vertical-align: top;  /* ← tekst od lewej góry */
+    font-family: "Mona Sans", sans-serif;
+    word-break: break-word;
+    white-space: pre-wrap;
 }
 
 .send-button {
