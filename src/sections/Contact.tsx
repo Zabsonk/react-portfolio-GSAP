@@ -12,13 +12,14 @@ const Contact = ({onButtonClick}: Props) => {
         e.preventDefault();
 
         if (!formRef.current) return;
-
+        const formData = new FormData(formRef.current);
+        formData.forEach((value, key) => console.log(key, value));
         emailjs
             .sendForm(
-                'YOUR_SERVICE_ID',
-                'YOUR_TEMPLATE_ID',
+                'service_iqd6gpy',
+                'template_u7vb1c1',
                 formRef.current,
-                'YOUR_USER_ID_OR_PUBLIC_KEY'
+                'bdiI2UsT6xOIiPW3g'
             )
             .then(
                 (result) => {
@@ -61,9 +62,15 @@ const Contact = ({onButtonClick}: Props) => {
                     </div>
                     <div className={'form-part'}>
                         <p>
+                            Subject
+                        </p>
+                        <input type="text" name="title" id="title" placeholder="Message Subject"/>
+                    </div>
+                    <div className={'form-part'}>
+                        <p>
                             Message
                         </p>
-                        <input type="text" className={'form-message'} name="message" id="name" placeholder="Write your message here..."/>
+                        <input type="text" className={'form-message'} name="message" id="message" placeholder="Write your message here..."/>
                     </div>
                     <button className={"send-button"} type="submit">Send</button>
                 </form>
