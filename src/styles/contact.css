@@ -17,7 +17,7 @@ textarea::placeholder {
     width: 100%;
     border-radius: 10px;
     border: none;
-    background-color:   rgba(255, 255, 255, 0.05);
+    background-color: rgba(255, 255, 255, 0.05);
     color: white;
     margin: 0;
     padding: 0.5rem;
@@ -47,8 +47,8 @@ form {
 .form-message {
     height: 5rem;
     padding: 0.5rem;
-    resize: none;         /* ← zablokuj ręczny resize */
-    vertical-align: top;  /* ← tekst od lewej góry */
+    resize: none;         
+    vertical-align: top;
     font-family: "Mona Sans", sans-serif;
     word-break: break-word;
     white-space: pre-wrap;
@@ -64,8 +64,27 @@ form {
     font-weight: 500;
     cursor: pointer;
     width: 100%;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.15s ease;
 }
 
+.send-button::before {
+    content: "";
+    position: absolute;
+    width: 60px;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.3);
+    top: -50%;
+    left: -100px;
+    transform: skewX(-20deg);
+    transition: none;
+    pointer-events: none;
+}
+
+.send-button:hover::before {
+    animation: sweep 0.8s linear infinite;
+}
 
 .return-button {
     display: flex;
@@ -117,4 +136,25 @@ form {
 
 .return-button:hover h3 {
     transform: translateX(-150%);
+}
+
+@keyframes sweep {
+    0%   { left: -100px; }
+    100% { left: calc(100% + 100px); }
+}
+
+.send-button.bounce {
+    animation: bounce 0.4s ease;
+}
+
+@keyframes bounce {
+    0%   { transform: scale(1); }
+    30%  { transform: scale(0.92); }
+    60%  { transform: scale(1.06); }
+    100% { transform: scale(1); }
+}
+
+.send-button.success {
+    background: linear-gradient(135deg, #16a34a, #15803d);
+    pointer-events: none;
 }

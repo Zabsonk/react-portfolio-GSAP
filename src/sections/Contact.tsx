@@ -1,4 +1,4 @@
-import {useRef} from "react";
+import {useRef, useState} from "react";
 import emailjs from 'emailjs-com';
 
 type Props = {
@@ -7,13 +7,20 @@ type Props = {
 
 const Contact = ({onButtonClick}: Props) => {
     const formRef = useRef<HTMLFormElement>(null);
+    const btnRef = useRef<HTMLButtonElement>(null);
+    const [sent, setSent] = useState(false);
 
     const sendEmail = (e: React.FormEvent) => {
         e.preventDefault();
 
         if (!formRef.current) return;
-        const formData = new FormData(formRef.current);
-        formData.forEach((value, key) => console.log(key, value));
+        if(!formRef.current.name || !formRef.current.email || !formRef.current.title || !formRef.current.message?.value) {
+            alert("Please fill in all fields.");
+            return;
+        }
+        btnRef.current?.classList.add("bounce");
+        setTimeout(() => btnRef.current?.classList.remove("bounce"), 400);
+
         emailjs
             .sendForm(
                 'service_iqd6gpy',
@@ -22,10 +29,10 @@ const Contact = ({onButtonClick}: Props) => {
                 'bdiI2UsT6xOIiPW3g'
             )
             .then(
-                (result) => {
-                    console.log('Success:', result.text);
-                    alert("Message sent!");
-                    formRef.current?.reset();
+                () => {
+                setSent(true); 
+                formRef.current?.reset();
+                setTimeout(() => setSent(false), 3000); 
                 },
                 (error) => {
                     console.log('Failed:', error.text);
@@ -76,8 +83,14 @@ const Contact = ({onButtonClick}: Props) => {
                             maxLength={255}
                         />
                     </div>
-                    <button className={"send-button"} type="submit">Send</button>
-                </form>
+                    <button
+                                ref={btnRef}
+                                className={`send-button ${sent ? 'success' : ''}`}
+                                type="submit"
+                            >
+                                {sent ? '✓ Sent!' : 'Send'}
+                            </button>               
+         </form>
             </div>
         </section>
     )
