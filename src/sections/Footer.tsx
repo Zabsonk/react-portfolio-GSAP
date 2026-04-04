@@ -1,15 +1,15 @@
 import type {ReactElement} from "react";
-import {type ImgTexts, myLinks} from "../constants";
+import {myLinks, type IconLink} from "../constants";
 
 const Footer = (): ReactElement => {
 
     return (
         <footer>
             <div className={'footer-top'}>
-                <div className={'links'}>
-                    {myLinks.map((link: (ImgTexts & { link: string })) => (
+                <div className={'my-links'}>
+                    {myLinks.map((link: IconLink) => (
                         <a href={link.link} className={'my-links'}>
-                            <img src={link.imgPath} alt={link.text}/>
+                            {<link.icon />}
                         </a>
                     ))}
                 </div>
@@ -26,7 +26,7 @@ const Footer = (): ReactElement => {
                     </a>
                 </div>
             </div>
-            <span>Created by Kacper Żabiński</span>
+            <span>© 2026 Kacper Żabiński. All rights reserved.</span>
         </footer>
 )
 }

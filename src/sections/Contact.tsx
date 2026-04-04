@@ -1,5 +1,6 @@
 import {useRef, useState} from "react";
 import emailjs from 'emailjs-com';
+import { emailServiceId, emailTemplateId, emailUserId } from "../constants";
 
 type Props = {
     onButtonClick: () => void;
@@ -23,10 +24,10 @@ const Contact = ({onButtonClick}: Props) => {
 
         emailjs
             .sendForm(
-                'service_iqd6gpy',
-                'template_u7vb1c1',
+                emailServiceId,
+                emailTemplateId,
                 formRef.current,
-                'bdiI2UsT6xOIiPW3g'
+                emailUserId
             )
             .then(
                 () => {

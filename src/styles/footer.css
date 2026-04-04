@@ -1,11 +1,12 @@
 footer{
-    background-color: #121010;
+    background: rgba(0, 0, 0, 0.75);
     height: 15vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 0 5px rgba(169, 10, 255, 1), 0 0 40px rgb(118, 10, 172);
+    position: relative;
+    gap: 20px;
 }
 
 .footer-top {
@@ -25,13 +26,8 @@ footer{
     justify-content: center;
     align-items: center;
     transition: transform 0.3s;
-
 }
 
-footer span{
-    position: absolute;
-    bottom: 10px;
-}
 
 .resume img{
     width: 2rem;
@@ -66,6 +62,18 @@ footer span{
     object-fit: scale-down;
     pointer-events: none;
     transition: top 0.3s;
+}
+
+.my-links {
+    color: white;
+    font-size: 2rem; 
+    display: flex;
+    align-items: center;
+    transition: color 0.2s ease;
+}
+
+.my-links:hover {
+    color: #a855f7;
 }
 
 .resume:hover .img-new-window {

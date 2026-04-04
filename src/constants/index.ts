@@ -1,6 +1,21 @@
-export type ImgTexts = {
+import type { IconType } from 'react-icons';
+import { FaLinkedin, FaGithub } from 'react-icons/fa';
+
+
+export interface ImgTexts  {
   text: string,
   imgPath: string,
+}
+
+export interface ExperienceStat {
+  value: number | string,
+  desc: string,
+}
+
+export interface IconLink{
+  link: string,
+  text: string,
+  icon: IconType,
 }
 
 const words: ImgTexts[] = [
@@ -98,13 +113,29 @@ const skills: { text:string , imgPath: string, level: number, color: string}[] =
   }
 ]
 
-const myLinks: (ImgTexts & { link: string })[] = [
+const myLinks: IconLink[] = [
   {
-    text:'Linked In',
-    link: 'll',
-    imgPath: 'images/linkedin.png',
+    link: 'https://www.linkedin.com/in/kacper-ż-105321360/',
+    icon: FaLinkedin,
+    text: 'LinkedIn'
+  },
+  {
+    link: 'https://github.com/Zabsonk',
+    icon: FaGithub,
+    text: 'GitHub'
   }
-]
+];
+
+const emailServiceId = 'service_iqd6gpy';
+const emailTemplateId = 'template_u7vb1c1';
+const emailUserId = 'bdiI2UsT6xOIiPW3g';
+
+const experienceStats: ExperienceStat[] = [
+  { value: "2+", desc: "Years of Experience" },
+  { value: 5, desc: "Core Technologies" },
+  { value: "20+", desc: "Projects Shipped" },
+  { value: "BEng ", desc: "Computer Science (Web Apps)" },
+];
 
 export {
     skillsLevels,
@@ -113,5 +144,9 @@ export {
     skills,
     myLinks,
     aboutImgs,
-    aboutInfo
+    aboutInfo,
+    emailServiceId,
+    emailTemplateId,
+    emailUserId,
+    experienceStats
 };

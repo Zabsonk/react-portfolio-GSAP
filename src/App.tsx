@@ -9,6 +9,7 @@ import Footer from "./sections/Footer.tsx";
 import ParticleWrapper from "./sections/ParticleWrapper.tsx";
 import MainScene from "./animation/MainScene.tsx";
 import LoadingScreen from "./sections/LoadingScreen.tsx";
+import Experience from "./sections/Experience.tsx";
 
 const App = () => {
     const homeContainerRef = useRef<HTMLDivElement>(null);
@@ -62,6 +63,7 @@ const App = () => {
                             <Hero/>
                         </div>
                         <Skills/>
+                        <Experience/>
                         <About/>
                         <Footer/>
                     </div>
