@@ -1,65 +1,95 @@
-.about{
+.about {
     position: relative;
     display: flex;
-    justify-content: center;
     flex-direction: column;
     margin-bottom: 50vh;
-    font-size: 2.5rem;
 }
 
-.about-title {
+.about-header {
     display: flex;
-    height: 25vh;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 4rem 4rem 3rem 4rem;
 }
 
-.about-info{
+.about-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: #7c3aed;
+}
+
+.about-main-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.about-info {
     position: relative;
     display: flex;
+    padding: 0 4rem;
+    gap: 4rem;
 }
 
 .info-wrapper {
-    width: 50vw;
+    width: 55%;
     display: flex;
     flex-direction: column;
-    font-size: 2rem;
-    gap: 10vh;
+    gap: 8vh;
 }
 
 .info-text-wrapper {
-    position: relative;
-    margin: auto;
-    height: 25vh;
-    width: 75%;
-     z-index: 0;
-
+    height: 30vh;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
 }
 
 .info-text {
-    margin: auto;
-    text-align: justify;
-    display: flex;
-    background: rgba(255, 255, 255, 0.04);
+    width: 100%;
     height: 100%;
-    border-radius: 10px;
-    justify-content: center;
+    display: flex;
     align-items: center;
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 3px solid rgba(124, 58, 237, 0.3);
+    border-radius: 0 10px 10px 0;
+    transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .info-text span {
-    margin: 20px;
+    margin: 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #a8a8a8;
+    transition: color 0.3s ease;
+}
+
+.info-text-wrapper.with-effects .info-text {
+    background: rgba(124, 58, 237, 0.144);
+    border-left-color: #a13dff;
+}
+
+.info-text-wrapper.with-effects .info-text span {
+    color: #ffffff;
 }
 
 .illustration {
     top: 25vh;
     position: sticky;
-    margin: 0 auto;
-    width: 25vh;
-    height: 25vh;
-    border-radius: 10px;
-    background: rgba(0, 0, 0, 0.75);}
+    width: 280px;
+    height: 280px;
+    flex-shrink: 0;
+    align-self: flex-start;
+    border-radius: 16px;
+    background: rgba(124, 58, 237, 0.253);
+    border: 1px solid rgba(124, 58, 237, 0.25);
+    box-shadow: 0 0 40px rgba(124, 58, 237, 0.1);
+    overflow: hidden;
+}
 
 .illustration img {
     width: 100%;
@@ -67,16 +97,4 @@
     object-fit: contain;
     display: block;
     opacity: 1;
-    transition: opacity 0.2s ease;
-}
-
-
-.illustration img.fade-out {
-    opacity: 0;
-    /* transition: opacity 0.2s ease; */
-}
-
-.illustration img.fade-in {
-    opacity: 1;
-    transition: opacity 0.2s ease;
 }

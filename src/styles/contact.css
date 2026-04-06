@@ -42,6 +42,8 @@ form {
 
 .form-wrapper p {
     margin: 0;
+    margin-left: 10px;
+    margin-bottom: 5px;
 }
 
 .form-message {
@@ -83,7 +85,7 @@ form {
 }
 
 .send-button:hover::before {
-    animation: sweep 0.8s linear infinite;
+    animation: sweep 1s linear infinite;
 }
 
 .return-button {

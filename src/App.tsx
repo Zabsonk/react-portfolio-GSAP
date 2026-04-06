@@ -15,7 +15,6 @@ const App = () => {
     const homeContainerRef = useRef<HTMLDivElement>(null);
     const contactContainerRef = useRef<HTMLDivElement>(null);
     const sliderRef = useRef<HTMLDivElement>(null);
-
     const [loading, setLoading] = useState(true);
     const [shaderVisible, setShaderVisible] = useState(true);
 
@@ -64,7 +63,7 @@ const App = () => {
                         </div>
                         <Skills/>
                         <Experience/>
-                        <About/>
+                        <About/>   
                         <Footer/>
                     </div>
                 </div>

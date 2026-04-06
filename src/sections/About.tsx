@@ -1,4 +1,4 @@
-import {type ReactElement, useRef} from 'react';
+import { useRef, type ReactElement} from 'react';
 import gsap from 'gsap';
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import {useGSAP} from "@gsap/react";
@@ -52,7 +52,7 @@ const About = (): ReactElement => {
                 }
             });
         });
-        ScrollTrigger.refresh();
+        setTimeout(() => ScrollTrigger.refresh(), 500);
         tlRef.current = gsap.timeline({ paused: true });
     });
 
@@ -85,24 +85,25 @@ const About = (): ReactElement => {
 
 
     return (
-        <section id={'about'} className={'about'}>
-            <div className={'about-title'}>
-                <h1>About me</h1>
+        <section id="about" className="about">
+            <div className="about-header">
+                <span className="about-tag">ABOUT ME</span>
+                <h1 className="about-main-title">Frontend & Game Developer from Poland</h1>
             </div>
-            <div className={'about-info'}>
-                <div className={'info-wrapper'}>
-                    {[...aboutInfo].map((info, index) => (
-                        <div key={index} className={'info-text-wrapper'}>
-                            <div className={'info-text'}>
+            <div className="about-info">
+                <div className="info-wrapper">
+                    {aboutInfo.map((info, index) => (
+                        <div key={index} className="info-text-wrapper">
+                            <div className="info-text">
                                 <span>{info}</span>
                             </div>
                         </div>
                     ))}
                 </div>
-                <div className={'illustration'}>
+                <div className="illustration">
                     <img
                         ref={imgRef}
-                        src={aboutImgs[ currentIndexRef.current]}
+                        src={aboutImgs[currentIndexRef.current]}
                         alt="Illustration"
                     />
                 </div>
