@@ -1,8 +1,10 @@
-import { type ReactElement, useRef, useState } from "react";
+import { type ReactElement, useEffect, useRef, useState } from "react";
 import { navLinks } from "../constants";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
+import { FaAnglesUp } from "react-icons/fa6";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 type Props = {
     onButtonClick: () => void;
@@ -50,6 +52,17 @@ const NavBar = ({ onButtonClick }: Props): ReactElement => {
         });
     });
 
+    useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+        if (navRef.current && !navRef.current.contains(e.target as Node)) {
+            setIsMobileMenuOpen(false);
+        }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+}, []);
+
     return (
         <nav className="navbar" ref={navRef}>
             <div className="nav-left">
@@ -58,7 +71,7 @@ const NavBar = ({ onButtonClick }: Props): ReactElement => {
 
             <div className={`nav-center ${isMobileMenuOpen ? "show-mobile-menu" : ""}`}>
                 <ul className="nav-links">
-                {navLinks.map(link => (
+                    {navLinks.map(link => (
                         <li key={link.text}>
                             <a href={link.link} className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>
                                 <span>{link.text}</span>
@@ -69,27 +82,24 @@ const NavBar = ({ onButtonClick }: Props): ReactElement => {
                 </ul>
             </div>
 
-            <div className={`nav-right ${isMobileMenuOpen ? "show-mobile-menu" : ""}`}>
+            <div className="nav-right">
                 <button className="contact-button" onClick={onButtonClick}>
                     <img src="images/message.svg" alt="contact" />
                     <h3>Contact Me</h3>
                 </button>
             </div>
-
-            <div
-                className="hamburger"
-                onClick={() => setIsMobileMenuOpen(prev => !prev)}
-                aria-label="Toggle menu"
-            >
-                <img
-                    src={isMobileMenuOpen ? "./images/close.svg" : "./images/menu.svg"}
-                    alt="menu"
-                    width={24}
-                    height={24}
-                />
+            <div className="hamburger">
+                <div className="nav-right-mobile">
+                    <button className="contact-button" onClick={onButtonClick}>
+                        <img src="images/message.svg" alt="contact" />
+                        <h3>Contact Me</h3>
+                    </button>
+                </div>
+                <div onClick={() => setIsMobileMenuOpen(prev => !prev)}>
+                    {isMobileMenuOpen ? <FaAnglesUp /> : <RxHamburgerMenu />}
+                </div>
             </div>
         </nav>
     );
 };
-
 export default NavBar;
