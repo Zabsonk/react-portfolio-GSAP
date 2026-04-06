@@ -86,54 +86,127 @@ h1{
     }
 }
 
-@media (min-width: 768px) {
-    .icon-text {
-        gap: 0.75rem;
-    }
-}
-
-
 @media (max-width: 1024px) {
-    .hero-text {    
+    .hero-text {
         font-size: 2rem;
     }
 
-        .img-wrapper {
-        width: 3rem;
-        height: 3rem;
-        } 
-        .img-wrapper img {
+ 
+    .img-wrapper img {
         width: 2.25rem;
         height: 2.25rem;
-        }    
+    }
+
+    .portrait {
+        width: 350px;
+        height: 350px;
+    }
+
+     .icon-text {
+        align-items: center;
+    }
+
+    .img-wrapper {
+        width: 3rem;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .hero-icon {
+        width: 3rem;
+        height: 3rem;
+    }
 }
 
 @media (max-width: 768px) {
-    .hero-text {    
-        font-size: 1rem;
+    .hero {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        padding: 2rem 24px;
+        min-height: calc(100vh - 5rem);
+        height: auto;  /* ← auto zamiast fixed height */
+    }
+
+    .hero-text {
+        font-size: 1.5rem;
+        text-align: left;  /* ← left zamiast center, żeby slider nie psuł layoutu */
+        width: 100%;
+    }
+
+    .hero-text h1 {
+        position: relative;  /* ← żeby absolute slide miał rodzica */
+        white-space: nowrap;
+    }
+
+    .portrait-wrapper {
+        margin: 0 auto;
+    }
+
+    .portrait {
+        width: 260px;
+        height: 260px;
     }
 
        .img-wrapper {
-        width: 2rem;
-        height: 2rem;
-        } 
-        .img-wrapper img {
         width: 1.5rem;
         height: 1.5rem;
-        }  
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;  /* ← żeby wrapper nie kurczył się */
+    }
+
+    .img-wrapper img {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+      .icon-text {
+        align-items: center;
+    }
+
+    .img-wrapper {
+        width: 2rem;
+        height: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .hero-icon {
+        width: 2rem;
+        height: 2rem;
+    }
 }
 
 @media (max-width: 480px) {
-    .hero-text {    
-        font-size: 0.5rem;
+    .hero-text {
+        font-size: 1.1rem;
     }
 
-        .img-wrapper {
-        width: 0.75rem;
-        height: 0.75rem;
-        } 
-        .img-wrapper img {
-        width: 0.5rem;
-        height: 0.5rem;
-        }  
+    .portrait {
+        width: 200px;
+        height: 200px;
+    }
+
+    .img-wrapper {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+    .img-wrapper img {
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+
+     .hero-icon {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
 }
