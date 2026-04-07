@@ -30,11 +30,12 @@
 }
 
 .hero{
-    padding: 0 40px;
-    width: 100%;
+    padding-left: 40px;
+    padding-right: 40px;
+    width: calc(100% - 80px);
     position: relative;
     min-height: calc(100vh - 5rem);
-    height: calc(100vh - 5rem);
+    height: calc(100vh - 5rem); 
     display: flex;
     justify-content: space-around;
 }
@@ -44,6 +45,7 @@
 }
 
 .hero-text{
+    width: 60vw;
     align-self: center;
     justify-self: center;
     position: relative;

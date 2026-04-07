@@ -1,9 +1,28 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import {type ImgTexts, words} from "../constants";
-import type {ReactElement} from "react";
+import {useEffect, useState, type ReactElement} from "react";
+import { words } from "../constants";
 
 const Hero = (): ReactElement => {
+ 
+  const [wrapText, setWrapText] = useState(false);
+
+
+    useEffect(() => {
+      const handleResize = () => {
+        setWrapText(window.innerWidth < 1200);
+      };
+
+    // ustaw wartość na start
+    handleResize();
+
+    // nasłuchuj zmian
+    window.addEventListener("resize", handleResize);
+
+    // cleanup
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   useGSAP(() => {
     gsap.fromTo(
       ".hero-text h1, .hero-text p",
@@ -35,11 +54,26 @@ const Hero = (): ReactElement => {
                     </span>
                   </span>
               </h1>
-              <h1>into Interactive Games</h1>
-              <h1>and Applications</h1>
-              <p>
-                  Hi, I'm Frontend/Game developer from Poland.
-              </p>
+              { wrapText ? 
+               <div>
+                <h1>into Interactive</h1>
+                <h1>Games and</h1>
+                <h1>Applications</h1>
+                <p>
+                    Hi, I'm Frontend/Game developer from Poland.
+                </p>
+              </div> 
+              :
+            
+               <div>
+                <h1>into Interactive Games</h1>
+                <h1>and Applications</h1>
+                <p>
+                    Hi, I'm Frontend/Game developer from Poland.
+                </p>
+              </div>
+              }
+
           </div>
           <div className="portrait-wrapper">
               <img className={'portrait'} src={'/images/portrait.png'} alt={'portrait'}/>

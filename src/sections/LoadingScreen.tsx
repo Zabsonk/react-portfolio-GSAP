@@ -23,7 +23,6 @@ const LoadingScreen = ({ visible }: { visible: boolean }) => {
             zIndex: 9999,
             opacity: visible ? 1 : 0,           // ← animuje opacity
             transition: "opacity 0.6s ease",
-            pointerEvents: "none",
         }}>
             <div style={{ color: "#fff", fontSize: "14px", letterSpacing: "0.2em", opacity: 0.6, fontFamily: "monospace" }}>
                 loading...

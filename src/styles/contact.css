@@ -160,3 +160,9 @@ form {
     background: linear-gradient(135deg, #16a34a, #15803d);
     pointer-events: none;
 }
+
+@media (max-width: 768px) {
+    .form-wrapper {
+        width: 80vw;
+    }
+}

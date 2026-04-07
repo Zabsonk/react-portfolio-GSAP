@@ -225,6 +225,10 @@
         width: 10px;
         height: 10px;
     }
+
+     .skills::after, .skills::before {
+        width: 100px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -252,4 +256,9 @@
         padding-top: 30px;
         padding-bottom: 30px;
     }
+
+    .skills::after, .skills::before {
+        width: 50px;
+    }
+
 }

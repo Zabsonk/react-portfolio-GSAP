@@ -15,8 +15,24 @@ export type Bounds = {
     height: number,
 }
 
+export type Scale = number;
+
+export type PixelValue = number;
+
+export type RocketSizeBand = Record<PixelValue, Scale>;
+
+export interface RocketConfig {
+    texture: Texture, 
+    flameTexture: Spritesheet, 
+    movementConfig: IRocketPhysics, 
+    movementBounds: Bounds, onFirstMove?: () => void,
+    pixelSizeBands: RocketSizeBand;
+}
+
 export class Rocket extends Sprite
 {
+    private readonly pixelSizeBands: RocketSizeBand;
+
     private onFirstMove?: () => void;
     private hasMoved = false;
 
@@ -33,8 +49,10 @@ export class Rocket extends Sprite
 
     private physics :IRocketPhysics;
 
-    constructor(texture: Texture, flameTexture: Spritesheet, movementConfig: IRocketPhysics, movementBounds: Bounds, onFirstMove?: () => void) {
+    constructor({texture, flameTexture, movementConfig, movementBounds, onFirstMove, pixelSizeBands}: RocketConfig) {
         super(texture);
+
+        this.pixelSizeBands = pixelSizeBands;
 
         const flame = this.flame = new AnimatedSprite(flameTexture.animations.flame);
         this.addChild(flame);
@@ -97,6 +115,16 @@ export class Rocket extends Sprite
 
         this.x = bounds.width / 2;
         this.y = bounds.height / 2;
+
+        let scale = null;
+
+        for (const pixelValue in this.pixelSizeBands) {
+            if(bounds.width <= Number(pixelValue)){
+                scale = this.pixelSizeBands[pixelValue];
+                break;      
+            }
+        }
+        this.scale.set(scale !== null ? scale : 2);
     }
 
     private turnOffFlame(){
@@ -167,14 +195,25 @@ export class Rocket extends Sprite
 export const initRocket = async (appBounds: Bounds, onFirstMove?: () => void): Promise<Rocket> => {
     const rocketTexture = await Assets.load("/assets/rocket.png");
     const flameTexture = await Assets.load("/assets/rocket_flame_spritesheet.json");
-    const rocket = new Rocket(rocketTexture,flameTexture,{
-        vx: 0,
-        vy: -0.1,
-        acceleration: 0.01 ,
-        rotationSpeed: 0.01,
-        maxSpeed: 2.5,
-        initRotation: -Math.PI
-    },appBounds, onFirstMove); 
+    const rocket = new Rocket(
+        {
+            texture: rocketTexture,
+            flameTexture: flameTexture,
+            movementConfig: {
+                vx: 0,
+                vy: -0.1,
+                acceleration: 0.01 ,
+                rotationSpeed: 0.01,
+                maxSpeed: 2.5,
+            initRotation: -Math.PI,
+        },
+        movementBounds: appBounds, 
+        onFirstMove: onFirstMove,
+        pixelSizeBands: {
+            470: 0.7,
+            768: 1
+        }
+    }); 
 
     rocket.anchor.set(0.5);
     rocket.scale.set(2);

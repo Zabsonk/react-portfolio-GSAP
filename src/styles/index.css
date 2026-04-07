@@ -26,6 +26,7 @@ a{
 
 .home {
   width: 100vw;
+  clip-path: inset(0);  /* insted of hidden overflow */
 }
 
 .slider{

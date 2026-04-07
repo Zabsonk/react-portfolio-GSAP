@@ -5,10 +5,10 @@ import {
     Shader
 } from "pixi.js";
 
-import { createPixiApp } from "../app/PixiApp";
 import { initRocket, Rocket } from "./Rocket";
 import { vertex, fragment } from "./shaders";
 import type BrowserApplication from "../app/BrowserApplication";
+import { createPixiApp } from "../app/PixiApp";
 
 interface Props {
     onReady?: () => void;

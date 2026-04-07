@@ -41,6 +41,7 @@ export default class BrowserApplication extends EventEmitter {
     this.container.style.justifyContent = "center";
     this.container.style.alignItems = "center";
     this.container.style.zIndex = "1";
+    this.container.style.touchAction = "auto";
 
     this.mainScreen = new Application();
 

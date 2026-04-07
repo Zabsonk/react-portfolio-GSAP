@@ -17,3 +17,7 @@
     border-radius: 5px;
     transform: translate(-50%) ;
 }
+
+canvas {
+  touch-action: auto !important;
+}
