@@ -3,129 +3,126 @@ import { FaLinkedin, FaGithub } from 'react-icons/fa';
 import { MdOutlineDraw } from 'react-icons/md';
 import { TbBulbFilled, TbCode, TbPalette } from 'react-icons/tb';
 
-
-export interface ImgTexts  {
-  text: string,
-  icon: IconType,
+export interface ImgTexts {
+    text: string;
+    icon: IconType;
 }
 
 export interface ExperienceStat {
-  value: number | string,
-  desc: string,
+    value: number | string;
+    desc: string;
 }
 
 export interface IconLink {
-  link: string,
-  text: string,
-  icon: IconType,
+    link: string;
+    text: string;
+    icon: IconType;
 }
 
 const words: ImgTexts[] = [
-  { text: "Ideas", icon: TbBulbFilled },
-  { text: "Concepts", icon: MdOutlineDraw },
-  { text: "Designs", icon: TbPalette },
-  { text: "Code", icon: TbCode }
+    { text: 'Ideas', icon: TbBulbFilled },
+    { text: 'Concepts', icon: MdOutlineDraw },
+    { text: 'Designs', icon: TbPalette },
+    { text: 'Code', icon: TbCode },
 ];
 
 const aboutImgs: string[] = [
-        "/images/abouts/graduate.png",
-        "/images/abouts/active.png",
-        "/images/abouts/game-dev.png",
-    ]
+    '/images/abouts/graduate.png',
+    '/images/abouts/active.png',
+    '/images/abouts/game-dev.png',
+];
 
 const aboutInfo: string[] = [
-  "I enjoy tackling complex problems and continuously improving my skills by exploring new technologies and best practices.",
-  "In my free time, I focus on staying active through sports and maintaining a healthy lifestyle.",
-  "Currently, I work on building interactive applications and browser-based games using PixiJS. I enjoy working in a team environment and take particular interest in developing engaging and visually rich casino games."
-]
+    'I enjoy tackling complex problems and continuously improving my skills by exploring new technologies and best practices.',
+    'In my free time, I focus on staying active through sports and maintaining a healthy lifestyle.',
+    'Currently, I work on building interactive applications and browser-based games using PixiJS. I enjoy working in a team environment and take particular interest in developing engaging and visually rich casino games.',
+];
 
-const navLinks: {text: string, link: string}[] = [
-  {
-    text: 'Skills',
-    link: '#skills',
-  },
-  {
-    text: 'Experience',
-    link: '#experience',
-  },
-  {
-    text: 'About Me',
-    link: '#about',
-  }
-]
+const navLinks: { text: string; link: string }[] = [
+    {
+        text: 'Skills',
+        link: '#skills',
+    },
+    {
+        text: 'Experience',
+        link: '#experience',
+    },
+    {
+        text: 'About Me',
+        link: '#about',
+    },
+];
 
 const skillsLevels: Map<number, string> = new Map([
-  [1, "Beginner"],
-  [2, "Intermediate"],
-  [3, "Advanced"],
-  [4, "Expert"],
-  [5, "Master"]
+    [1, 'Beginner'],
+    [2, 'Intermediate'],
+    [3, 'Advanced'],
+    [4, 'Expert'],
+    [5, 'Master'],
 ]);
 
-const skills: { text:string , imgPath: string, level: number, color: string}[] = [
-  {
-    text: 'PixiJS is a fast and flexible 2D rendering library for creating rich, interactive graphics and animations in the browser',
-    imgPath: "/images/logos/pixi.svg",
-    level: 4,
-    color: '#ea1e63'
-  },
-  {
-    text: 'This is what I love the most about programing. OOP makes it easier to model real-world problems in a clear and intuitive way.',
-    imgPath: "/images/logos/oop.svg",
-    level: 4,
-    color: '#12dcbe'
-  },
-  {
-    text: 'This site is built with React, a powerful library for building interactive user interfaces',
-    imgPath: "/images/logos/react.png",
-    level: 2,
-    color: '#00d8ff'
-  },
-  {
-    text: 'Node.js is a powerful runtime environment that allows JavaScript to be executed on the server side.',
-    imgPath: "/images/logos/node.png",
-    level: 3,
-    color: '#78cc65'
-  }
-  ,
-  {
-    text: 'I use Git for version control to keep track of changes and collaborate efficiently.',
-    imgPath: "/images/logos/git.svg",
-    level: 4,
-    color: '#f03c2e'
-  },
-  {
-    text: 'TypeScript helps me write safer, strongly typed code for complex projects.',
-    imgPath: "/images/logos/ts.svg",
-    level: 5,
-    color: '#3178c6'
-  },
-  {
-    text: 'HTML5 is the latest standard for structuring and presenting content on the web. ',
-    imgPath: "/images/logos/html5.svg",
-    level: 4,
-    color: '#e44d26'
-  }
-  ,
-  {
-    text: 'GSAP is a powerful JavaScript library for creating high-performance animations simply tweening any numeric property of any object.',
-    imgPath: "/images/logos/gsap.svg",
-    level: 3,
-    color: '#8ac640'
-  }
-]
+const skills: { text: string; imgPath: string; level: number; color: string }[] = [
+    {
+        text: 'PixiJS is a fast and flexible 2D rendering library for creating rich, interactive graphics and animations in the browser',
+        imgPath: '/images/logos/pixi.svg',
+        level: 4,
+        color: '#ea1e63',
+    },
+    {
+        text: 'This is what I love the most about programing. OOP makes it easier to model real-world problems in a clear and intuitive way.',
+        imgPath: '/images/logos/oop.svg',
+        level: 4,
+        color: '#12dcbe',
+    },
+    {
+        text: 'This site is built with React, a powerful library for building interactive user interfaces',
+        imgPath: '/images/logos/react.png',
+        level: 2,
+        color: '#00d8ff',
+    },
+    {
+        text: 'Node.js is a powerful runtime environment that allows JavaScript to be executed on the server side.',
+        imgPath: '/images/logos/node.png',
+        level: 3,
+        color: '#78cc65',
+    },
+    {
+        text: 'I use Git for version control to keep track of changes and collaborate efficiently.',
+        imgPath: '/images/logos/git.svg',
+        level: 4,
+        color: '#f03c2e',
+    },
+    {
+        text: 'TypeScript helps me write safer, strongly typed code for complex projects.',
+        imgPath: '/images/logos/ts.svg',
+        level: 5,
+        color: '#3178c6',
+    },
+    {
+        text: 'HTML5 is the latest standard for structuring and presenting content on the web. ',
+        imgPath: '/images/logos/html5.svg',
+        level: 4,
+        color: '#e44d26',
+    },
+    {
+        text: 'GSAP is a powerful JavaScript library for creating high-performance animations simply tweening any numeric property of any object.',
+        imgPath: '/images/logos/gsap.svg',
+        level: 3,
+        color: '#8ac640',
+    },
+];
 
 const myLinks: IconLink[] = [
-  {
-    link: 'https://www.linkedin.com/in/kacper-ż-105321360/',
-    icon: FaLinkedin,
-    text: 'LinkedIn'
-  },
-  {
-    link: 'https://github.com/Zabsonk',
-    icon: FaGithub,
-    text: 'GitHub'
-  }
+    {
+        link: 'https://www.linkedin.com/in/kacper-ż-105321360/',
+        icon: FaLinkedin,
+        text: 'LinkedIn',
+    },
+    {
+        link: 'https://github.com/Zabsonk',
+        icon: FaGithub,
+        text: 'GitHub',
+    },
 ];
 
 const emailServiceId = 'service_iqd6gpy';
@@ -133,10 +130,10 @@ const emailTemplateId = 'template_u7vb1c1';
 const emailUserId = 'bdiI2UsT6xOIiPW3g';
 
 const experienceStats: ExperienceStat[] = [
-  { value: "2+", desc: "Years of Experience" },
-  { value: 5, desc: "Core Technologies" },
-  { value: "20+", desc: "Projects Shipped" },
-  { value: "BEng ", desc: "Computer Science (Web Apps)" },
+    { value: '2+', desc: 'Years of Experience' },
+    { value: 5, desc: 'Core Technologies' },
+    { value: '20+', desc: 'Projects Shipped' },
+    { value: 'BEng ', desc: 'Computer Science (Web Apps)' },
 ];
 
 export {
@@ -150,5 +147,5 @@ export {
     emailServiceId,
     emailTemplateId,
     emailUserId,
-    experienceStats
+    experienceStats,
 };

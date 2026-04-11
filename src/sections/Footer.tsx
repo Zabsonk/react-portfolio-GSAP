@@ -1,10 +1,9 @@
-import type {ReactElement} from "react";
-import {myLinks, type IconLink} from "../constants";
-import { LuFileUser } from "react-icons/lu";
-import { FaArrowUpRightFromSquare } from "react-icons/fa6";
+import type { ReactElement } from 'react';
+import { myLinks, type IconLink } from '../constants';
+import { LuFileUser } from 'react-icons/lu';
+import { FaArrowUpRightFromSquare } from 'react-icons/fa6';
 
 const Footer = (): ReactElement => {
-
     return (
         <footer>
             <div className={'footer-top'}>
@@ -18,19 +17,23 @@ const Footer = (): ReactElement => {
                 <div className="footer-separator"></div>
 
                 <div className={'resume-button'}>
-                    <a href="/files/resume.pdf" target="_blank" rel="noopener noreferrer" className="resume">
-                        <FaArrowUpRightFromSquare className={'img-new-window'}/>
+                    <a
+                        href="/files/resume.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="resume"
+                    >
+                        <FaArrowUpRightFromSquare className={'img-new-window'} />
                         <div className={'resume-title'}>
-                            {<LuFileUser className="resume-icon"/>}
+                            {<LuFileUser className="resume-icon" />}
                             <h3>Open Resume</h3>
                         </div>
-
                     </a>
                 </div>
             </div>
             <span>© 2026 Kacper Żabiński. All rights reserved.</span>
         </footer>
-)
-}
+    );
+};
 
 export default Footer;

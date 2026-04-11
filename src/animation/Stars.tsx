@@ -1,5 +1,5 @@
-import { Application, Container, Graphics, Rectangle, type ContainerChild } from "pixi.js";
-import gsap from "gsap";
+import { Application, Container, Graphics, Rectangle, type ContainerChild } from 'pixi.js';
+import gsap from 'gsap';
 
 export const initStars = (app: Application, width: number, height: number) => {
     const maxStars = 1000;
@@ -9,7 +9,7 @@ export const initStars = (app: Application, width: number, height: number) => {
         const container = new Container();
         container.hitArea = new Rectangle(0, 0, size, size);
         container.interactive = true;
-        container.eventMode = "dynamic";
+        container.eventMode = 'dynamic';
 
         const star = new Graphics();
         star.circle(0, 0, Math.random() * (1 - 0.5) + 0.5);
@@ -20,14 +20,11 @@ export const initStars = (app: Application, width: number, height: number) => {
         container.addChild(star);
         app.stage.addChild(container);
 
-        container.position.set(
-            Math.random() * width,
-            Math.random() * height
-        );
+        container.position.set(Math.random() * width, Math.random() * height);
 
         const animationTime = 0.2;
 
-        container.on("pointerover", () => {
+        container.on('pointerover', () => {
             const prevAlpha = star.alpha;
 
             gsap.to(star, { alpha: 1, duration: animationTime });

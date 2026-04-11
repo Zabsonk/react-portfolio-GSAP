@@ -1,11 +1,10 @@
-import { useRef, type ReactElement} from 'react';
+import { useRef, type ReactElement } from 'react';
 import gsap from 'gsap';
-import {ScrollTrigger} from "gsap/ScrollTrigger";
-import {useGSAP} from "@gsap/react";
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import { aboutImgs, aboutInfo } from '../constants';
 
 const About = (): ReactElement => {
-
     gsap.registerPlugin(ScrollTrigger);
     const currentIndexRef = useRef(0);
     const imgRef = useRef<HTMLImageElement>(null);
@@ -26,62 +25,57 @@ const About = (): ReactElement => {
         gsap.from('.illustration', {
             duration: 1,
             opacity: 0,
-            x:   100,
-            ease: "power2.inOut",
+            x: 100,
+            ease: 'power2.inOut',
             scrollTrigger: {
                 trigger: '.illustration',
             },
-        })
+        });
 
-
-
-        gsap.utils.toArray<HTMLElement>(".info-text-wrapper").forEach((el, index) => {
+        gsap.utils.toArray<HTMLElement>('.info-text-wrapper').forEach((el, index) => {
             ScrollTrigger.create({
                 trigger: el,
-                start: "center center",
-                end: "bottom center",
+                start: 'center center',
+                end: 'bottom center',
 
-                onToggle: self => {
+                onToggle: (self) => {
                     if (self.isActive) {
-                        el.classList.add("with-effects");
+                        el.classList.add('with-effects');
                         changeImage(index);
                     } else {
-                        el.classList.remove("with-effects");
+                        el.classList.remove('with-effects');
                     }
-
-                }
+                },
             });
         });
         tlRef.current = gsap.timeline({ paused: true });
     });
 
     const changeImage = (index: number) => {
+        if (!imgRef.current) return;
 
-    if (!imgRef.current) return;
+        if (index === currentIndexRef.current) return;
 
-    if (index === currentIndexRef.current) return;
+        const img = imgRef.current;
 
-    const img = imgRef.current;
+        gsap.killTweensOf(img);
 
-    gsap.killTweensOf(img);
-
-    gsap.timeline()
-        .to(img, {
-            opacity: 0,
-            duration: 0.2,
-            ease: "power1.out"
-        })
-        .add(() => {
-            currentIndexRef.current = index; 
-            img.src = aboutImgs[index];
-        }, "+=0.15")
-        .to(img, {
-            opacity: 1,
-            duration: 0.2,
-            ease: "power3.in",
-        });
-};
-
+        gsap.timeline()
+            .to(img, {
+                opacity: 0,
+                duration: 0.2,
+                ease: 'power1.out',
+            })
+            .add(() => {
+                currentIndexRef.current = index;
+                img.src = aboutImgs[index];
+            }, '+=0.15')
+            .to(img, {
+                opacity: 1,
+                duration: 0.2,
+                ease: 'power3.in',
+            });
+    };
 
     return (
         <section id="about" className="about">
@@ -100,11 +94,7 @@ const About = (): ReactElement => {
                     ))}
                 </div>
                 <div className="illustration">
-                    <img
-                        ref={imgRef}
-                        src={aboutImgs[currentIndexRef.current]}
-                        alt="Illustration"
-                    />
+                    <img ref={imgRef} src={aboutImgs[currentIndexRef.current]} alt="Illustration" />
                 </div>
             </div>
         </section>

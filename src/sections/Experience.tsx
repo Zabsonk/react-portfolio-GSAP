@@ -1,13 +1,13 @@
-import {type ReactElement} from 'react';
+import { type ReactElement } from 'react';
 import { experienceStats } from '../constants';
 
 const Experience = (): ReactElement => {
-
     return (
         <section className="experience" id="experience">
             <h1 className="experience-title">My Experience</h1>
             <p className="experience-desc">
-                Computer Science graduate specializing in IT Systems Infrastructure. I build interactive web apps and games — from concept to deployment.
+                Computer Science graduate specializing in IT Systems Infrastructure. I build
+                interactive web apps and games — from concept to deployment.
             </p>
             <div className="experience-grid">
                 {experienceStats.map((stat, index) => (

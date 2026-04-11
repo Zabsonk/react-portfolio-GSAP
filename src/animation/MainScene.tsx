@@ -1,14 +1,10 @@
-import { useEffect, useRef } from "react";
-import {
-    Geometry,
-    Mesh,
-    Shader
-} from "pixi.js";
+import { useEffect, useRef } from 'react';
+import { Geometry, Mesh, Shader } from 'pixi.js';
 
-import { initRocket, Rocket } from "./Rocket";
-import { vertex, fragment } from "./shaders";
-import type BrowserApplication from "../app/BrowserApplication";
-import { createPixiApp } from "../app/PixiApp";
+import { initRocket, Rocket } from './Rocket';
+import { vertex, fragment } from './shaders';
+import type BrowserApplication from '../app/BrowserApplication';
+import { createPixiApp } from '../app/PixiApp';
 
 interface Props {
     onReady?: () => void;
@@ -24,17 +20,15 @@ const MainScene = ({ onReady, isVisible }: Props) => {
     const rocketRef = useRef<Rocket | null>(null);
 
     const initialized = useRef(false);
-    
 
-        useEffect(() => {
+    useEffect(() => {
         if (!appRef.current) return;
         if (isVisible) {
-           appRef.current.resume();
+            appRef.current.resume();
         } else {
             appRef.current.stop();
         }
     }, [isVisible]);
-
 
     useEffect(() => {
         if (initialized.current) return;
@@ -46,9 +40,9 @@ const MainScene = ({ onReady, isVisible }: Props) => {
             const { app } = await createPixiApp(mountRef.current);
             appRef.current = app;
 
-            app.on("onResize", handlePixiSceneResize, this);
+            app.on('onResize', handlePixiSceneResize, this);
 
-            const rocket = await initRocket({width: app.width, height: app.height}, alphaOutHint);
+            const rocket = await initRocket({ width: app.width, height: app.height }, alphaOutHint);
             rocketRef.current = rocket;
 
             app.addToTicker(rocket.movementTick, rocket);
@@ -57,7 +51,7 @@ const MainScene = ({ onReady, isVisible }: Props) => {
             requestAnimationFrame(() => {
                 rocket.position.set(app.width / 2, app.height / 4);
             });
-            onReady?.(); 
+            onReady?.();
         };
 
         init();
@@ -72,7 +66,7 @@ const MainScene = ({ onReady, isVisible }: Props) => {
             hintRef.current.style.transition = 'opacity 0.5s ease';
             hintRef.current.style.opacity = '0';
         }
-    }
+    };
 
     const initStars = () => {
         if (!appRef.current) return;
@@ -81,50 +75,40 @@ const MainScene = ({ onReady, isVisible }: Props) => {
 
         const geometry = new Geometry({
             attributes: {
-                aPosition: [
-                    -1, -1,
-                     1, -1,
-                     1,  1,
-                    -1,  1
-                ],
-                aUV: [
-                    0, 0,
-                    1, 0,
-                    1, 1,
-                    0, 1
-                ]
+                aPosition: [-1, -1, 1, -1, 1, 1, -1, 1],
+                aUV: [0, 0, 1, 0, 1, 1, 0, 1],
             },
-            indexBuffer: [0, 1, 2, 0, 2, 3]
+            indexBuffer: [0, 1, 2, 0, 2, 3],
         });
 
         const shader = Shader.from({
             gl: {
                 vertex,
-                fragment
+                fragment,
             },
             resources: {
                 shaderToyUniforms: {
                     iResolution: {
                         value: [app.width, app.height, 1],
-                        type: "vec3<f32>"
+                        type: 'vec3<f32>',
                     },
                     iTime: {
                         value: 0,
-                        type: "f32"
+                        type: 'f32',
                     },
                     iMouse: {
                         value: [0, 0],
-                        type: "vec2<f32>"
-                    }
-                }
-            }
+                        type: 'vec2<f32>',
+                    },
+                },
+            },
         });
 
         shaderRef.current = shader;
 
         const quad = new Mesh({
             geometry,
-            shader
+            shader,
         });
 
         quadRef.current = quad;
@@ -138,25 +122,30 @@ const MainScene = ({ onReady, isVisible }: Props) => {
     };
 
     const handlePixiSceneResize = (width: number, height: number) => {
-        if(rocketRef.current){
-            rocketRef.current.updateMovementBounds({width, height});
+        if (rocketRef.current) {
+            rocketRef.current.updateMovementBounds({ width, height });
         }
-    }
+    };
+    const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 
     return (
-       
-            <div
-                ref={mountRef}
-                className="particle-container"
-                style={{ width: "100%", height: "100%" }}
-            >
-                <div ref={hintRef} className={"rocket-hint"}>
-                    Use <span className="hint-key">W</span> <span className="hint-key">A</span> <span className="hint-key">D</span> to move the rocket
+        <div
+            ref={mountRef}
+            className="particle-container"
+            style={{ width: '100%', height: '100%' }}
+        >
+            {isMobile ? (
+                <div ref={hintRef} className={'rocket-hint-mobile'}>
+                    Use Joystick to move the rocket
                 </div>
-            </div>
-      
+            ) : (
+                <div ref={hintRef} className={'rocket-hint'}>
+                    Use <span className="hint-key">W</span> <span className="hint-key">A</span>{' '}
+                    <span className="hint-key">D</span> to move the rocket
+                </div>
+            )}
+        </div>
     );
 };
 
 export default MainScene;
-

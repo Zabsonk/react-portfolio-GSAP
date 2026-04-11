@@ -1,6 +1,6 @@
 import { ParticleContainer, Texture, Ticker } from 'pixi.js';
 import CustomParticle from './CustomParticle.ts';
-import {CommonUtils} from '../utils/CommonUtils.ts';
+import { CommonUtils } from '../utils/CommonUtils.ts';
 
 /**
  * @field texture - Texture used for each particle.
@@ -50,7 +50,7 @@ export default class CustomEmitter extends ParticleContainer {
     constructor(config: CustomEmitterConfig) {
         super({
             texture: config.texture,
-            roundPixels: true
+            roundPixels: true,
         });
 
         this.config = config;
@@ -111,12 +111,38 @@ export default class CustomEmitter extends ParticleContainer {
             while (this._spawnTimer <= 0) {
                 // spawn particle only if particles count is smaller the max particles
                 if (this.particleChildren.length < this.config.maxParticles) {
-                    const lifetime: number = CommonUtils.getRandomValueFromSection(this.config.lifeTime.min, this.config.lifeTime.max);
-                    const moveSpeed: number = CommonUtils.getRandomValueFromSection(this.config.moveSpeed.min, this.config.moveSpeed.max);
-                    const initScaleX: number = this.initScaleX ? CommonUtils.getRandomValueFromSection(this.initScaleX.min, this.initScaleX.max) : 1;
-                    const initScaleY: number = this.initScaleY ? CommonUtils.getRandomValueFromSection(this.initScaleY.min, this.initScaleY.max) : 1;
-                    const initAlpha: number = this.initAlpha ? CommonUtils.getRandomValueFromSection(this.initAlpha.min, this.initAlpha.max) : 1;
-                    const angleDeg: number = this.initDirection ? CommonUtils.getRandomValueFromSection(this.initDirection.max, this.initDirection.min) : 0;
+                    const lifetime: number = CommonUtils.getRandomValueFromSection(
+                        this.config.lifeTime.min,
+                        this.config.lifeTime.max
+                    );
+                    const moveSpeed: number = CommonUtils.getRandomValueFromSection(
+                        this.config.moveSpeed.min,
+                        this.config.moveSpeed.max
+                    );
+                    const initScaleX: number = this.initScaleX
+                        ? CommonUtils.getRandomValueFromSection(
+                              this.initScaleX.min,
+                              this.initScaleX.max
+                          )
+                        : 1;
+                    const initScaleY: number = this.initScaleY
+                        ? CommonUtils.getRandomValueFromSection(
+                              this.initScaleY.min,
+                              this.initScaleY.max
+                          )
+                        : 1;
+                    const initAlpha: number = this.initAlpha
+                        ? CommonUtils.getRandomValueFromSection(
+                              this.initAlpha.min,
+                              this.initAlpha.max
+                          )
+                        : 1;
+                    const angleDeg: number = this.initDirection
+                        ? CommonUtils.getRandomValueFromSection(
+                              this.initDirection.max,
+                              this.initDirection.min
+                          )
+                        : 0;
 
                     const angleRad: number = angleDeg * (Math.PI / 180);
                     const dirX: number = Math.cos(angleRad);
@@ -124,14 +150,21 @@ export default class CustomEmitter extends ParticleContainer {
                     const initRotation: number = angleRad - Math.PI / 2;
 
                     const p: CustomParticle = new CustomParticle(
-                        { texture: this.config.texture, scaleX: initScaleX, scaleY: initScaleY, alpha: initAlpha, rotation: initRotation },
+                        {
+                            texture: this.config.texture,
+                            scaleX: initScaleX,
+                            scaleY: initScaleY,
+                            alpha: initAlpha,
+                            rotation: initRotation,
+                        },
                         lifetime,
                         moveSpeed,
                         dirX,
                         dirY
                     );
 
-                    const spawn: { x: number; y: number; width?: number; height?: number } = this.config.spawnShape;
+                    const spawn: { x: number; y: number; width?: number; height?: number } =
+                        this.config.spawnShape;
                     if (spawn) {
                         let spawnPosX: number = spawn.x;
                         let spawnPosY: number = spawn.y;
