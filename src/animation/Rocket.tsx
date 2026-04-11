@@ -1,9 +1,9 @@
-import gsap from "gsap";
-import { AnimatedSprite, Assets, Sprite, Spritesheet, Texture} from "pixi.js";
+import gsap from 'gsap';
+import { AnimatedSprite, Assets, Sprite, Spritesheet, Texture } from 'pixi.js';
 
 interface IRocketPhysics {
-    vx: number; 
-    vy: number; 
+    vx: number;
+    vy: number;
     acceleration: number;
     rotationSpeed: number;
     maxSpeed: number;
@@ -11,9 +11,9 @@ interface IRocketPhysics {
 }
 
 export type Bounds = {
-    width: number,
-    height: number,
-}
+    width: number;
+    height: number;
+};
 
 export type Scale = number;
 
@@ -22,15 +22,15 @@ export type PixelValue = number;
 export type RocketSizeBand = Record<PixelValue, Scale>;
 
 export interface RocketConfig {
-    texture: Texture, 
-    flameTexture: Spritesheet, 
-    movementConfig: IRocketPhysics, 
-    movementBounds: Bounds, onFirstMove?: () => void,
+    texture: Texture;
+    flameTexture: Spritesheet;
+    movementConfig: IRocketPhysics;
+    movementBounds: Bounds;
+    onFirstMove?: () => void;
     pixelSizeBands: RocketSizeBand;
 }
 
-export class Rocket extends Sprite
-{
+export class Rocket extends Sprite {
     private readonly pixelSizeBands: RocketSizeBand;
 
     private onFirstMove?: () => void;
@@ -42,21 +42,28 @@ export class Rocket extends Sprite
     public movementBounds: Bounds;
 
     private keys: {
-        w: boolean,
-        a: boolean,
-        d: boolean
-    } = {w: false, a: false, d: false}
+        w: boolean;
+        a: boolean;
+        d: boolean;
+    } = { w: false, a: false, d: false };
 
-    private physics :IRocketPhysics;
+    private physics: IRocketPhysics;
 
-    constructor({texture, flameTexture, movementConfig, movementBounds, onFirstMove, pixelSizeBands}: RocketConfig) {
+    constructor({
+        texture,
+        flameTexture,
+        movementConfig,
+        movementBounds,
+        onFirstMove,
+        pixelSizeBands,
+    }: RocketConfig) {
         super(texture);
 
         this.pixelSizeBands = pixelSizeBands;
 
-        const flame = this.flame = new AnimatedSprite(flameTexture.animations.flame);
+        const flame = (this.flame = new AnimatedSprite(flameTexture.animations.flame));
         this.addChild(flame);
-        flame.pivot.set(flame.width/2, 0);
+        flame.pivot.set(flame.width / 2, 0);
         flame.position.set(0, texture.height / 2);
         flame.scale.set(0.3);
         flame.alpha = 0;
@@ -66,20 +73,20 @@ export class Rocket extends Sprite
         this.onFirstMove = onFirstMove;
         this.rotation = movementConfig.initRotation;
 
-        window.addEventListener("keydown", (e) => {
-            if (e.key === "w" || e.key === "W") this.keys.w = true;
-            if (e.key === "a" || e.key === "A") this.keys.a = true;
-            if (e.key === "d" || e.key === "D") this.keys.d = true;
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'w' || e.key === 'W') this.keys.w = true;
+            if (e.key === 'a' || e.key === 'A') this.keys.a = true;
+            if (e.key === 'd' || e.key === 'D') this.keys.d = true;
         });
 
-        window.addEventListener("keyup", (e) => {
-            if (e.key === "w" || e.key === "W") this.keys.w = false;
-            if (e.key === "a" || e.key === "A") this.keys.a = false;
-            if (e.key === "d" || e.key === "D") this.keys.d = false;
-    });
+        window.addEventListener('keyup', (e) => {
+            if (e.key === 'w' || e.key === 'W') this.keys.w = false;
+            if (e.key === 'a' || e.key === 'A') this.keys.a = false;
+            if (e.key === 'd' || e.key === 'D') this.keys.d = false;
+        });
     }
 
-    public movementTick(){
+    public movementTick() {
         if ((this.keys.w || this.keys.a || this.keys.d) && !this.hasMoved) {
             this.hasMoved = true;
             this.onFirstMove?.();
@@ -92,10 +99,8 @@ export class Rocket extends Sprite
             this.physics.vx += Math.cos(this.rotation - Math.PI / 2) * this.physics.acceleration;
             this.physics.vy += Math.sin(this.rotation - Math.PI / 2) * this.physics.acceleration;
             this.turnOnFlame();
-    
         } else {
             this.turnOffFlame();
-          
         }
 
         const speed = Math.sqrt(this.physics.vx ** 2 + this.physics.vy ** 2);
@@ -119,55 +124,56 @@ export class Rocket extends Sprite
         let scale = null;
 
         for (const pixelValue in this.pixelSizeBands) {
-            if(bounds.width <= Number(pixelValue)){
+            if (bounds.width <= Number(pixelValue)) {
                 scale = this.pixelSizeBands[pixelValue];
-                break;      
+                break;
             }
         }
         this.scale.set(scale !== null ? scale : 2);
     }
 
-    private turnOffFlame(){
-        if(this.isFlameOn === false) return;
-     this.isFlameOn = false;  // ← od razu
+    private turnOffFlame() {
+        if (this.isFlameOn === false) return;
+        this.isFlameOn = false; // ← od razu
 
-        gsap.to(this.flame.scale, { 
-            x: 0, 
-            y: 0, 
-            duration: 0.4
+        gsap.to(this.flame.scale, {
+            x: 0,
+            y: 0,
+            duration: 0.4,
         });
 
-        gsap.to(this.flame,
-            {
-                alpha: 0,
-                duration: 0.5, 
-                onComplete: () => {
-                    if(!this.isFlameOn){
-                        this.flame.stop();
-                    }
-                }});
+        gsap.to(this.flame, {
+            alpha: 0,
+            duration: 0.5,
+            onComplete: () => {
+                if (!this.isFlameOn) {
+                    this.flame.stop();
+                }
+            },
+        });
     }
 
     private turnOnFlame() {
-        if(this.isFlameOn) return;
+        if (this.isFlameOn) return;
         this.isFlameOn = true;
         this.flame.play();
 
-        gsap.to(this.flame.scale, { 
-            x: 0.3, y: 0.3, 
-            duration: 0.4
+        gsap.to(this.flame.scale, {
+            x: 0.3,
+            y: 0.3,
+            duration: 0.4,
         });
-        gsap.to(this.flame, { 
-            alpha: 1, 
-            duration: 0.5, 
-           });
-    }   
+        gsap.to(this.flame, {
+            alpha: 1,
+            duration: 0.5,
+        });
+    }
 
-    private keepInsideScreen(): void{
+    private keepInsideScreen(): void {
         const w = this.movementBounds.width;
         const h = this.movementBounds.height;
 
-        const margin = 50; 
+        const margin = 50;
 
         if (this.x < margin) {
             this.x = margin;
@@ -178,10 +184,10 @@ export class Rocket extends Sprite
             this.physics.vx = 0;
         }
 
-        if (this.y < margin){
+        if (this.y < margin) {
             this.y = margin;
-                this.physics.vy = 0;
-            }
+            this.physics.vy = 0;
+        }
         if (this.y > h - margin) {
             this.y = h - margin;
             this.physics.vy = 0;
@@ -189,31 +195,27 @@ export class Rocket extends Sprite
     }
 }
 
-
-
-
 export const initRocket = async (appBounds: Bounds, onFirstMove?: () => void): Promise<Rocket> => {
-    const rocketTexture = await Assets.load("/assets/rocket.png");
-    const flameTexture = await Assets.load("/assets/rocket_flame_spritesheet.json");
-    const rocket = new Rocket(
-        {
-            texture: rocketTexture,
-            flameTexture: flameTexture,
-            movementConfig: {
-                vx: 0,
-                vy: -0.1,
-                acceleration: 0.01 ,
-                rotationSpeed: 0.01,
-                maxSpeed: 2.5,
+    const rocketTexture = await Assets.load('/assets/rocket.png');
+    const flameTexture = await Assets.load('/assets/rocket_flame_spritesheet.json');
+    const rocket = new Rocket({
+        texture: rocketTexture,
+        flameTexture: flameTexture,
+        movementConfig: {
+            vx: 0,
+            vy: -0.1,
+            acceleration: 0.01,
+            rotationSpeed: 0.01,
+            maxSpeed: 2.5,
             initRotation: -Math.PI,
         },
-        movementBounds: appBounds, 
+        movementBounds: appBounds,
         onFirstMove: onFirstMove,
         pixelSizeBands: {
             470: 0.7,
-            768: 1
-        }
-    }); 
+            768: 1,
+        },
+    });
 
     rocket.anchor.set(0.5);
     rocket.scale.set(2);

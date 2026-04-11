@@ -11,17 +11,17 @@ const About = (): ReactElement => {
     const imgRef = useRef<HTMLImageElement>(null);
     const tlRef = useRef<gsap.core.Timeline | null>(null);
     useGSAP(() => {
-        gsap.utils.toArray<HTMLElement>(".info-text-wrapper").forEach((el) => {
-            gsap.from(el, {
-                x:   -100,
-                opacity: 0,
-                duration: 1,
-                ease: "power2.inOut",
-                scrollTrigger: {
-                    trigger: el,
-                },
-            });
-        });
+        // gsap.utils.toArray<HTMLElement>(".info-text-wrapper").forEach((el) => {
+        //     gsap.from(el, {
+        //         x:   -100,
+        //         opacity: 0,
+        //         duration: 1,
+        //         ease: "power2.inOut",
+        //         scrollTrigger: {
+        //             trigger: el,
+        //         },
+        //     });
+        // });
 
         gsap.from('.illustration', {
             duration: 1,
@@ -52,7 +52,6 @@ const About = (): ReactElement => {
                 }
             });
         });
-        setTimeout(() => ScrollTrigger.refresh(), 500);
         tlRef.current = gsap.timeline({ paused: true });
     });
 

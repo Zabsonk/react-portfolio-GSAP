@@ -80,8 +80,8 @@
 .illustration {
     top: 25vh;
     position: sticky;
-    width: 280px;
-    height: 280px;
+    width: 30vh;
+    height: 30vh;
     flex-shrink: 0;
     align-self: flex-start;
     border-radius: 16px;
@@ -97,4 +97,25 @@
     object-fit: contain;
     display: block;
     opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .about-header {
+        padding: 2rem;
+    }
+
+    .about-info {
+        padding: 0 2rem;
+     }
+
+    .illustration {
+        width: 200px;
+        height: 200px;
+        position: sticky;
+    }
+    
+    .info-wrapper {
+        width: 100%;
+    }
+
 }
