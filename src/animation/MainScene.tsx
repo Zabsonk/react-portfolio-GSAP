@@ -131,6 +131,13 @@ const MainScene = ({ onReady, isVisible, rocketController }: Props) => {
         if (rocketRef.current) {
             rocketRef.current.updateMovementBounds({ width, height });
         }
+
+        if (shaderRef.current) {
+            const uniforms = shaderRef.current.resources.shaderToyUniforms.uniforms;
+
+            uniforms.iResolution[0] = width;
+            uniforms.iResolution[1] = height;
+        }
     };
     const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 

@@ -19,11 +19,18 @@ const Joystick = ({ visible, controller }: Props) => {
 
     const handleMove = (clientX: number, clientY: number) => {
         if (!active.current) return;
+
         const center = getCenter();
         const maxRadius = 40;
 
         let dx = clientX - center.x;
         let dy = clientY - center.y;
+
+        // 🔥 BLOKADA DOLNEJ POŁOWY
+        if (dy > 0) {
+            dy = 0;
+        }
+
         const dist = Math.sqrt(dx * dx + dy * dy);
 
         if (dist > maxRadius) {
@@ -36,8 +43,7 @@ const Joystick = ({ visible, controller }: Props) => {
         const ndx = dx / maxRadius;
         const ndy = dy / maxRadius;
 
-        if (!controller) return;
-        controller.onMove(ndx, ndy);
+        controller?.onMove(ndx, ndy);
     };
 
     const handleEnd = () => {

@@ -1,6 +1,6 @@
-footer{
+footer {
     background: rgba(0, 0, 0, 0.75);
-    height: 15vh;
+    height: calc(15vh + 20px);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -28,8 +28,6 @@ footer{
     transition: transform 0.3s;
 }
 
-
-
 .resume {
     overflow: hidden;
     position: relative;
@@ -41,7 +39,7 @@ footer{
     background-color: #000000;
     border-radius: 10px;
     border: none;
-    font-family: "Mona Sans", sans-serif;
+    font-family: 'Mona Sans', sans-serif;
     cursor: pointer;
     border: 1px solid rgba(255, 255, 255, 0.25);
     gap: 0.3rem;
@@ -53,24 +51,22 @@ footer{
     position: absolute;
     top: -50%;
     left: 50%;
-    transform: translate(-50%, -50%) ;
+    transform: translate(-50%, -50%);
     width: 2.5rem;
     height: 2.5rem;
     object-fit: scale-down;
     pointer-events: none;
     transition: top 0.3s;
     color: white;
-
 }
 
 .my-links {
     color: white;
-    font-size: 1.5rem; 
+    font-size: 1.5rem;
     display: flex;
     flex-direction: column;
     gap: 8px;
-    align-self: center; 
-
+    align-self: center;
 }
 
 .my-links:hover {
@@ -78,7 +74,7 @@ footer{
 }
 
 .resume:hover .img-new-window {
-    top:50%;
+    top: 50%;
 }
 
 .resume:hover .resume-title {
@@ -89,5 +85,3 @@ footer{
     color: white;
     font-size: 40px;
 }
-
-

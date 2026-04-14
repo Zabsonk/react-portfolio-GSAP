@@ -56,8 +56,6 @@ export class Rocket extends Sprite {
 
     private physics: IRocketPhysics;
 
-    private controller: IRocketController;
-
     constructor({
         texture,
         flameTexture,
@@ -83,7 +81,7 @@ export class Rocket extends Sprite {
         this.onFirstMove = onFirstMove;
         this.rotation = movementConfig.initRotation;
 
-        this.controller = rocketController(this.controlls);
+        rocketController(this.controlls);
     }
 
     public movementTick() {
@@ -211,8 +209,8 @@ export const initRocket = async (
         flameTexture: flameTexture,
         movementConfig: {
             vx: 0,
-            vy: -0.1,
-            acceleration: 0.01,
+            vy: 2,
+            acceleration: 0.006,
             rotationSpeed: 0.01,
             maxSpeed: 2.5,
             initRotation: -Math.PI,
@@ -227,6 +225,5 @@ export const initRocket = async (
     });
 
     rocket.anchor.set(0.5);
-    rocket.scale.set(2);
     return rocket;
 };

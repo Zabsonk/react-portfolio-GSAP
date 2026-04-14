@@ -60,6 +60,7 @@ export default class BrowserApplication extends EventEmitter {
             })
             .then(() => {
                 this.container.prepend(this.mainScreen.canvas);
+                this.onResize();
             });
         this.onResize();
     }
@@ -93,6 +94,7 @@ export default class BrowserApplication extends EventEmitter {
     }
 
     protected onResize(): void {
+        if (!this.mainScreen || !this.mainScreen?.screen) return;
         this.currentWidth = this.mainScreen.screen.width;
         this.currentHeight = this.mainScreen.screen.height;
         this.emit('onResize', this.currentWidth, this.currentHeight);
