@@ -11,6 +11,8 @@ import MainScene from './animation/MainScene.tsx';
 import LoadingScreen from './sections/LoadingScreen.tsx';
 import Experience from './sections/Experience.tsx';
 import Joystick from './components/Joystick.tsx';
+import KeyboardController from './components/KeyboardController.ts';
+import JoystickController from './components/JoystickController.ts';
 
 const App = () => {
     const homeContainerRef = useRef<HTMLDivElement>(null);
@@ -18,6 +20,7 @@ const App = () => {
     const sliderRef = useRef<HTMLDivElement>(null);
     const [loading, setLoading] = useState(true);
     const [shaderVisible, setShaderVisible] = useState(true);
+    const joystickControllerRef = useRef<JoystickController | null>(null);
 
     const handleSlide = () => {
         document.body.style.overflowY = 'hidden';
@@ -52,7 +55,9 @@ const App = () => {
     return (
         <div className="main">
             <LoadingScreen visible={loading} />
-            {isMobile && <Joystick />}
+            {isMobile && (
+                <Joystick visible={shaderVisible} controller={joystickControllerRef.current} />
+            )}
             <div className={'slider'} ref={sliderRef}>
                 <div ref={homeContainerRef} className="home">
                     <div className="w-screen h-full overflow-y-auto">
@@ -60,6 +65,17 @@ const App = () => {
                             <MainScene
                                 onReady={() => setLoading(false)}
                                 isVisible={shaderVisible}
+                                rocketController={(controls) => {
+                                    const controller = isMobile
+                                        ? new JoystickController(controls)
+                                        : new KeyboardController(controls);
+
+                                    if (controller instanceof JoystickController) {
+                                        joystickControllerRef.current = controller;
+                                    }
+
+                                    return controller;
+                                }}
                             />
                         </ParticleWrapper>
                         <NavBar onButtonClick={handleSlide} />

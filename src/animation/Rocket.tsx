@@ -1,6 +1,6 @@
 import gsap from 'gsap';
 import { AnimatedSprite, Assets, Sprite, Spritesheet, Texture } from 'pixi.js';
-
+import type { RocketController } from '../components/RocketController';
 interface IRocketPhysics {
     vx: number;
     vy: number;
@@ -15,6 +15,12 @@ export type Bounds = {
     height: number;
 };
 
+export interface IRocketControlls {
+    accelerate: boolean;
+    rotateLeft: boolean;
+    rotateRight: boolean;
+}
+
 export type Scale = number;
 
 export type PixelValue = number;
@@ -28,6 +34,7 @@ export interface RocketConfig {
     movementBounds: Bounds;
     onFirstMove?: () => void;
     pixelSizeBands: RocketSizeBand;
+    rocketController: (controls: IRocketControlls) => RocketController;
 }
 
 export class Rocket extends Sprite {
@@ -41,13 +48,15 @@ export class Rocket extends Sprite {
 
     public movementBounds: Bounds;
 
-    private keys: {
-        w: boolean;
-        a: boolean;
-        d: boolean;
-    } = { w: false, a: false, d: false };
+    private controlls: IRocketControlls = {
+        accelerate: false,
+        rotateLeft: false,
+        rotateRight: false,
+    };
 
     private physics: IRocketPhysics;
+
+    private controller: IRocketController;
 
     constructor({
         texture,
@@ -56,6 +65,7 @@ export class Rocket extends Sprite {
         movementBounds,
         onFirstMove,
         pixelSizeBands,
+        rocketController,
     }: RocketConfig) {
         super(texture);
 
@@ -73,29 +83,24 @@ export class Rocket extends Sprite {
         this.onFirstMove = onFirstMove;
         this.rotation = movementConfig.initRotation;
 
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'w' || e.key === 'W') this.keys.w = true;
-            if (e.key === 'a' || e.key === 'A') this.keys.a = true;
-            if (e.key === 'd' || e.key === 'D') this.keys.d = true;
-        });
-
-        window.addEventListener('keyup', (e) => {
-            if (e.key === 'w' || e.key === 'W') this.keys.w = false;
-            if (e.key === 'a' || e.key === 'A') this.keys.a = false;
-            if (e.key === 'd' || e.key === 'D') this.keys.d = false;
-        });
+        this.controller = rocketController(this.controlls);
     }
 
     public movementTick() {
-        if ((this.keys.w || this.keys.a || this.keys.d) && !this.hasMoved) {
+        if (
+            (this.controlls.accelerate ||
+                this.controlls.rotateLeft ||
+                this.controlls.rotateRight) &&
+            !this.hasMoved
+        ) {
             this.hasMoved = true;
             this.onFirstMove?.();
         }
 
-        if (this.keys.a) this.rotation -= this.physics.rotationSpeed;
-        if (this.keys.d) this.rotation += this.physics.rotationSpeed;
+        if (this.controlls.rotateLeft) this.rotation -= this.physics.rotationSpeed;
+        if (this.controlls.rotateRight) this.rotation += this.physics.rotationSpeed;
 
-        if (this.keys.w) {
+        if (this.controlls.accelerate) {
             this.physics.vx += Math.cos(this.rotation - Math.PI / 2) * this.physics.acceleration;
             this.physics.vy += Math.sin(this.rotation - Math.PI / 2) * this.physics.acceleration;
             this.turnOnFlame();
@@ -134,8 +139,7 @@ export class Rocket extends Sprite {
 
     private turnOffFlame() {
         if (this.isFlameOn === false) return;
-        this.isFlameOn = false; // ← od razu
-
+        this.isFlameOn = false;
         gsap.to(this.flame.scale, {
             x: 0,
             y: 0,
@@ -195,7 +199,11 @@ export class Rocket extends Sprite {
     }
 }
 
-export const initRocket = async (appBounds: Bounds, onFirstMove?: () => void): Promise<Rocket> => {
+export const initRocket = async (
+    appBounds: Bounds,
+    onFirstMove: () => void,
+    rocketController: (controls: IRocketControlls) => RocketController
+): Promise<Rocket> => {
     const rocketTexture = await Assets.load('/assets/rocket.png');
     const flameTexture = await Assets.load('/assets/rocket_flame_spritesheet.json');
     const rocket = new Rocket({
@@ -215,6 +223,7 @@ export const initRocket = async (appBounds: Bounds, onFirstMove?: () => void): P
             470: 0.7,
             768: 1,
         },
+        rocketController: rocketController,
     });
 
     rocket.anchor.set(0.5);

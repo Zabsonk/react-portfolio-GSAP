@@ -1,10 +1,12 @@
 import { useRef, useState } from 'react';
+import type JoystickController from './JoystickController';
 
 interface Props {
-    onMove: (dx: number, dy: number) => void;
+    visible: boolean;
+    controller: JoystickController | null;
 }
 
-const Joystick = ({ onMove }: Props) => {
+const Joystick = ({ visible, controller }: Props) => {
     const baseRef = useRef<HTMLDivElement>(null);
     const [knobPos, setKnobPos] = useState({ x: 0, y: 0 });
     const active = useRef(false);
@@ -30,32 +32,39 @@ const Joystick = ({ onMove }: Props) => {
         }
 
         setKnobPos({ x: dx, y: dy });
-        // onMove(dx / maxRadius, dy / maxRadius);
 
-        console.log(dx / maxRadius, dy / maxRadius);
+        const ndx = dx / maxRadius;
+        const ndy = dy / maxRadius;
+
+        if (!controller) return;
+        controller.onMove(ndx, ndy);
     };
 
     const handleEnd = () => {
         active.current = false;
+        setIsActive(false);
         setKnobPos({ x: 0, y: 0 });
-        onMove(0, 0);
+
+        if (!controller) return;
+        controller.onEnd();
     };
 
     return (
         <div
             ref={baseRef}
             className="joystick-base"
-            style={{ opacity: isActive ? 0.9 : 0.4 }}
+            style={{
+                opacity: visible ? (isActive ? 0.8 : 0.4) : 0,
+                pointerEvents: visible ? 'auto' : 'none',
+                transition: 'opacity 0.3s ease',
+            }}
             onTouchStart={(e) => {
-                setIsActive(true);
                 active.current = true;
+                setIsActive(true);
                 handleMove(e.touches[0].clientX, e.touches[0].clientY);
             }}
             onTouchMove={(e) => handleMove(e.touches[0].clientX, e.touches[0].clientY)}
-            onTouchEnd={() => {
-                setIsActive(false);
-                handleEnd();
-            }}
+            onTouchEnd={handleEnd}
         >
             <div
                 className="joystick-knob"

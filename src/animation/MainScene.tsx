@@ -1,17 +1,19 @@
 import { useEffect, useRef } from 'react';
 import { Geometry, Mesh, Shader } from 'pixi.js';
 
-import { initRocket, Rocket } from './Rocket';
+import { initRocket, Rocket, type IRocketControlls } from './Rocket';
 import { vertex, fragment } from './shaders';
 import type BrowserApplication from '../app/BrowserApplication';
 import { createPixiApp } from '../app/PixiApp';
+import type { RocketController } from '../components/RocketController';
 
 interface Props {
     onReady?: () => void;
     isVisible: boolean;
+    rocketController: (controls: IRocketControlls) => RocketController;
 }
 
-const MainScene = ({ onReady, isVisible }: Props) => {
+const MainScene = ({ onReady, isVisible, rocketController }: Props) => {
     const mountRef = useRef<HTMLDivElement>(null);
     const appRef = useRef<BrowserApplication | null>(null);
     const quadRef = useRef<Mesh<Geometry, Shader> | null>(null);
@@ -42,7 +44,11 @@ const MainScene = ({ onReady, isVisible }: Props) => {
 
             app.on('onResize', handlePixiSceneResize, this);
 
-            const rocket = await initRocket({ width: app.width, height: app.height }, alphaOutHint);
+            const rocket = await initRocket(
+                { width: app.width, height: app.height },
+                alphaOutHint,
+                rocketController
+            );
             rocketRef.current = rocket;
 
             app.addToTicker(rocket.movementTick, rocket);
