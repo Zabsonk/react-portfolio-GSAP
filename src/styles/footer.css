@@ -1,6 +1,8 @@
 footer {
     background: rgba(0, 0, 0, 0.75);
-    height: calc(15vh + 20px);
+    min-height: calc(15vh + 20px);
+    height: auto;
+    padding: 1.5rem 1rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -84,4 +86,19 @@ footer {
 .resume-icon {
     color: white;
     font-size: 40px;
+}
+
+footer span {
+    position: relative;
+    bottom: auto;
+    font-size: 0.75rem;
+    text-align: center;
+    padding: 0 1rem;
+    white-space: normal;
+}
+
+@media (max-width: 480px) {
+    footer span {
+        font-size: 0.65rem;
+    }
 }
