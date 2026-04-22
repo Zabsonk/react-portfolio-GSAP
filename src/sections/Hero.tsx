@@ -1,7 +1,7 @@
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { useEffect, useState, type ReactElement } from 'react';
-import { words, type ImgTexts } from '../constants';
+import { asset, words, type ImgTexts } from '../constants';
 
 const Hero = (): ReactElement => {
     const [wrapText, setWrapText] = useState(false);
@@ -65,7 +65,7 @@ const Hero = (): ReactElement => {
                 )}
             </div>
             <div className="portrait-wrapper">
-                <img className={'portrait'} src={'/images/portrait.png'} alt={'portrait'} />
+                <img className={'portrait'} src={asset('/images/portrait.png')} alt={'portrait'} />
             </div>
         </section>
     );

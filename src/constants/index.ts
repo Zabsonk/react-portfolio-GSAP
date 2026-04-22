@@ -3,6 +3,9 @@ import { FaLinkedin, FaGithub } from 'react-icons/fa';
 import { MdOutlineDraw } from 'react-icons/md';
 import { TbBulbFilled, TbCode, TbPalette } from 'react-icons/tb';
 
+const base = import.meta.env.BASE_URL;
+export const asset = (path: string) => `${base}${path}`;
+
 export interface ImgTexts {
     text: string;
     icon: IconType;
@@ -27,9 +30,9 @@ const words: ImgTexts[] = [
 ];
 
 const aboutImgs: string[] = [
-    '/images/abouts/graduate.png',
-    '/images/abouts/active.png',
-    '/images/abouts/game-dev.png',
+    `${base}images/abouts/graduate.png`,
+    `${base}images/abouts/active.png`,
+    `${base}images/abouts/game-dev.png`,
 ];
 
 const aboutInfo: string[] = [
@@ -70,43 +73,43 @@ const skills: { text: string; imgPath: string; level: number; color: string }[] 
     },
     {
         text: 'This is what I love the most about programing. OOP makes it easier to model real-world problems in a clear and intuitive way.',
-        imgPath: '/images/logos/oop.svg',
+        imgPath: `${base}images/logos/pixi.svg`,
         level: 4,
         color: '#12dcbe',
     },
     {
         text: 'This site is built with React, a powerful library for building interactive user interfaces',
-        imgPath: '/images/logos/react.png',
+        imgPath: `${base}images/logos/react.png`,
         level: 2,
         color: '#00d8ff',
     },
     {
         text: 'Node.js is a powerful runtime environment that allows JavaScript to be executed on the server side.',
-        imgPath: '/images/logos/node.png',
+        imgPath: `${base}images/logos/node.png`,
         level: 3,
         color: '#78cc65',
     },
     {
         text: 'I use Git for version control to keep track of changes and collaborate efficiently.',
-        imgPath: '/images/logos/git.svg',
+        imgPath: `${base}images/logos/git.svg`,
         level: 4,
         color: '#f03c2e',
     },
     {
         text: 'TypeScript helps me write safer, strongly typed code for complex projects.',
-        imgPath: '/images/logos/ts.svg',
+        imgPath: `${base}images/logos/ts.svg`,
         level: 5,
         color: '#3178c6',
     },
     {
         text: 'HTML5 is the latest standard for structuring and presenting content on the web. ',
-        imgPath: '/images/logos/html5.svg',
+        imgPath: `${base}images/logos/html5.svg`,
         level: 4,
         color: '#e44d26',
     },
     {
         text: 'GSAP is a powerful JavaScript library for creating high-performance animations simply tweening any numeric property of any object.',
-        imgPath: '/images/logos/gsap.svg',
+        imgPath: `${base}images/logos/gsap.svg`,
         level: 3,
         color: '#8ac640',
     },
