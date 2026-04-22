@@ -6,7 +6,6 @@ import About from './sections/About.tsx';
 import Skills from './sections/Skills.tsx';
 import Contact from './sections/Contact.tsx';
 import Footer from './sections/Footer.tsx';
-import ParticleWrapper from './sections/ParticleWrapper.tsx';
 import MainScene from './animation/MainScene.tsx';
 import LoadingScreen from './sections/LoadingScreen.tsx';
 import Experience from './sections/Experience.tsx';
@@ -61,7 +60,7 @@ const App = () => {
             <div className={'slider'} ref={sliderRef}>
                 <div ref={homeContainerRef} className="home">
                     <div className="w-screen h-full overflow-y-auto">
-                        <ParticleWrapper>
+                        <div className="particle-wrapper">
                             <MainScene
                                 onReady={() => setLoading(false)}
                                 isVisible={shaderVisible}
@@ -77,7 +76,7 @@ const App = () => {
                                     return controller;
                                 }}
                             />
-                        </ParticleWrapper>
+                        </div>
                         <NavBar onButtonClick={handleSlide} />
                         <div className="hero-background">
                             <Hero />

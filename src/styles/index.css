@@ -1,46 +1,46 @@
-@import url("https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap');
 html,
 body {
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  width: 100vw;
-  overflow-x: hidden;
-  overflow-y: auto;
-  color: white;
-  scroll-behavior: smooth;
-  font-family: "Mona Sans", sans-serif;
-  background: black;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    overflow-y: auto;
+    color: white;
+    scroll-behavior: smooth;
+    font-family: 'Mona Sans', sans-serif;
+    background: black;
 }
 
 .hero-background {
-  background-color: rgb(10, 10, 10);
-  min-height: calc(100vh - 5rem);
-  height: calc(100vh - 5rem);
-  width: 100%;
+    background-color: rgb(10, 10, 10);
+    min-height: calc(100vh - 5rem);
+    height: calc(100vh - 5rem);
+    width: 100%;
 }
 
-a{
-  text-decoration: none;
+a {
+    text-decoration: none;
 }
 
 .home {
-  width: 100vw;
-  clip-path: inset(0);  /* insted of hidden overflow */
+    width: 100vw;
+    clip-path: inset(0);
 }
 
-.slider{
-  width: 200vw;
-  display: flex;
+.slider {
+    width: 200vw;
+    display: flex;
 }
 
 .contact-wrapper {
-  z-index: 100;
+    z-index: 100;
 }
 
 .contact-wrapper > * {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  width: 100vw;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
 }

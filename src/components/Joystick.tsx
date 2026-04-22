@@ -26,7 +26,6 @@ const Joystick = ({ visible, controller }: Props) => {
         let dx = clientX - center.x;
         let dy = clientY - center.y;
 
-        // 🔥 BLOKADA DOLNEJ POŁOWY
         if (dy > 0) {
             dy = 0;
         }

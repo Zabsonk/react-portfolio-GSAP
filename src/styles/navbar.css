@@ -157,11 +157,11 @@ button:hover h3 {
     }
 
     .nav-right-mobile {
-        display: flex;  /* ← contact button obok hamburgera */
+        display: flex; 
     }
 
     .nav-right {
-        display: none !important;  /* ← ukryj oryginalny */
+        display: none !important; 
     }
 
     .nav-center {
@@ -188,7 +188,7 @@ button:hover h3 {
 
     .nav-links {
         flex-direction: column;
-        align-items: center;  /* ← wyśrodkowane */
+        align-items: center; 
         gap: 1.5rem;
         width: 100%;
     }

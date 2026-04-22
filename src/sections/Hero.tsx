@@ -11,13 +11,10 @@ const Hero = (): ReactElement => {
             setWrapText(window.innerWidth < 1200);
         };
 
-        // ustaw wartość na start
         handleResize();
 
-        // nasłuchuj zmian
         window.addEventListener('resize', handleResize);
 
-        // cleanup
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 

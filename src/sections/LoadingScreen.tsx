@@ -22,7 +22,7 @@ const LoadingScreen = ({ visible }: { visible: boolean }) => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 zIndex: 9999,
-                opacity: visible ? 1 : 0, // ← animuje opacity
+                opacity: visible ? 1 : 0,
                 transition: 'opacity 0.6s ease',
             }}
         >

@@ -13,7 +13,6 @@ const About = (): ReactElement => {
 
         if (!wrappers) return;
 
-        // animacja ilustracji
         if (illustration) {
             const illustrationObserver = new IntersectionObserver(
                 ([entry]) => {
@@ -38,7 +37,6 @@ const About = (): ReactElement => {
                     const index = Number(el.dataset.index);
 
                     if (entry.isIntersecting) {
-                        // usuń with-effects ze wszystkich innych
                         wrappers.forEach((w) => w.classList.remove('with-effects'));
                         el.classList.add('with-effects');
                         changeImage(index);
@@ -47,7 +45,7 @@ const About = (): ReactElement => {
             },
             {
                 threshold: 0.6,
-                rootMargin: '-30% 0px -30% 0px', // ← tylko środkowe 40% ekranu
+                rootMargin: '-30% 0px -30% 0px',
             }
         );
         wrappers.forEach((el, index) => {
