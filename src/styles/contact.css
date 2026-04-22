@@ -6,13 +6,13 @@
     background: rgba(13, 0, 16, 0.8);
 }
 
-
 .contact input::placeholder,
 textarea::placeholder {
     color: #a8a8a8;
 }
 
-.contact input, .contact textarea {
+.contact input,
+.contact textarea {
     box-sizing: border-box;
     width: 100%;
     border-radius: 10px;
@@ -23,11 +23,11 @@ textarea::placeholder {
     padding: 0.5rem;
 }
 
-.form-wrapper{
+.form-wrapper {
     padding: 1rem;
     background: rgba(18, 5, 21);
     border-radius: 10px;
-    border: 4px solid rgba(255, 255, 255, 0.06);;
+    border: 4px solid rgba(255, 255, 255, 0.06);
     backdrop-filter: blur(12px);
     width: 40vw;
 }
@@ -49,9 +49,9 @@ form {
 .form-message {
     height: 5rem;
     padding: 0.5rem;
-    resize: none;         
+    resize: none;
     vertical-align: top;
-    font-family: "Mona Sans", sans-serif;
+    font-family: 'Mona Sans', sans-serif;
     word-break: break-word;
     white-space: pre-wrap;
 }
@@ -72,7 +72,7 @@ form {
 }
 
 .send-button::before {
-    content: "";
+    content: '';
     position: absolute;
     width: 60px;
     height: 200%;
@@ -100,7 +100,7 @@ form {
     width: 10rem;
     height: 3rem;
     padding: 0 12px;
-    font-family: "Mona Sans", sans-serif;
+    font-family: 'Mona Sans', sans-serif;
     cursor: pointer;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.25);
@@ -125,11 +125,11 @@ form {
     font-size: 1.25rem;
     transition: transform 0.3s ease;
     white-space: nowrap;
-    pointer-events: none;  
+    pointer-events: none;
 }
 
 .return-button:hover img {
-    transform: translate(-50%, -50%) scaleX(-1);  
+    transform: translate(-50%, -50%) scaleX(-1);
 }
 
 .return-button h3 {
@@ -141,8 +141,12 @@ form {
 }
 
 @keyframes sweep {
-    0%   { left: -100px; }
-    100% { left: calc(100% + 100px); }
+    0% {
+        left: -100px;
+    }
+    100% {
+        left: calc(100% + 100px);
+    }
 }
 
 .send-button.bounce {
@@ -150,10 +154,18 @@ form {
 }
 
 @keyframes bounce {
-    0%   { transform: scale(1); }
-    30%  { transform: scale(0.92); }
-    60%  { transform: scale(1.06); }
-    100% { transform: scale(1); }
+    0% {
+        transform: scale(1);
+    }
+    30% {
+        transform: scale(0.92);
+    }
+    60% {
+        transform: scale(1.06);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 .send-button.success {
@@ -161,8 +173,78 @@ form {
     pointer-events: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .form-wrapper {
-        width: 80vw;
+        width: 85vw;
+    }
+
+    form {
+        height: auto;
+        gap: 1rem;
+    }
+
+    .contact h1 {
+        font-size: 1.5rem;
+        text-align: center;
+        padding: 0 1rem;
+    }
+
+    .return-button {
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 1024px) and (orientation: landscape) {
+    .contact {
+        min-height: 100vh;
+        height: auto;
+        padding: 0.5rem 0;
+        justify-content: flex-start;
+        gap: 0.5rem;
+    }
+
+    .form-wrapper {
+        width: 60vw;
+        padding: 0.5rem;
+    }
+
+    form {
+        height: auto;
+        gap: 0.4rem;
+    }
+
+    .contact h1 {
+        font-size: 1rem;
+        margin: 0.25rem 0;
+    }
+
+    .form-wrapper p {
+        font-size: 0.75rem;
+        margin-bottom: 2px;
+    }
+
+    .contact input,
+    .contact textarea {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.8rem;
+    }
+
+    .form-message {
+        height: 2.5rem;
+    }
+
+    .send-button {
+        padding: 6px 16px;
+        font-size: 0.8rem;
+    }
+
+    .return-button {
+        height: 2rem;
+        font-size: 0.8rem;
+        margin-top: 0.25rem;
+    }
+
+    .return-button h3 {
+        font-size: 0.9rem;
     }
 }

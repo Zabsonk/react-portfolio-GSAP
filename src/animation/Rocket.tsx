@@ -125,9 +125,10 @@ export class Rocket extends Sprite {
         this.y = bounds.height / 2;
 
         let scale = null;
+        const band = Math.min(bounds.width, bounds.height);
 
         for (const pixelValue in this.pixelSizeBands) {
-            if (bounds.width <= Number(pixelValue)) {
+            if (band <= Number(pixelValue)) {
                 scale = this.pixelSizeBands[pixelValue];
                 break;
             }

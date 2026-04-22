@@ -1,7 +1,7 @@
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { useEffect, useState, type ReactElement } from 'react';
-import { words } from '../constants';
+import { words, type ImgTexts } from '../constants';
 
 const Hero = (): ReactElement => {
     const [wrapText, setWrapText] = useState(false);

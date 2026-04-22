@@ -1,84 +1,81 @@
-import { useRef, type ReactElement } from 'react';
+import { useEffect, useRef, type ReactElement } from 'react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
 import { aboutImgs, aboutInfo } from '../constants';
 
 const About = (): ReactElement => {
-    gsap.registerPlugin(ScrollTrigger);
     const currentIndexRef = useRef(0);
     const imgRef = useRef<HTMLImageElement>(null);
-    const tlRef = useRef<gsap.core.Timeline | null>(null);
-    useGSAP(() => {
-        // gsap.utils.toArray<HTMLElement>(".info-text-wrapper").forEach((el) => {
-        //     gsap.from(el, {
-        //         x:   -100,
-        //         opacity: 0,
-        //         duration: 1,
-        //         ease: "power2.inOut",
-        //         scrollTrigger: {
-        //             trigger: el,
-        //         },
-        //     });
-        // });
+    const sectionRef = useRef<HTMLElement>(null);
 
-        gsap.from('.illustration', {
-            duration: 1,
-            opacity: 0,
-            x: 100,
-            ease: 'power2.inOut',
-            scrollTrigger: {
-                trigger: '.illustration',
-            },
-        });
+    useEffect(() => {
+        const wrappers = sectionRef.current?.querySelectorAll<HTMLElement>('.info-text-wrapper');
+        const illustration = sectionRef.current?.querySelector<HTMLElement>('.illustration');
 
-        gsap.utils.toArray<HTMLElement>('.info-text-wrapper').forEach((el, index) => {
-            ScrollTrigger.create({
-                trigger: el,
-                start: 'center center',
-                end: 'bottom center',
+        if (!wrappers) return;
 
-                onToggle: (self) => {
-                    if (self.isActive) {
-                        el.classList.add('with-effects');
-                        changeImage(index);
-                    } else {
-                        el.classList.remove('with-effects');
+        // animacja ilustracji
+        if (illustration) {
+            const illustrationObserver = new IntersectionObserver(
+                ([entry]) => {
+                    if (entry.isIntersecting) {
+                        gsap.fromTo(
+                            illustration,
+                            { opacity: 0, x: 100 },
+                            { opacity: 1, x: 0, duration: 1, ease: 'power2.inOut' }
+                        );
+                        illustrationObserver.disconnect();
                     }
                 },
-            });
+                { threshold: 0.2 }
+            );
+            illustrationObserver.observe(illustration);
+        }
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    const el = entry.target as HTMLElement;
+                    const index = Number(el.dataset.index);
+
+                    if (entry.isIntersecting) {
+                        // usuń with-effects ze wszystkich innych
+                        wrappers.forEach((w) => w.classList.remove('with-effects'));
+                        el.classList.add('with-effects');
+                        changeImage(index);
+                    }
+                });
+            },
+            {
+                threshold: 0.6,
+                rootMargin: '-30% 0px -30% 0px', // ← tylko środkowe 40% ekranu
+            }
+        );
+        wrappers.forEach((el, index) => {
+            el.dataset.index = String(index);
+            observer.observe(el);
         });
-        tlRef.current = gsap.timeline({ paused: true });
-    });
+
+        return () => observer.disconnect();
+    }, []);
 
     const changeImage = (index: number) => {
         if (!imgRef.current) return;
-
         if (index === currentIndexRef.current) return;
 
         const img = imgRef.current;
-
         gsap.killTweensOf(img);
 
         gsap.timeline()
-            .to(img, {
-                opacity: 0,
-                duration: 0.2,
-                ease: 'power1.out',
-            })
+            .to(img, { opacity: 0, duration: 0.2, ease: 'power1.out' })
             .add(() => {
                 currentIndexRef.current = index;
                 img.src = aboutImgs[index];
-            }, '+=0.15')
-            .to(img, {
-                opacity: 1,
-                duration: 0.2,
-                ease: 'power3.in',
-            });
+            }, '+=0.05')
+            .to(img, { opacity: 1, duration: 0.2, ease: 'power3.in' });
     };
 
     return (
-        <section id="about" className="about">
+        <section id="about" className="about" ref={sectionRef}>
             <div className="about-header">
                 <span className="about-tag">ABOUT ME</span>
                 <h1 className="about-main-title">Frontend & Game Developer from Poland</h1>
@@ -96,7 +93,7 @@ const About = (): ReactElement => {
                 <div className="illustration">
                     <img ref={imgRef} src={aboutImgs[currentIndexRef.current]} alt="Illustration" />
                 </div>
-            </div>
+            </div>{' '}
         </section>
     );
 };

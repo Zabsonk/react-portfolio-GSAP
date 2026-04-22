@@ -2,7 +2,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    margin-bottom: 50vh;
+    margin-bottom: 25vh;
 }
 
 .about-header {
@@ -101,27 +101,38 @@
     opacity: 1;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .about-header {
         padding: 2rem;
     }
 
     .about-info {
         gap: 1.5rem;
+        padding: 0 2rem;
     }
 
     .info-wrapper {
-        width: 65%;
+        width: 75%;
     }
 
     .illustration {
-        width: 35%;
+        width: 25%;
+        top: 50vh;
         height: auto;
         aspect-ratio: 1/1;
     }
 
     .info-text-wrapper {
-        height: auto; /* ← auto zamiast 30vh */
+        height: auto;
         min-height: 80px;
+    }
+}
+
+@media (max-width: 1024px) and (orientation: landscape) {
+    .illustration {
+        width: 12.5%;
+        top: 40vh;
+        height: auto;
+        aspect-ratio: 1/1;
     }
 }
