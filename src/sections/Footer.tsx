@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import { myLinks, type IconLink } from '../constants';
+import { asset, myLinks, type IconLink } from '../constants';
 import { LuFileUser } from 'react-icons/lu';
 import { FaArrowUpRightFromSquare } from 'react-icons/fa6';
 
@@ -18,7 +18,7 @@ const Footer = (): ReactElement => {
 
                 <div className={'resume-button'}>
                     <a
-                        href="/files/resume.pdf"
+                        href={asset(`/files/resume.pdf`)}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="resume"
