@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type JoystickController from './JoystickController';
 
 interface Props {
@@ -26,9 +26,7 @@ const Joystick = ({ visible, controller }: Props) => {
         let dx = clientX - center.x;
         let dy = clientY - center.y;
 
-        if (dy > 0) {
-            dy = 0;
-        }
+        if (dy > 0) dy = 0;
 
         const dist = Math.sqrt(dx * dx + dy * dy);
 
@@ -49,10 +47,37 @@ const Joystick = ({ visible, controller }: Props) => {
         active.current = false;
         setIsActive(false);
         setKnobPos({ x: 0, y: 0 });
-
-        if (!controller) return;
-        controller.onEnd();
+        controller?.onEnd();
     };
+
+    useEffect(() => {
+        const el = baseRef.current;
+        if (!el) return;
+
+        const onTouchStart = (e: TouchEvent) => {
+            e.preventDefault();
+            active.current = true;
+            setIsActive(true);
+            handleMove(e.touches[0].clientX, e.touches[0].clientY);
+        };
+
+        const onTouchMove = (e: TouchEvent) => {
+            e.preventDefault();
+            handleMove(e.touches[0].clientX, e.touches[0].clientY);
+        };
+
+        const onTouchEnd = () => handleEnd();
+
+        el.addEventListener('touchstart', onTouchStart, { passive: false });
+        el.addEventListener('touchmove', onTouchMove, { passive: false });
+        el.addEventListener('touchend', onTouchEnd);
+
+        return () => {
+            el.removeEventListener('touchstart', onTouchStart);
+            el.removeEventListener('touchmove', onTouchMove);
+            el.removeEventListener('touchend', onTouchEnd);
+        };
+    }, [controller]);
 
     return (
         <div
@@ -63,13 +88,6 @@ const Joystick = ({ visible, controller }: Props) => {
                 pointerEvents: visible ? 'auto' : 'none',
                 transition: 'opacity 0.3s ease',
             }}
-            onTouchStart={(e) => {
-                active.current = true;
-                setIsActive(true);
-                handleMove(e.touches[0].clientX, e.touches[0].clientY);
-            }}
-            onTouchMove={(e) => handleMove(e.touches[0].clientX, e.touches[0].clientY)}
-            onTouchEnd={handleEnd}
         >
             <div
                 className="joystick-knob"
