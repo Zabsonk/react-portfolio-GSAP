@@ -203,8 +203,10 @@ export const initRocket = async (
     onFirstMove: () => void,
     rocketController: (controls: IRocketControlls) => RocketController
 ): Promise<Rocket> => {
-    const rocketTexture = await Assets.load('/assets/rocket.png');
-    const flameTexture = await Assets.load('/assets/rocket_flame_spritesheet.json');
+    const rocketTexture = await Assets.load(`${import.meta.env.BASE_URL}assets/rocket.png`);
+    const flameTexture = await Assets.load(
+        `${import.meta.env.BASE_URL}assets/rocket_flame_spritesheet.json`
+    );
     const rocket = new Rocket({
         texture: rocketTexture,
         flameTexture: flameTexture,
