@@ -101,4 +101,8 @@ footer span {
     footer span {
         font-size: 0.65rem;
     }
+
+    footer h3 {
+        font-size: 1rem;
+    }
 }

@@ -154,6 +154,8 @@ button:hover h3 {
         top: 50%;
         right: 20px;
         transform: translateY(-50%);
+        height: 2.8rem;
+        font-size: 1.8rem;
     }
 
     .nav-right-mobile {
@@ -202,6 +204,11 @@ button:hover h3 {
     .author {
         font-size: 1.1rem;
     }
+    .contact-button h3 {
+  
+     font-size: 1rem;
+
+}
 }
 
 @media (max-width: 480px) {
