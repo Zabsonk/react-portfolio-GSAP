@@ -92,7 +92,6 @@ const About = (): ReactElement => {
                 <div className="illustration" style={{ opacity: 0 }}>
                     <img
                         ref={imgRef}
-                        wa
                         src={aboutImgs[currentIndexRef.current]}
                         alt="Illustration"
                         style={{ opacity: 1 }}
