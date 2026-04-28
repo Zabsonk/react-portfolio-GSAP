@@ -67,8 +67,9 @@ const About = (): ReactElement => {
             .to(img, { opacity: 0, duration: 0.2, ease: 'power1.out' })
             .add(() => {
                 currentIndexRef.current = index;
+                img.style.opacity = '0';
                 img.src = aboutImgs[index];
-            }, '+=0.05')
+            })
             .to(img, { opacity: 1, duration: 0.2, ease: 'power3.in' });
     };
 
@@ -88,8 +89,14 @@ const About = (): ReactElement => {
                         </div>
                     ))}
                 </div>
-                <div className="illustration">
-                    <img ref={imgRef} src={aboutImgs[currentIndexRef.current]} alt="Illustration" />
+                <div className="illustration" style={{ opacity: 0 }}>
+                    <img
+                        ref={imgRef}
+                        wa
+                        src={aboutImgs[currentIndexRef.current]}
+                        alt="Illustration"
+                        style={{ opacity: 1 }}
+                    />
                 </div>
             </div>{' '}
         </section>
