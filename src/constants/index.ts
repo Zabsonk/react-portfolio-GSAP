@@ -66,7 +66,7 @@ const skillsLevels: Map<number, string> = new Map([
 
 const skills: { text: string; imgPath: string; level: number; color: string }[] = [
     {
-        text: 'PixiJS is a fast and flexible 2D rendering library for creating rich, interactive graphics and animations in the browser',
+        text: 'PixiJS is a fast and flexible 2D rendering library that helped me creating rich, interactive graphics and animations in the browser',
         imgPath: `${base}/images/logos/pixi.svg`,
         level: 4,
         color: '#ea1e63',
@@ -84,7 +84,7 @@ const skills: { text: string; imgPath: string; level: number; color: string }[] 
         color: '#00d8ff',
     },
     {
-        text: 'Node.js is a powerful runtime environment that allows JavaScript to be executed on the server side.',
+        text: 'Node.js is a powerful runtime environment which I used for examaple to build a server-side application for a crash game.',
         imgPath: `${base}images/logos/node.png`,
         level: 3,
         color: '#78cc65',
@@ -102,10 +102,22 @@ const skills: { text: string; imgPath: string; level: number; color: string }[] 
         color: '#3178c6',
     },
     {
+        text: 'I have been working with Spine since the begginning of my career. It helped me create complex 2D animations for games.',
+        imgPath: `${base}images/logos/spine.png`,
+        level: 4,
+        color: '#f08a16',
+    },
+    {
         text: 'HTML5 is the latest standard for structuring and presenting content on the web. ',
         imgPath: `${base}images/logos/html5.svg`,
         level: 4,
         color: '#e44d26',
+    },
+    {
+        text: 'Andriod Studio is a IDE that helped me create few projects for Android devices. They were a mini games sychronized with a pixi.js based displays.',
+        imgPath: `${base}images/logos/android_studio.svg`,
+        level: 2,
+        color: '#a4c639',
     },
     {
         text: 'GSAP is a powerful JavaScript library for creating high-performance animations simply tweening any numeric property of any object.',
@@ -132,10 +144,36 @@ const emailServiceId = 'service_iqd6gpy';
 const emailTemplateId = 'template_u7vb1c1';
 const emailUserId = 'bdiI2UsT6xOIiPW3g';
 
+const programingStartDate = new Date('2023-10-01');
+
+const getYearsOfExperience = (): number => {
+    const now = new Date();
+    let years = now.getFullYear() - programingStartDate.getFullYear();
+    if (
+        now.getMonth() < programingStartDate.getMonth() ||
+        (now.getMonth() === programingStartDate.getMonth() &&
+            now.getDate() < programingStartDate.getDate())
+    ) {
+        years--;
+    }
+    return years;
+};
+
+const coreTechnologies: string[] = [
+    'PixiJS',
+    'React',
+    'Node.js',
+    'Git',
+    'TypeScript',
+    'HTML5',
+    'GSAP',
+    'Spine',
+];
+
 const experienceStats: ExperienceStat[] = [
-    { value: '2+', desc: 'Years of Experience' },
-    { value: 5, desc: 'Core Technologies' },
-    { value: '20+', desc: 'Projects Shipped' },
+    { value: `${getYearsOfExperience()}+`, desc: 'Years of Experience' },
+    { value: coreTechnologies.length, desc: 'Core Technologies' },
+    { value: '30+', desc: 'Projects Shipped' },
     { value: 'BEng ', desc: 'Computer Science (Web Apps)' },
 ];
 
@@ -151,4 +189,6 @@ export {
     emailTemplateId,
     emailUserId,
     experienceStats,
+    programingStartDate,
+    getYearsOfExperience,
 };
