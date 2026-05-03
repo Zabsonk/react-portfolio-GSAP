@@ -114,7 +114,7 @@ const skills: { text: string; imgPath: string; level: number; color: string }[] 
         color: '#e44d26',
     },
     {
-        text: 'Andriod Studio is a IDE that helped me create few projects for Android devices. They were a mini games sychronized with a pixi.js based displays.',
+        text: 'Andriod Studio is a IDE that helped me create few projects mobiles. They were a mini games synchronized with a pixi.js based apps showing the result of the game.',
         imgPath: `${base}images/logos/android_studio.svg`,
         level: 2,
         color: '#a4c639',
