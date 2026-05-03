@@ -149,12 +149,18 @@ const programingStartDate = new Date('2023-10-01');
 const getYearsOfExperience = (): number => {
     const now = new Date();
     let years = now.getFullYear() - programingStartDate.getFullYear();
-    if (
-        now.getMonth() < programingStartDate.getMonth() ||
-        (now.getMonth() === programingStartDate.getMonth() &&
-            now.getDate() < programingStartDate.getDate())
-    ) {
+    let months = now.getMonth() - programingStartDate.getMonth();
+
+    if (months < 0) {
         years--;
+        months += 12;
+    } else if (months === 0 && now.getDate() < programingStartDate.getDate()) {
+        years--;
+        months = 12;
+    }
+
+    if (months >= 6) {
+        return years + 0.5;
     }
     return years;
 };
